@@ -11,9 +11,8 @@ end
 
 def player_input(board, player)
     player_move = gets.chomp.to_i
-    check_move_avail_msg(player_move)
+    move_avail_msg(player_move)
     play_turn(board, player_move, player)
-    return player_move
 end 
 
 def play_turn(board, index, player)
@@ -25,15 +24,15 @@ def play_turn(board, index, player)
 end 
 
 def position_taken?(board, index)
-    if board[index] == "" || board[index] == " " || board[index] == nil
-        return false
-    else
+    if board[index] == "X" || board[index] == "0" || board[index] == nil
         return true
+    else
+        return false
     end
 end
 
-def valid_move?(board, player_move)
-    if !position_taken?(board, player_move) && (player_move).between?(0,8)
+def valid_move?(board, index)
+    if !position_taken?(board, index) && (index).between?(0,8)
         return true
     else
         return false
@@ -46,7 +45,7 @@ def move(board,index, player)
 end
 
 welcome_msg
-board = [" "," "," "," "," "," "," "," "," "]
+board = ["0","1","2","3","4","5","6","7","8"]
 player_x = "X"
 player_o = "O"
 display_board(board)

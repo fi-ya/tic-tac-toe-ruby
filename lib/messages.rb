@@ -7,7 +7,7 @@ def enter_number_msg
     puts "Enter number 0-8 "
 end
 
-def check_move_avail_msg(player_move)
+def move_avail_msg(player_move)
     puts "You entered #{player_move.to_s}. Lets see if that is available"
 end
 
