@@ -12,12 +12,16 @@ end
 def player_input(board, player)
     player_move = gets.chomp.to_i
     check_move_avail_msg(player_move)
-    if valid_move?(board, player_move)
-        move(board, player_move, player)
+    play_turn(board, player_move, player)
+    return player_move
+end 
+
+def play_turn(board, index, player)
+    if valid_move?(board, index)
+        move(board, index, player)
     else
         error_msg
     end
-    return player_move
 end 
 
 def position_taken?(board, index)
