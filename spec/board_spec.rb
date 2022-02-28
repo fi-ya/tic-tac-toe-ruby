@@ -7,10 +7,7 @@ describe Board do
       end
 
     context "initialize" do
-        it "method returns the string with correct number of index" do
-            expect(@new_board.board).to eq(["-","-","-","-","-","-","-","-","-"])
-            expect(@new_board.board.length).to eq(9)
-        end 
+       
 
         it "should display the board" do
             output = @new_board.generate_board()

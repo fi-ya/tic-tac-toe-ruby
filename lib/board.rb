@@ -3,14 +3,12 @@ class Board
     attr_accessor :board
 
     def initialize
-        @board = ["-","-","-","-","-","-","-","-","-"]
-        @index_0 = " "
-        @index_1 = " "
-        @index_2 = " "
+        @board = [" "," "," "," "," "," "," "," "," "]
+
     end 
 
     def generate_board
-        " #{@index_0} | #{@index_1} | #{@index_2} \n" + 
+        " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" + 
         "-----------\n" +
         "   |   |   \n" +
         "-----------\n" +
@@ -18,13 +16,7 @@ class Board
     end
 
     def place_X(index)
-        if index == 0
-            @index_0 = "X"
-        elsif index === 1
-            @index_1 = "X"
-        else
-            @index_2 = "X"
-        end
+        @board[index] = "X"
     end
 end
 
