@@ -3,24 +3,32 @@ require_relative "board"
 class Display
 
     def initialize(board)
-     @board = board
+        @board = board
     end
 
+    def array_string
+        @board.join()
+    end
         # to array add new character string at pos 2, 5 8
         # array to string 
         # split string at pos 2 - now rows
-            def add_grid(board)
-                # board.map { |space| space.push}
+    def add_grid(board)
+        display_grid = ""
+        board.each_index { |index| 
+            if index == 2 || 5 || 8
+                display_grid.push(" \n ")
             end
+        }
+    
+    end
         
-            def array_string
-                @board.join()
-            end
-            
-            def split_to_row(board_string)
-            board_string
-            end
+   
+
+    def split_to_row(board_string)
+        board_string
+    end
 end
+
 
     # def display_board(grid)
     #     puts "

@@ -9,6 +9,17 @@ describe Board do
             expect(new_board.board.length).to eq(9)
         end 
 
+        it "should display the board" do
+            # Given - Arrange
+            new_board = Board.new
+            # When - Act
+            output = new_board.generate_board()
+
+            # Then - Assert
+            expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        end   
+ 
+
 
 
 

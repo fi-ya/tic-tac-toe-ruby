@@ -1,13 +1,12 @@
 class Game
-    attr_reader :board, 
+    attr_reader :board, :display
     
-    def initialize(board, display, players)
+    def initialize(board)
       @board = board
-      @display = display 
-      @players = players
+      @display = display
     end
 
-    # def display_board
+    # def start_game
     # @display.display_board(@board.grid)
     # end
 
