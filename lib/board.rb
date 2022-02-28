@@ -1,20 +1,23 @@
 class Board
 
     attr_accessor :board
-   
+
     def initialize
         @board = ["-","-","-","-","-","-","-","-","-"]
+        @move= " "
     end 
 
     def generate_board
-        "   |   |   \n" + 
+        " #{@move} |   |   \n" + 
         "-----------\n" +
         "   |   |   \n" +
         "-----------\n" +
         "   |   |   \n"
     end
 
-
+    def place_X(index)
+        @move = "X"
+    end
 end
 
 new_board = Board.new

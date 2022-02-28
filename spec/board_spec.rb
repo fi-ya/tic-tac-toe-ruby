@@ -19,10 +19,15 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end   
  
-
-
-
-
+        it "should display an X in the top level corner" do
+            # Given - Arrange
+            new_board = Board.new
+            # When - Act
+            new_board.place_X(0)
+            # Then - Assert
+            output = new_board.generate_board()
+            expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        end
 
     end
 
