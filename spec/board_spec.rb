@@ -67,10 +67,21 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   | X |   \n")
         end
 
-        it "should display an X in the bottom left row" do
-            @new_board.place_player("X", 8)
+        # it "should display an X in the bottom right row" do
+        #     @new_board.place_player("X", 8)
+        #     output = @new_board.generate_board()
+        #     expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
+        # end
+
+        it "should display correct players marker in the bottom right row" do
+            verify_bottom_right('X')
+            verify_bottom_right('O')
+        end
+
+        def verify_bottom_right(player)
+            @new_board.place_player(player, 8 )
             output = @new_board.generate_board()
-            expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
+            expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
         end
 
 
