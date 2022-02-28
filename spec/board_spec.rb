@@ -14,18 +14,16 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end   
  
-        it "should display an X in the top left corner" do
-            @new_board.place_player("X", 0)
-            output = @new_board.generate_board()
-            expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        it "should display correct player marker in the top left corner" do
+            verify_top_left('X', 0)
+            verify_top_left('O', 0)
         end
 
-        # def verify(index) do
-        #     @new_board.place_player('X', 0)
-        #     output = @new_board.generate_board()
-        #     expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
-        # end
-
+        def verify_top_left(player, index)
+            @new_board.place_player(player, 0)
+            output = @new_board.generate_board()
+            expect(output).to eq(" #{player} |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        end
 
         it "should display an X in the top middle row" do
             @new_board.place_player("X", 1)
@@ -75,11 +73,7 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
         end
 
-        # it "should display an O in the bottom left row" do
-        #     @new_board.place_player("X", 8)
-        #     output = @new_board.generate_board()
-        #     expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
-        # end
+
     end
 
 end
