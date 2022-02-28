@@ -6,10 +6,11 @@ class Board
         @board = ["-","-","-","-","-","-","-","-","-"]
         @index_0 = " "
         @index_1 = " "
+        @index_2 = " "
     end 
 
     def generate_board
-        " #{@index_0} | #{@index_1} |   \n" + 
+        " #{@index_0} | #{@index_1} | #{@index_2} \n" + 
         "-----------\n" +
         "   |   |   \n" +
         "-----------\n" +
@@ -19,8 +20,10 @@ class Board
     def place_X(index)
         if index == 0
             @index_0 = "X"
-        else
+        elsif index === 1
             @index_1 = "X"
+        else
+            @index_2 = "X"
         end
     end
 end
