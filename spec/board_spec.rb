@@ -32,6 +32,11 @@ describe Board do
             expect(output).to eq("   |   | X \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
+        it "should display an X in the top right row" do
+            @new_board.place_X(3)
+            output = @new_board.generate_board()
+            expect(output).to eq("   |   |   \n-----------\n X |   |   \n-----------\n   |   |   \n")
+        end
     end
 
 end

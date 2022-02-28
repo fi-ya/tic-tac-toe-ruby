@@ -10,7 +10,7 @@ class Board
     def generate_board
         " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" + 
         "-----------\n" +
-        "   |   |   \n" +
+        " #{@board[3]} |   |   \n" +
         "-----------\n" +
         "   |   |   \n"
     end
