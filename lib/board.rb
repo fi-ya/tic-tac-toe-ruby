@@ -15,8 +15,8 @@ class Board
         " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
 
-    def place_X(index)
-        @board[index] = "X"
+    def place_player(player, index)
+        @board[index] = player
     end
 end
 

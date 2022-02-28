@@ -15,58 +15,71 @@ describe Board do
         end   
  
         it "should display an X in the top left corner" do
-            @new_board.place_X(0)
+            @new_board.place_player("X", 0)
             output = @new_board.generate_board()
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
-            it "should display an X in the top middle row" do
-            @new_board.place_X(1)
+        # def verify(index) do
+        #     @new_board.place_player('X', 0)
+        #     output = @new_board.generate_board()
+        #     expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        # end
+
+
+        it "should display an X in the top middle row" do
+            @new_board.place_player("X", 1)
             output = @new_board.generate_board()
             expect(output).to eq("   | X |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the top right row" do
-            @new_board.place_X(2)
+            @new_board.place_player("X", 2)
             output = @new_board.generate_board()
             expect(output).to eq("   |   | X \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the middle left row" do
-            @new_board.place_X(3)
+            @new_board.place_player("X", 3)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n X |   |   \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the middle middle row" do
-            @new_board.place_X(4)
+            @new_board.place_player("X", 4)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the middle right row" do
-            @new_board.place_X(5)
+            @new_board.place_player("X", 5)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   | X \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the bottom left row" do
-            @new_board.place_X(6)
+            @new_board.place_player("X", 6)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n X |   |   \n")
         end
 
         it "should display an X in the bottom middle row" do
-            @new_board.place_X(7)
+            @new_board.place_player("X", 7)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   | X |   \n")
         end
 
         it "should display an X in the bottom left row" do
-            @new_board.place_X(8)
+            @new_board.place_player("X", 8)
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
         end
+
+        # it "should display an O in the bottom left row" do
+        #     @new_board.place_player("X", 8)
+        #     output = @new_board.generate_board()
+        #     expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
+        # end
     end
 
 end
