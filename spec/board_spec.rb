@@ -29,6 +29,17 @@ describe Board do
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
+            it "should display an X in the top middle row" do
+            # Given - Arrange
+            new_board = Board.new
+            # When - Act
+            new_board.place_X(1)
+            # Then - Assert
+            output = new_board.generate_board()
+            expect(output).to eq("   | X |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+        end
+
+
     end
 
 end

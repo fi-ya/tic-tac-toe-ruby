@@ -4,11 +4,12 @@ class Board
 
     def initialize
         @board = ["-","-","-","-","-","-","-","-","-"]
-        @move= " "
+        @index_0 = " "
+        @index_1 = " "
     end 
 
     def generate_board
-        " #{@move} |   |   \n" + 
+        " #{@index_0} | #{@index_1} |   \n" + 
         "-----------\n" +
         "   |   |   \n" +
         "-----------\n" +
@@ -16,7 +17,11 @@ class Board
     end
 
     def place_X(index)
-        @move = "X"
+        if index == 0
+            @index_0 = "X"
+        else
+            @index_1 = "X"
+        end
     end
 end
 
