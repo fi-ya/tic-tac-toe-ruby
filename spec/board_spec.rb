@@ -88,17 +88,24 @@ describe Board do
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
         end
 
-        it "checks if top left position is taken" do
-            play_turn_1 = @new_board.place_player("X", 0)
+        it "when taking turn it checks to see if position is taken returns true" do
+            play_turn_1 = @new_board.play_turn("X", 0)
 
             output = @new_board.position_taken?("0", 0)
             expect(output).to eq(true)
+        end
 
+        it "when taking turn it checks to see if position is taken returns false" do
+            play_turn_1 = @new_board.play_turn("X", 0)
+            play_turn_2 = @new_board.play_turn("0", 8)
+
+            output = @new_board.position_taken?("X", 1)
+            expect(output).to eq(false)
         end
         
-        xit "verify after 3rd turn goes back to first player" do
+        # xit "verify after 3rd turn goes back to first player" do
             
-        end
+        # end
 
 
         

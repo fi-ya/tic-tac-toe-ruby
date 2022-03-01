@@ -19,10 +19,12 @@ class Board
     end
 
     def play_turn(player, index)
-        if player == "X"
+        if player == "X" && !position_taken?(player, index)
             place_player("X", index)
-        else
+        elsif player == "0" && !position_taken?(player, index)
             place_player("0", index)
+        else
+            "error"
         end
     end
 
