@@ -2,13 +2,10 @@ require "board"
 
 describe Board do 
 
-    before :each do
-        @new_board = Board.new
-      end
+    before { @new_board = Board.new }
 
-    context "initialize" do
+    context "display a board" do
        
-
         it "should display the board" do
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
@@ -67,12 +64,6 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   | X |   \n")
         end
 
-        # it "should display an X in the bottom right row" do
-        #     @new_board.place_player("X", 8)
-        #     output = @new_board.generate_board()
-        #     expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | X \n")
-        # end
-
         it "should display correct players marker in the bottom right row" do
             verify_bottom_right('X')
             verify_bottom_right('O')
@@ -84,6 +75,22 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
         end
 
+    end
+
+    context "update a board" do
+        # test takes turns. place x, then place 0, verify board displays correct counters
+        it "take turns and display player X marker in top left and player O marker bottom right" do
+            
+            play_turn_x = @new_board.play_turn("X", 0)
+            play_turn_o = @new_board.play_turn("0", 8)
+            
+            output = @new_board.generate_board()
+            expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
+        end
+
+        # verify after 3rd turn goes back to first player
+        # test taken position
+        # test wins
 
     end
 

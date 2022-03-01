@@ -4,7 +4,6 @@ class Board
 
     def initialize
         @board = [" "," "," "," "," "," "," "," "," "]
-
     end 
 
     def generate_board
@@ -18,24 +17,20 @@ class Board
     def place_player(player, index)
         @board[index] = player
     end
+
+    def play_turn(player, index)
+        if player == "X"
+            place_player("X", index)
+        else
+            place_player("0", index)
+        end
+    end
+
 end
 
-new_board = Board.new
-p new_board
+new_board = Board.new 
+puts new_board.generate_board
 
-# def display_board(board)
-#     puts row = " #{board[0]} " "|" " #{board[1]} " "|" " #{board[2]} "
-#     puts separator = "-----------"
-#     puts row = " #{board[3]} " "|" " #{board[4]} " "|" " #{board[5]} "
-#     puts separator
-#     puts row = " #{board[6]} " "|" " #{board[7]} " "|" " #{board[8]} " 
-#     puts ""
-# end 
-
-# board = [" "," "," "," "," "," "," "," "," "]
-# player_x = "X"
-# player_o = "O"
-# display_board(board)
 
 
 
@@ -88,14 +83,3 @@ p new_board
 # player_input(board, player_o)
 # display_board(board)
 
-# player_input(board,player_x)
-# display_board(board)
-
-# player_input(board,player_o)
-# display_board(board)
-
-# player_input(board,player_x)
-# display_board(board)
-
-# player_input(board,player_o)
-# display_board(board)
