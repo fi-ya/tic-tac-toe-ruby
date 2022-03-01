@@ -19,12 +19,12 @@ class Board
     end
 
     def play_turn(player, index)
-        if player == "X" && !position_taken?(player, index)
+        if player == "X" && !position_taken?(player, index) && valid_move?(index)
             place_player("X", index)
-        elsif player == "0" && !position_taken?(player, index)
+        elsif player == "0" && !position_taken?(player, index) && valid_move?(index)
             place_player("0", index)
         else
-            "error"
+            "move not vaild"
         end
     end
 
