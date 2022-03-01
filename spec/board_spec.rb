@@ -124,14 +124,17 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
         end
 
+        it "keep count of number of turns played" do
+            p "at start new board is", @new_board.board
+            play_turn_1 = @new_board.play_turn("X", 4)
+            p "after play 1 board is", @new_board.board
+            output = turn_count()
+            p "output is:", output
+            expect(output).to eq(1)
+        end
+        
         # xit "verify after 3rd turn goes back to first player" do
-            
         # end
-
-
-        
-        
-
     end
 
 end

@@ -39,6 +39,20 @@ class Board
     def valid_move?(index)
         !position_taken?(index) && index.between?(0,8) ? true : false
     end
+
+    def turn_count()
+        p board, "board in turn count"
+        counter = 0
+        p counter, "counter in turn count"
+        board.each do |space|
+            if space == "X" || space == "0"
+                counter +=1
+            end 
+        end
+        counter
+    end
+
+
 end
 
 new_board = Board.new 
