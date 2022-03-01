@@ -103,6 +103,14 @@ describe Board do
             expect(output).to eq(false)
         end
         
+        it "verify if move is not valid if player picks 9" do
+            play_turn_1 = @new_board.play_turn("X", 9)
+
+            output = @new_board.valid_move?(9)
+            expect(output).to eq(false)
+        end
+
+
         # xit "verify after 3rd turn goes back to first player" do
             
         # end

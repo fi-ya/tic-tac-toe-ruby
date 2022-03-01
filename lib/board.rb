@@ -35,19 +35,15 @@ class Board
             return false
         end
     end
+
+    def valid_move?(index)
+        index.between?(0,8) ? true : false
+    end
 end
 
 new_board = Board.new 
 puts new_board.generate_board
 
-
-
-
-# def player_input(board, player)
-#     player_move = gets.chomp.to_i
-#     move_avail_msg(player_move)
-#     # play_turn(board, player_move, player)
-# end 
 
 # def play_turn(board, index, player)
 #     if valid_move?(board, index)
@@ -57,13 +53,6 @@ puts new_board.generate_board
 #     end
 # end 
 
-# def position_taken?(board, index)
-#     if board[index] == "X" || board[index] == "0" || board[index] == nil
-#         return true
-#     else
-#         return false
-#     end
-# end
 
 # def valid_move?(board, index)
 #     if !position_taken?(board, index) && (index).between?(0,8)
@@ -73,22 +62,6 @@ puts new_board.generate_board
 #     end
 # end
 
-# def move(board,index, player)
-#     # p index , "index in move method check if int"
-#     board[index] = player
-# end
 
-# puts welcome_msg
-# board = [" "," "," "," "," "," "," "," "," "]
-# player_x = "X"
-# player_o = "O"
-# display_board(board)
 
-# enter_number_msg
-
-# player_input(board,player_x)
-# display_board(board)
-
-# player_input(board, player_o)
-# display_board(board)
 
