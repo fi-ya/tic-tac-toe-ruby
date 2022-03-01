@@ -91,7 +91,7 @@ describe Board do
         it "when taking turn it checks to see if position is taken returns true" do
             play_turn_1 = @new_board.play_turn("X", 0)
 
-            output = @new_board.position_taken?("0", 0)
+            output = @new_board.position_taken?(0)
             expect(output).to eq(true)
         end
 
@@ -99,7 +99,7 @@ describe Board do
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
 
-            output = @new_board.position_taken?("X", 1)
+            output = @new_board.position_taken?(1)
             expect(output).to eq(false)
         end
         
@@ -118,6 +118,11 @@ describe Board do
             expect(output).to eq("move not vaild")
         end
 
+        it "if player picks 4 move is vaild and board updates" do
+            @new_board.play_turn("X", 4)
+            output = @new_board.generate_board()
+            expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
+        end
 
         # xit "verify after 3rd turn goes back to first player" do
             
