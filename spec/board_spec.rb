@@ -77,9 +77,9 @@ describe Board do
 
     end
 
-    context "update a board" do
+    context "players take turns" do
         
-        it "take turns and display player X marker in top left and player O marker bottom right" do
+        it "display player X marker in top left and player O marker bottom right" do
             
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
@@ -88,14 +88,14 @@ describe Board do
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
         end
 
-        it "when taking turn it checks to see if position is taken returns true" do
+        it "check to see if position is taken returns true" do
             play_turn_1 = @new_board.play_turn("X", 0)
 
             output = @new_board.position_taken?(0)
             expect(output).to eq(true)
         end
 
-        it "when taking turn it checks to see if position is taken returns false" do
+        it "check to see if position is taken returns false" do
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
 
@@ -113,7 +113,7 @@ describe Board do
             expect(output).to eq(true)
         end
 
-        it "if player picks 9 move not valid" do
+        it "error message when invaild move" do
             output = @new_board.play_turn("X", 9)
             expect(output).to eq("move not vaild")
         end
