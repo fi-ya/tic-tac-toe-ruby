@@ -26,6 +26,13 @@ class Board
         end
     end
 
+    def position_taken?(player, index)
+        if board[index] == "X" || board[index] == "0" 
+            return true
+        else
+            return false
+        end
+    end
 end
 
 new_board = Board.new 

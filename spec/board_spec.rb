@@ -78,19 +78,31 @@ describe Board do
     end
 
     context "update a board" do
-        # test takes turns. place x, then place 0, verify board displays correct counters
+        
         it "take turns and display player X marker in top left and player O marker bottom right" do
             
-            play_turn_x = @new_board.play_turn("X", 0)
-            play_turn_o = @new_board.play_turn("0", 8)
+            play_turn_1 = @new_board.play_turn("X", 0)
+            play_turn_2 = @new_board.play_turn("0", 8)
             
             output = @new_board.generate_board()
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
         end
 
-        # verify after 3rd turn goes back to first player
-        # test taken position
-        # test wins
+        it "checks if top left position is taken" do
+            play_turn_1 = @new_board.place_player("X", 0)
+
+            output = @new_board.position_taken?("0", 0)
+            expect(output).to eq(true)
+
+        end
+        
+        xit "verify after 3rd turn goes back to first player" do
+            
+        end
+
+
+        
+        
 
     end
 
