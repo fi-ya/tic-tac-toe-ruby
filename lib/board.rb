@@ -18,13 +18,13 @@ class Board
         @board[index] = player
     end
 
-    def play_turn(player = "X", index)
+    def play_turn(player, index)
         if player == "X" && valid_move?(index)
             place_player("X", index)
         elsif player == "0" && valid_move?(index)
             place_player("0", index)
         else
-            "move not valid"
+            print_to_console(invalid_move_msg)
         end
     end
 
@@ -64,8 +64,16 @@ class Board
     def enter_num_msg
         "\n Enter a number between 0-8\n\n"
     end
+
+    def invalid_move_msg
+        "\n Invalid move. Try again\n\n"
+    end
+
+    def game_over_msg
+        "\n Game Over!\n\n"
+    end
     
-    def start_game
+    def game_setup
         print_to_console(welcome_msg)
         print_board_with_msg
     end
@@ -75,14 +83,21 @@ class Board
     end
 
     def turn 
-        play_turn(player_input)
-        print_board_with_msg
+        until turn_count == 9 do
+            play_turn(current_player, player_input)
+            print_board_with_msg
+        end
+        print_to_console(game_over_msg)
+    end
+
+    def current_player
+        turn_count % 2 == 0 ? "X" : "0"
     end
    
 end
 
 new_board = Board.new 
-new_board.start_game
+new_board.game_setup
 new_board.turn
 
 

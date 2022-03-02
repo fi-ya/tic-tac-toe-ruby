@@ -101,9 +101,9 @@ describe Board do
             expect(output).to eq(true)
         end
 
-        it "error message when invaild move" do
+        xit "error message when invaild move" do
             output = @new_board.play_turn("X", 9)
-            expect(output).to eq("move not valid")
+            expect(output).to eq("\n Invalid move. Try again\n\n")
         end
 
         it "if player picks 4 move is vaild and board updates" do
@@ -139,6 +139,16 @@ describe Board do
         it "displays correct enter number instruction" do
             output = @new_board.enter_num_msg
             expect(output).to eq("\n Enter a number between 0-8\n\n")
+        end
+
+        it "displays invalid move message" do
+            output = @new_board.invalid_move_msg
+            expect(output).to eq("\n Invalid move. Try again\n\n")
+        end
+
+        it "displays game over message" do
+            output = @new_board.game_over_msg
+            expect(output).to eq("\n Game Over!\n\n")
         end
         
         

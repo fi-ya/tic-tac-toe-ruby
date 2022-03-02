@@ -29,7 +29,7 @@ Create a walking skeleton for the game of tic-tac-toe, that includes the followi
 
 ## Run game
 The following steps will allow you to run the game in your terminal.
-1. Clone repository `git clone`
+1. Clone repository `git clone git@github.com:fi-ya/tic-tac-toe-ruby.git`
 2. Check to see if you have the correct version of Ruby (3.1.0) installed `ruby --version`
    - If not, you can use a software version manager like [chruby](https://github.com/postmodern/chruby), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv). For more information on which one is best for you check [this blog](https://mac.install.guide/ruby/index.html) or follow [this guide](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install)
 3. Install dependencies requirements with `bundle install`
