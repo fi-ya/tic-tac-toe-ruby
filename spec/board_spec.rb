@@ -129,6 +129,20 @@ describe Board do
         # end
     end
 
+    context "console messages" do 
+       
+        it "displays correct welcome message" do
+            output = @new_board.welcome_msg
+            expect(output).to eq("\n Let's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n")
+        end
+        
+        it "displays correct enter number instruction" do
+            output = @new_board.enter_num_msg
+            expect(output).to eq("\n Enter a number between 0-8\n\n")
+        end
+        
+        
+    end
     # Helper methods
     def verify_top_left(player, index)
         @new_board.place_player(player, 0)
