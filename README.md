@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-Tic-tac-toe is played on a three-by-three grid by two players, who alternately place the marks X and O in one of the nine spaces in the grid. The winner is the first to get three marks in a row, or draw when all nine spaces are filled
+Tic-tac-toe is played on a three-by-three grid by two players, who alternately place the marks X and O in one of the nine spaces in the grid. The winner is the first to get three marks in a row, or draw when all nine spaces are filled.
 It is convention that the 'X' plays first. 
 
 
@@ -31,12 +31,13 @@ Create a walking skeleton for the game of tic-tac-toe, that includes the followi
 The following steps will allow you to run the game in your terminal.
 1. Clone repository `git clone`
 2. Check to see if you have the correct version of Ruby (3.1.0) installed `ruby --version`
-   - If not you can use a software version manager like [chruby](https://github.com/postmodern/chruby), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv). For more information on which one is best for you check [this blog](https://mac.install.guide/ruby/index.html) or follow [this guide](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install)
+   - If not, you can use a software version manager like [chruby](https://github.com/postmodern/chruby), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv). For more information on which one is best for you check [this blog](https://mac.install.guide/ruby/index.html) or follow [this guide](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install)
 3. Install dependencies requirements with `bundle install`
 4. Run application with `ruby lib/board.rb`
 5. Have fun playing!
 ## Run tests
 Run the following command in the terminal to run the Rspec test suite:
+
 `rspec`
 ## Tech Stack
 - Ruby 3.1.0

@@ -18,8 +18,7 @@ class Board
         @board[index] = player
     end
 
-    def play_turn(player, index)
-        
+    def play_turn(player = "X", index)
         if player == "X" && valid_move?(index)
             place_player("X", index)
         elsif player == "0" && valid_move?(index)
@@ -38,9 +37,7 @@ class Board
     end
 
     def turn_count()
-        p board, "board in turn count"
         counter = 0
-        p counter, "counter in turn count"
 
         board.each do |space|
             if space == "X" || space == "0"
@@ -51,26 +48,50 @@ class Board
         counter
     end
 
+    def print_to_console(msg)
+        puts msg
+    end
 
+    def print_board_with_msg
+        print_to_console(generate_board)
+        print_to_console(enter_num_msg)
+    end
+
+    def welcome_msg
+        "\n Let's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n"
+    end
+
+    def enter_num_msg
+        "\n Enter a number between 0-8\n\n"
+    end
+    
+    def start_game
+        print_to_console(welcome_msg)
+        print_board_with_msg
+    end
+
+    def player_input
+        gets.chomp().to_i
+    end
+
+    def turn 
+        play_turn(player_input)
+        print_board_with_msg
+    end
+   
 end
 
 new_board = Board.new 
-puts new_board.generate_board
+new_board.start_game
+new_board.turn
 
-puts "Enter a number between 0-8"
 
-player_x = gets.chomp().to_i
-p player_x
+# puts "Enter a number between 0-8"
+# player_o = gets.chomp().to_i
+# p player_o
+# turn_2 = new_board.play_turn("O", player_o)
+# p turn_2
 
-turn_1 = new_board.play_turn("X", player_x)
-puts new_board.generate_board
-
-puts "Enter a number between 0-8"
-player_o = gets.chomp().to_i
-p player_o
-turn_2 = new_board.play_turn("O", player_o)
-p turn_2
-
-puts new_board.generate_board
+# puts new_board.generate_board
 
 
