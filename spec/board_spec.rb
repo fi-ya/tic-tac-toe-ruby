@@ -5,7 +5,7 @@ describe Board do
     before { @new_board = Board.new }
 
     context "display a board" do
-       
+    
         it "should display the board" do
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
@@ -14,12 +14,6 @@ describe Board do
         it "should display correct player marker in the top left corner" do
             verify_top_left('X', 0)
             verify_top_left('O', 0)
-        end
-
-        def verify_top_left(player, index)
-            @new_board.place_player(player, 0)
-            output = @new_board.generate_board()
-            expect(output).to eq(" #{player} |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
         end
 
         it "should display an X in the top middle row" do
@@ -69,17 +63,11 @@ describe Board do
             verify_bottom_right('O')
         end
 
-        def verify_bottom_right(player)
-            @new_board.place_player(player, 8 )
-            output = @new_board.generate_board()
-            expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
-        end
-
     end
 
     context "players take turns" do
         
-        it "display player X marker in top left and player O marker bottom right" do
+        it "displays player X marker in top left and player O marker bottom right" do
             
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
@@ -88,14 +76,14 @@ describe Board do
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
         end
 
-        it "check to see if position is taken returns true" do
+        it "checks to see if position is taken returns true" do
             play_turn_1 = @new_board.play_turn("X", 0)
 
             output = @new_board.position_taken?(0)
             expect(output).to eq(true)
         end
 
-        it "check to see if position is taken returns false" do
+        it "checks to see if position is taken returns false" do
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
 
@@ -103,7 +91,7 @@ describe Board do
             expect(output).to eq(false)
         end
         
-        it "verify if move is not valid if player picks 9" do
+        it "verifys if move is not valid if player picks 9" do
             output = @new_board.valid_move?(9)
             expect(output).to eq(false)
         end
@@ -115,7 +103,7 @@ describe Board do
 
         it "error message when invaild move" do
             output = @new_board.play_turn("X", 9)
-            expect(output).to eq("move not vaild")
+            expect(output).to eq("move not valid")
         end
 
         it "if player picks 4 move is vaild and board updates" do
@@ -124,17 +112,29 @@ describe Board do
             expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
         end
 
-        it "keep count of number of turns played" do
-            p "at start new board is", @new_board.board
-            play_turn_1 = @new_board.play_turn("X", 4)
-            p "after play 1 board is", @new_board.board
-            output = turn_count()
-            p "output is:", output
-            expect(output).to eq(1)
-        end
+        # it "keep count of number of turns played" do
+        #     # p "at start new board is", @new_board.board
+        #     play_turn_1 = @new_board.play_turn("X", 4)
+        #     # p "after play 1 board is", @new_board.board
+        #     output = @new_display.turn_count
+        #     p "output is:", output
+        #     expect(output).to eq(1)
+        # end
         
         # xit "verify after 3rd turn goes back to first player" do
         # end
     end
 
+    # Helper methods
+    def verify_top_left(player, index)
+        @new_board.place_player(player, 0)
+        output = @new_board.generate_board()
+        expect(output).to eq(" #{player} |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+    end
+
+    def verify_bottom_right(player)
+        @new_board.place_player(player, 8 )
+        output = @new_board.generate_board()
+        expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
+    end
 end
