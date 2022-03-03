@@ -101,9 +101,10 @@ describe Board do
             expect(output).to eq(true)
         end
 
-        xit "error message when invaild move" do
+        it "error message when invaild move" do
             output = @new_board.play_turn("X", 9)
-            expect(output).to eq("\n Invalid move. Try again\n\n")
+            expected = @new_board.print_to_console("\n Invalid move. Try again\n\n")
+            expect(output).to eq(expected)
         end
 
         it "if player picks 4 move is vaild and board updates" do

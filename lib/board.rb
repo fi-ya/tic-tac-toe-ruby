@@ -96,17 +96,9 @@ class Board
    
 end
 
-new_board = Board.new 
-new_board.game_setup
-new_board.turn
+# new_board = Board.new 
+# new_board.game_setup
+# new_board.turn
 
-
-# puts "Enter a number between 0-8"
-# player_o = gets.chomp().to_i
-# p player_o
-# turn_2 = new_board.play_turn("O", player_o)
-# p turn_2
-
-# puts new_board.generate_board
 
 
