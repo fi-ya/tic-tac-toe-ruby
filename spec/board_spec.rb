@@ -68,7 +68,6 @@ describe Board do
     context "players take turns" do
         
         it "displays player X marker in top left and player O marker bottom right" do
-            
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("0", 8)
             
@@ -101,7 +100,7 @@ describe Board do
             expect(output).to eq(true)
         end
 
-        it "error message when invaild move" do
+        it "error message when invalid move" do
             output = @new_board.play_turn("X", 9)
             expected = @new_board.print_to_console("\n Invalid move. Try again\n\n")
             expect(output).to eq(expected)
@@ -109,12 +108,14 @@ describe Board do
 
         it "if player picks 4 move is vaild and board updates" do
             @new_board.play_turn("X", 4)
+            
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
         end
 
         it "keep count of number of turns played returns 1" do
             play_turn_1 = @new_board.play_turn("X", 4)
+            
             output = @new_board.turn_count
             expect(output).to eq(1)
         end
@@ -122,12 +123,18 @@ describe Board do
         it "keep count of number of turns played returns 2" do
             play_turn_1 = @new_board.play_turn("X", 4)
             play_turn_2 = @new_board.play_turn("0", 1)
+            
             output = @new_board.turn_count
             expect(output).to eq(2)
         end
         
-        # xit "verify after 3rd turn goes back to first player" do
-        # end
+        it "verify after 3rd turn goes back to first player using current_player" do
+            play_turn_1 = @new_board.play_turn("X", 4)
+            play_turn_2 = @new_board.play_turn("0", 1)
+           
+            output = @new_board.turn_count % 2 == 0
+            expect(output).to eq(true)
+        end
     end
 
     context "console messages" do 
