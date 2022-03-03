@@ -106,7 +106,7 @@ describe Board do
             expect(output).to eq(expected)
         end
 
-        it "if player picks 4 move is vaild and board updates" do
+        it "if player picks 4 move is valid and board updates" do
             @new_board.play_turn("X", 4)
             
             output = @new_board.generate_board()
@@ -135,6 +135,23 @@ describe Board do
             output = @new_board.turn_count % 2 == 0
             expect(output).to eq(true)
         end
+
+        it "verify no more moves allowed after 9 turns" do 
+            play_turn_1 = @new_board.play_turn("X", 0)
+            play_turn_2 = @new_board.play_turn("0", 1)
+            play_turn_3 = @new_board.play_turn("X", 2)
+            play_turn_4 = @new_board.play_turn("0", 3)
+            play_turn_5 = @new_board.play_turn("X", 4)
+            play_turn_6 = @new_board.play_turn("0", 5)
+            play_turn_7 = @new_board.play_turn("X", 6)
+            play_turn_8 = @new_board.play_turn("0", 7)
+            play_turn_9 = @new_board.play_turn("X", 8)
+            
+            output = @new_board.turn
+            
+            expect(output).to eq(@new_board.print_to_console("\n Game Over!\n\n"))
+        end
+
     end
 
     context "console messages" do 
