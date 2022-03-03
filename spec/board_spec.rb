@@ -102,7 +102,7 @@ describe Board do
 
         it "error message when invalid move" do
             output = @new_board.play_turn("X", 9)
-            expected = @new_board.print_to_console("\n Invalid move. Try again\n\n")
+            expected = @new_board.print_to_terminal("\n Invalid move. Try again\n\n")
             expect(output).to eq(expected)
         end
 
@@ -149,12 +149,12 @@ describe Board do
             
             output = @new_board.turn
             
-            expect(output).to eq(@new_board.print_to_console("\n Game Over!\n\n"))
+            expect(output).to eq(@new_board.print_to_terminal("\n Game Over!\n\n"))
         end
 
     end
 
-    context "console messages" do 
+    context "terminal messages" do 
        
         it "displays correct welcome message" do
             output = @new_board.welcome_msg
@@ -175,9 +175,16 @@ describe Board do
             output = @new_board.game_over_msg
             expect(output).to eq("\n Game Over!\n\n")
         end
-        
-        
     end
+
+    context "prints to terminal" do 
+        it "prints a message in the terminal" do 
+            # setup exerise verify teardown
+            
+        end
+
+    end
+
     # Helper methods
     def verify_top_left(player, index)
         @new_board.place_player(player, 0)

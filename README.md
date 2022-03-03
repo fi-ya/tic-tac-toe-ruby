@@ -39,11 +39,16 @@ The following steps will allow you to run the game in your terminal.
 Run the following command in the terminal to run the Rspec test suite:
 
 `rspec`
+
+To view code coverage report run command
+`open coverage/index.html`
 ## Tech Stack
 - Ruby 3.1.0
 - Rspec 3.11
 - Bundler 2.3.7
 - Git 2.35.1
+- SimpleCov
+- RuboCop
 ## Process
  
  *Step 1* - Create a walking skeleton 
@@ -53,5 +58,5 @@ Run the following command in the terminal to run the Rspec test suite:
 
 ## Resources 
 - [GitHub CI Guide](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)
-- []()
-- []()
+- [SimpleCov - Code coverage analysis tool for Ruby]https://github.com/simplecov-ruby/simplecov()
+- [RuboCop - The Ruby Linter/Formatter that Serves and Protects](https://rubocop.org/)

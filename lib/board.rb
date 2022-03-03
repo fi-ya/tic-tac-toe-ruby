@@ -24,7 +24,7 @@ class Board
         elsif player == "0" && valid_move?(index)
             place_player("0", index)
         else
-            print_to_console(invalid_move_msg)
+            print_to_terminal(invalid_move_msg)
         end
     end
 
@@ -48,13 +48,13 @@ class Board
         counter
     end
 
-    def print_to_console(msg)
+    def print_to_terminal(msg)
         puts msg
     end
 
     def print_board_with_msg
-        print_to_console(generate_board)
-        print_to_console(enter_num_msg)
+        print_to_terminal(generate_board)
+        print_to_terminal(enter_num_msg)
     end
 
     def welcome_msg
@@ -74,7 +74,7 @@ class Board
     end
     
     def game_setup
-        print_to_console(welcome_msg)
+        print_to_terminal(welcome_msg)
         print_board_with_msg
     end
 
@@ -87,7 +87,7 @@ class Board
             play_turn(current_player, player_input)
             print_board_with_msg
         end
-        print_to_console(game_over_msg)
+        print_to_terminal(game_over_msg)
     end
 
     def current_player
@@ -96,9 +96,14 @@ class Board
    
 end
 
-# new_board = Board.new 
-# new_board.game_setup
-# new_board.turn
+def start_game
+    new_board = Board.new 
+    new_board.game_setup
+    new_board.turn
+end
+
+start_game
+
 
 
 
