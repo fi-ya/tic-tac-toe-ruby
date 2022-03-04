@@ -6,9 +6,10 @@ class Game
     #   @display = display
     # end
 
-    # def start_game
-    # @display.display_board(@board.grid)
-    # end
+    def start_game
+    
+        
+    end
 
 end
 

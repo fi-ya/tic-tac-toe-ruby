@@ -2,7 +2,7 @@ require "board"
 
 describe Board do 
 
-    before { @new_board = Board.new }
+    before { @new_board = Board.new(Message.new) }
 
     context "display a board" do
     
@@ -69,10 +69,10 @@ describe Board do
         
         it "displays player X marker in top left and player O marker bottom right" do
             play_turn_1 = @new_board.play_turn("X", 0)
-            play_turn_2 = @new_board.play_turn("0", 8)
+            play_turn_2 = @new_board.play_turn("O", 8)
             
             output = @new_board.generate_board()
-            expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | 0 \n")
+            expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | O \n")
         end
 
         it "checks to see if position is taken returns true" do
@@ -84,7 +84,7 @@ describe Board do
 
         it "checks to see if position is taken returns false" do
             play_turn_1 = @new_board.play_turn("X", 0)
-            play_turn_2 = @new_board.play_turn("0", 8)
+            play_turn_2 = @new_board.play_turn("O", 8)
 
             output = @new_board.position_taken?(1)
             expect(output).to eq(false)
@@ -122,29 +122,45 @@ describe Board do
 
         it "keep count of number of turns played returns 2" do
             play_turn_1 = @new_board.play_turn("X", 4)
-            play_turn_2 = @new_board.play_turn("0", 1)
+            play_turn_2 = @new_board.play_turn("O", 1)
             
             output = @new_board.turn_count
             expect(output).to eq(2)
         end
-        
-        it "verify after 3rd turn goes back to first player using current_player" do
-            play_turn_1 = @new_board.play_turn("X", 4)
-            play_turn_2 = @new_board.play_turn("0", 1)
-           
-            output = @new_board.turn_count % 2 == 0
-            expect(output).to eq(true)
+
+        it "empty board returns correct player mark for initial turn for player X" do
+            board = ["", "", "", "", "", "", "", "", "", ""]
+            current_player_mark = @new_board.get_player_mark(board)
+            expect(current_player_mark).to eq("X")
+        end
+
+        it "returns correct player mark on second turn for player O" do
+            board = ["", "X", "", "", "", "", "", "", "", ""]
+            current_player_mark = @new_board.get_player_mark(board)
+            expect(current_player_mark).to eq("O")
+        end
+
+        it "returns correct player mark on third turn for player X" do
+            board = ["", "X", "O", "", "", "", "", "", "", ""]
+            current_player_mark = @new_board.get_player_mark(board)
+            expect(current_player_mark).to eq("X")
+        end
+
+          it "returns correct player mark on fourth turn for player O" do
+            board = ["", "X", "O", "X", "", "", "", "", "", ""]
+            current_player_mark = @new_board.get_player_mark(board)
+            expect(current_player_mark).to eq("O")
         end
 
         it "verify no more moves allowed after 9 turns" do 
             play_turn_1 = @new_board.play_turn("X", 0)
-            play_turn_2 = @new_board.play_turn("0", 1)
+            play_turn_2 = @new_board.play_turn("O", 1)
             play_turn_3 = @new_board.play_turn("X", 2)
-            play_turn_4 = @new_board.play_turn("0", 3)
+            play_turn_4 = @new_board.play_turn("O", 3)
             play_turn_5 = @new_board.play_turn("X", 4)
-            play_turn_6 = @new_board.play_turn("0", 5)
+            play_turn_6 = @new_board.play_turn("O", 5)
             play_turn_7 = @new_board.play_turn("X", 6)
-            play_turn_8 = @new_board.play_turn("0", 7)
+            play_turn_8 = @new_board.play_turn("O", 7)
             play_turn_9 = @new_board.play_turn("X", 8)
             
             output = @new_board.turn
@@ -152,29 +168,6 @@ describe Board do
             expect(output).to eq(@new_board.print_to_terminal("\n Game Over!\n\n"))
         end
 
-    end
-
-    context "terminal messages" do 
-       
-        it "displays correct welcome message" do
-            output = @new_board.welcome_msg
-            expect(output).to eq("\n Let's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n")
-        end
-        
-        it "displays correct enter number instruction" do
-            output = @new_board.enter_num_msg
-            expect(output).to eq("\n Enter a number between 0-8\n\n")
-        end
-
-        it "displays invalid move message" do
-            output = @new_board.invalid_move_msg
-            expect(output).to eq("\n Invalid move. Try again\n\n")
-        end
-
-        it "displays game over message" do
-            output = @new_board.game_over_msg
-            expect(output).to eq("\n Game Over!\n\n")
-        end
     end
 
     context "prints to terminal" do 

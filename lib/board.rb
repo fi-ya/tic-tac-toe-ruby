@@ -1,9 +1,11 @@
+require_relative 'message'
 class Board
 
     attr_accessor :board
 
-    def initialize
+    def initialize(message)
         @board = [" "," "," "," "," "," "," "," "," "]
+        @message = message
     end 
 
     def generate_board
@@ -21,15 +23,15 @@ class Board
     def play_turn(player, index)
         if player == "X" && valid_move?(index)
             place_player("X", index)
-        elsif player == "0" && valid_move?(index)
-            place_player("0", index)
+        elsif player == "O" && valid_move?(index)
+            place_player("O", index)
         else
-            print_to_terminal(invalid_move_msg)
+            print_to_terminal(@message.invalid_move)
         end
     end
 
     def position_taken?(index)
-        board[index] == "X" || board[index] == "0" 
+        board[index] == "X" || board[index] == "O" 
     end
 
     def valid_move?(index)
@@ -40,7 +42,7 @@ class Board
         counter = 0
 
         board.each do |space|
-            if space == "X" || space == "0"
+            if space == "X" || space == "O"
                 counter +=1
             end 
         end
@@ -54,27 +56,11 @@ class Board
 
     def print_board_with_msg
         print_to_terminal(generate_board)
-        print_to_terminal(enter_num_msg)
-    end
-
-    def welcome_msg
-        "\n Let's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n"
-    end
-
-    def enter_num_msg
-        "\n Enter a number between 0-8\n\n"
-    end
-
-    def invalid_move_msg
-        "\n Invalid move. Try again\n\n"
-    end
-
-    def game_over_msg
-        "\n Game Over!\n\n"
+        print_to_terminal(@message.enter_num)
     end
     
     def game_setup
-        print_to_terminal(welcome_msg)
+        print_to_terminal(@message.welcome)
         print_board_with_msg
     end
 
@@ -84,14 +70,20 @@ class Board
 
     def turn 
         until turn_count == 9 do
-            play_turn(current_player, player_input)
+            play_turn(get_player_mark(@board), player_input)
             print_board_with_msg
         end
-        print_to_terminal(game_over_msg)
+        print_to_terminal(@message.game_over)
     end
 
-    def current_player
-        turn_count % 2 == 0 ? "X" : "0"
+    def get_player_mark(board)
+        if board.count("X") == board.count("O") 
+            "X"
+        elsif board.count("X") > board.count("O")
+            "O"
+        else
+            "X"
+        end
     end
    
 end
