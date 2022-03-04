@@ -6,10 +6,10 @@ class Game
     #   @display = display
     # end
 
-    def start_game
+    # def start_game
     
-        
-    end
+
+    # end
 
 end
 

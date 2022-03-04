@@ -65,7 +65,7 @@ describe Board do
 
     end
 
-    context "players take turns" do
+    context "players take turns and marks the board" do
         
         it "displays player X marker in top left and player O marker bottom right" do
             play_turn_1 = @new_board.play_turn("X", 0)
