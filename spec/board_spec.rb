@@ -1,8 +1,10 @@
-require "board"
-
+require 'board'
 describe Board do 
 
-    before { @new_board = Board.new(Message.new) }
+    before do
+        @message = Message.new
+        @new_board = Board.new(@message) 
+    end
 
     context "display a board" do
     
@@ -67,7 +69,7 @@ describe Board do
 
     context "players take turns and marks the board" do
         
-        it "displays player X marker in top left and player O marker bottom right" do
+        it "should display player X marker in top left and player O marker bottom right" do
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("O", 8)
             
@@ -75,14 +77,14 @@ describe Board do
             expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | O \n")
         end
 
-        it "checks to see if position is taken returns true" do
+        it "should check to see if position is taken returns true" do
             play_turn_1 = @new_board.play_turn("X", 0)
 
             output = @new_board.position_taken?(0)
             expect(output).to eq(true)
         end
 
-        it "checks to see if position is taken returns false" do
+        it "should check to see if position is taken returns false" do
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("O", 8)
 
@@ -90,37 +92,37 @@ describe Board do
             expect(output).to eq(false)
         end
         
-        it "verifys if move is not valid if player picks 9" do
+        it "should verify if move is not valid if player picks 9" do
             output = @new_board.valid_move?(9)
             expect(output).to eq(false)
         end
 
-        it "verify if move valid if player picks 6" do
+        it "should verify if move valid if player picks 6" do
             output = @new_board.valid_move?(6)
             expect(output).to eq(true)
         end
 
-        it "error message when invalid move" do
+        it "should show an error message when invalid move" do
             output = @new_board.play_turn("X", 9)
             expected = @new_board.print_to_terminal("\n Invalid move. Try again\n\n")
             expect(output).to eq(expected)
         end
 
-        it "if player picks 4 move is valid and board updates" do
+        it "should show player mark at position 4 if space is free and move is valid" do
             @new_board.play_turn("X", 4)
             
             output = @new_board.generate_board()
             expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
         end
 
-        it "keep count of number of turns played returns 1" do
+        it "should keep count of number of turns played returns 1" do
             play_turn_1 = @new_board.play_turn("X", 4)
             
             output = @new_board.turn_count
             expect(output).to eq(1)
         end
 
-        it "keep count of number of turns played returns 2" do
+        it "shoud keep count of number of turns played returns 2" do
             play_turn_1 = @new_board.play_turn("X", 4)
             play_turn_2 = @new_board.play_turn("O", 1)
             
@@ -128,31 +130,31 @@ describe Board do
             expect(output).to eq(2)
         end
 
-        it "empty board returns correct player mark for initial turn for player X" do
+        it "should show an empty board and updates board with player marker X on the first play" do
             board = ["", "", "", "", "", "", "", "", "", ""]
             current_player_mark = @new_board.get_player_mark(board)
             expect(current_player_mark).to eq("X")
         end
 
-        it "returns correct player mark on second turn for player O" do
+        it "should return the correct player mark on second turn for player O" do
             board = ["", "X", "", "", "", "", "", "", "", ""]
             current_player_mark = @new_board.get_player_mark(board)
             expect(current_player_mark).to eq("O")
         end
 
-        it "returns correct player mark on third turn for player X" do
+        it "should return the correct player mark on third turn for player X" do
             board = ["", "X", "O", "", "", "", "", "", "", ""]
             current_player_mark = @new_board.get_player_mark(board)
             expect(current_player_mark).to eq("X")
         end
 
-          it "returns correct player mark on fourth turn for player O" do
+          it "should return the correct player mark on fourth turn for player O" do
             board = ["", "X", "O", "X", "", "", "", "", "", ""]
             current_player_mark = @new_board.get_player_mark(board)
             expect(current_player_mark).to eq("O")
         end
 
-        it "verify no more moves allowed after 9 turns" do 
+        it "should verify no more moves allowed after 9 turns" do 
             play_turn_1 = @new_board.play_turn("X", 0)
             play_turn_2 = @new_board.play_turn("O", 1)
             play_turn_3 = @new_board.play_turn("X", 2)
@@ -170,10 +172,18 @@ describe Board do
 
     end
 
-    context "prints to terminal" do 
-        it "prints a message in the terminal" do 
-            # setup exerise verify teardown
-            
+    context "correct input output" do 
+        it "should print the board to the terminal" do 
+            expect {@new_board.print_to_terminal(@new_board.generate_board)}.to output("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n").to_stdout
+        end
+
+        it "should print an enter number message to the terminal" do 
+            expect {@new_board.print_to_terminal(@message.enter_num)}.to output("\n Enter a number between 0-8\n\n").to_stdout
+        end
+
+        it "should take the correct player input from the terminal" do 
+            allow($stdin).to receive(:gets).and_return(0)
+            expect(@new_board.player_input).to eq(0)
         end
 
     end

@@ -1,4 +1,5 @@
 require_relative 'message'
+
 class Board
 
     attr_accessor :board
@@ -87,9 +88,3 @@ class Board
     end
    
 end
-
-
-
-
-
-
