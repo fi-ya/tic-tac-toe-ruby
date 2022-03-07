@@ -146,19 +146,23 @@ describe Board do
     end
 
     it 'should verify no more moves allowed after 9 turns' do
-      play_turn_1 = @new_board.play_turn('X', 0)
-      play_turn_2 = @new_board.play_turn('O', 1)
-      play_turn_3 = @new_board.play_turn('X', 2)
-      play_turn_4 = @new_board.play_turn('O', 3)
-      play_turn_5 = @new_board.play_turn('X', 4)
-      play_turn_6 = @new_board.play_turn('O', 5)
-      play_turn_7 = @new_board.play_turn('X', 6)
-      play_turn_8 = @new_board.play_turn('O', 7)
-      play_turn_9 = @new_board.play_turn('X', 8)
+      dummy_full_board
 
       output = @new_board.turn
 
       expect(output).to eq(@new_board.print_to_terminal("\n Nobody won. Game Over!\n\n"))
+    end
+
+    it 'should return board_full? as false when new board is initilaised' do
+      expect(@new_board.board_full?).to eq(false)
+    end
+
+    it 'should return board_full? as true when board is full' do
+      dummy_full_board
+
+      board_full = @new_board.available_moves.empty?
+
+      expect(board_full).to eq(true)
     end
   end
 
@@ -208,5 +212,17 @@ describe Board do
     @new_board.place_player(player, 8)
     output = @new_board.generate_board
     expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
+  end
+
+  def dummy_full_board
+    play_turn_1 = @new_board.play_turn('X', 0)
+    play_turn_2 = @new_board.play_turn('O', 1)
+    play_turn_3 = @new_board.play_turn('X', 2)
+    play_turn_4 = @new_board.play_turn('O', 3)
+    play_turn_5 = @new_board.play_turn('X', 4)
+    play_turn_6 = @new_board.play_turn('O', 5)
+    play_turn_7 = @new_board.play_turn('X', 6)
+    play_turn_8 = @new_board.play_turn('O', 7)
+    play_turn_9 = @new_board.play_turn('X', 8)
   end
 end

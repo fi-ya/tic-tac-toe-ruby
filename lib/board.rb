@@ -58,7 +58,6 @@ class Board
   def print_board_with_msg
     print_to_terminal(generate_board)
     print_to_terminal(@message.enter_num)
-    
   end
 
   def game_setup
@@ -74,9 +73,7 @@ class Board
     until board_full?
       play_turn(get_player_mark(@board), player_input)
       print_to_terminal(generate_board)
-      unless board_full?
-        print_to_terminal(@message.enter_num)
-      end
+      print_to_terminal(@message.enter_num) unless board_full?
     end
     print_to_terminal(@message.game_over)
   end
