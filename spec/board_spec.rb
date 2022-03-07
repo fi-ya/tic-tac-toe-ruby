@@ -114,13 +114,12 @@ describe Board do
     end
 
     it 'should keep track of available moves in an array' do
-        play_turn_1 = @new_board.play_turn('X', 4)
-        play_turn_2 = @new_board.play_turn('O', 1)
+      play_turn_1 = @new_board.play_turn('X', 4)
+      play_turn_2 = @new_board.play_turn('O', 1)
 
-        output = @new_board.available_moves
-        expect(output).to eq([' ',' ',' ',' ',' ',' ',' '])
-        expect(output.length).to eq(7)
-
+      output = @new_board.available_moves
+      expect(output).to eq([' ', ' ', ' ', ' ', ' ', ' ', ' '])
+      expect(output.length).to eq(7)
     end
     it 'should show an empty board and updates board with player marker X on the first play' do
       board = ['', '', '', '', '', '', '', '', '', '']
@@ -159,7 +158,7 @@ describe Board do
 
       output = @new_board.turn
 
-      expect(output).to eq(@new_board.print_to_terminal("\n Game Over!\n\n"))
+      expect(output).to eq(@new_board.print_to_terminal("\n Nobody won. Game Over!\n\n"))
     end
   end
 
@@ -178,25 +177,24 @@ describe Board do
 
   context 'winning board' do
     it 'should have a list of winning moves' do
-        winning_moves = Board::WINNING_MOVES
-        expect(winning_moves).to eq([
-            [0,1,2],
-            [3,4,5],
-            [6,7,8],
-            [0,3,6],
-            [1,4,7],
-            [2,5,8],
-            [0,4,8],
-            [2,4,6]
-        ])
-    end 
-
-    it 'should correctly identify winning play and return true' do 
-        board = ['X','X','X','0','','','O','','']
-        win = @new_board.win?(board, 'X')
-        expect(win).to eq(true)
+      winning_moves = Board::WINNING_MOVES
+      expect(winning_moves).to eq([
+                                    [0, 1, 2],
+                                    [3, 4, 5],
+                                    [6, 7, 8],
+                                    [0, 3, 6],
+                                    [1, 4, 7],
+                                    [2, 5, 8],
+                                    [0, 4, 8],
+                                    [2, 4, 6]
+                                  ])
     end
 
+    it 'should correctly identify winning play and return true' do
+      board = ['X', 'X', 'X', '0', '', '', 'O', '', '']
+      win = @new_board.win?(board, 'X')
+      expect(win).to eq(true)
+    end
   end
 
   # Helper methods

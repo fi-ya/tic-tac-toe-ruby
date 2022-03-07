@@ -6,15 +6,15 @@ class Board
   attr_accessor :board
 
   WINNING_MOVES = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ].freeze
 
   def initialize(message)
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
@@ -58,6 +58,7 @@ class Board
   def print_board_with_msg
     print_to_terminal(generate_board)
     print_to_terminal(@message.enter_num)
+    
   end
 
   def game_setup
@@ -72,7 +73,10 @@ class Board
   def turn
     until board_full?
       play_turn(get_player_mark(@board), player_input)
-      print_board_with_msg
+      print_to_terminal(generate_board)
+      unless board_full?
+        print_to_terminal(@message.enter_num)
+      end
     end
     print_to_terminal(@message.game_over)
   end
@@ -90,29 +94,25 @@ class Board
   def available_moves
     available_moves = []
     @board.each do |cell|
-        if cell != "X" && cell != "O"
-            available_moves.push(cell)
-        end
+      available_moves.push(cell) if cell != 'X' && cell != 'O'
     end
     available_moves
   end
 
   def board_full?
-    available_moves.empty? 
+    available_moves.empty?
   end
 
   def win?(board, player)
     WINNING_MOVES.any? do |winning_play|
-         winning_play.all? do |position| 
-            board[position] == player 
-         end
+      winning_play.all? do |position|
+        board[position] == player
+      end
     end
   end
 
   def player_won(board, player)
-    if win?(board, player)
-        print_to_terminal(@message.won)
-    end
+    print_to_terminal(@message.won) if win?(board, player)
   end
 end
 
