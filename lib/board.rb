@@ -68,16 +68,16 @@ class Board
   def player_input
     gets.chomp.to_i
   end
-
+  
   def turn
-    count = 0
     until game_over?
-      play_turn(get_player_mark(@board), player_input)
+      play_turn(get_player_mark(@board), player_input) unless game_over?
+      p "Board after player's turn: #{@board}"
       print_to_terminal(generate_board)
-      p "why is this printing", count+=1
+      p "Is game over: #{game_over?}"
       print_to_terminal(@message.enter_num) unless game_over?
     end
-    player_won(@board, get_player_mark(@board))
+    game_status(@board, get_player_mark(@board))
   end
 
   def get_player_mark(board)
@@ -103,23 +103,25 @@ class Board
   end
 
   def win?(board, player)
+    p "win? Board:#{@board} Player:#{player}"
     WINNING_MOVES.any? do |winning_play|
       winning_play.all? do |position|
         board[position] == player
       end
     end
+    
   end
 
-  def player_won(board, player)
+  def game_status(board, player)
     if win?(board, player)
-        print_to_terminal(@message.won) 
+      print_to_terminal(@message.won) 
     else
-        print_to_terminal(@message.game_over)
+      print_to_terminal(@message.game_over)
     end
   end
 
   def game_over?
-    board_full? || win?(@board, get_player_mark(@board))
+   board_full? || win?(@board, get_player_mark(@board))
   end
 
 end
