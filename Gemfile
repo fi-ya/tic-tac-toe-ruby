@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'rspec'
@@ -5,4 +7,3 @@ gem 'rspec'
 gem 'simplecov', require: false, group: :test
 
 gem 'rubocop', require: false
-

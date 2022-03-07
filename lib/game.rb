@@ -1,15 +1,14 @@
+# frozen_string_literal: true
+
 class Game
-    # attr_reader :board, :display
-    
-    # def initialize(board)
-    #   @board = board
-    #   @display = display
-    # end
+  # attr_reader :board, :display
 
-    # def start_game
-    
+  # def initialize(board)
+  #   @board = board
+  #   @display = display
+  # end
 
-    # end
+  # def start_game
 
+  # end
 end
-
