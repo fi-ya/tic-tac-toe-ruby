@@ -70,12 +70,14 @@ class Board
   end
 
   def turn
-    until board_full?
+    count = 0
+    until game_over?
       play_turn(get_player_mark(@board), player_input)
       print_to_terminal(generate_board)
-      print_to_terminal(@message.enter_num) unless board_full?
+      p "why is this printing", count+=1
+      print_to_terminal(@message.enter_num) unless game_over?
     end
-    print_to_terminal(@message.game_over)
+    player_won(@board, get_player_mark(@board))
   end
 
   def get_player_mark(board)
@@ -109,10 +111,18 @@ class Board
   end
 
   def player_won(board, player)
-    print_to_terminal(@message.won) if win?(board, player)
+    if win?(board, player)
+        print_to_terminal(@message.won) 
+    else
+        print_to_terminal(@message.game_over)
+    end
   end
-end
 
+  def game_over?
+    board_full? || win?(@board, get_player_mark(@board))
+  end
+
+end
 # new_board = Board.new(Message.new)
 # board = ['','','0','','','O','X','X','X']
 # p new_board.win?(board, 'X')
