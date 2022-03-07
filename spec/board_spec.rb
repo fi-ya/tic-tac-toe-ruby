@@ -196,6 +196,13 @@ describe Board do
             [2,4,6]
         ])
     end 
+
+    it 'should correctly identify winning play and return true' do 
+        board = ['X','X','X','0','','','O','','']
+        win = @new_board.win?(board, 'X')
+        expect(win).to eq(true)
+    end
+
   end
 
   # Helper methods

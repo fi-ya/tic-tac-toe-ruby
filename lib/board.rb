@@ -96,4 +96,18 @@ class Board
       'X'
     end
   end
+
+  def win?(board, player)
+    WINNING_MOVES.any? do |winning_play|
+         winning_play.all? do |position| 
+            board[position] == player 
+         end
+    end
+  end
+
+ 
 end
+
+new_board = Board.new(Message.new)
+board = ['','','0','','','O','X','X','X']
+p new_board.win?(board, 'X')
