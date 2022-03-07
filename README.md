@@ -7,25 +7,11 @@ It is convention that the 'X' plays first.
 
 ## Table of Contents
 
-  - [Functional Requirements](#functional-requirements)
   - [Run game](#run-game)
   - [Run tests](#run-game)
   - [Tech Stack](#tech-stack)
-  - [Process](#process)
-  - [Errors](#errors)
+  - [Features](#features)
   - [Resources](#resources)
-
-## Functional Requirements
-
-*Step 1*
-Create a walking skeleton for the game of tic-tac-toe, that includes the following:
-
-- [ ] A new repository that is checked into version control and accessible to the mentoring team.
-- [ ] Any relevant packages are managed by a package manager rather than copy/pasted into the repo.
-- [ ] A single passing test (this might be a dummy test that asserts true equals true).
-- [ ] A detailed README outlining how to run the app and tests.
-- [ ] A continuous integration service that runs the test suite upon every commit. One suggestion is to use GitHub and GitHub Actions.
-- [ ] A simple message that is displayed on the console when the app is run (e.g. "Welcome to Tic-Tac-Toe").
 
 ## Run game
 The following steps will allow you to run the game in your terminal.
@@ -43,18 +29,14 @@ Run the following command in the terminal to run the Rspec test suite:
 To view code coverage report run command
 `open coverage/index.html`
 ## Tech Stack
-- Ruby 3.1.0
-- Rspec 3.11
-- Bundler 2.3.7
-- Git 2.35.1
-- SimpleCov
-- RuboCop
-## Process
- 
- *Step 1* - Create a walking skeleton 
- `A Walking Skeleton is a tiny implementation of the system that performs a small end-to-end function. It need not use the final architecture, but it should link together the main architectural components. The architecture and the functionality can then evolve in parallel. - Alistair Cockburn`
-
-## Errors
+- [Ruby](https://www.ruby-lang.org/en/) 3.1.0
+- [Rspec](https://relishapp.com/rspec) 3.11
+- [Bundler](https://bundler.io/) 2.3.7
+- [Git](https://git-scm.com/) 2.35.1
+- [SimpleCov](https://github.com/simplecov-ruby/simplecov)
+- [RuboCop](https://rubocop.org/)
+## Features
+ - Human vs Human game
 
 ## Resources 
 - [GitHub CI Guide](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)
