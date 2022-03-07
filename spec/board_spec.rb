@@ -182,6 +182,22 @@ describe Board do
     end
   end
 
+  context 'winning board' do
+    it 'should have a list of winning moves' do
+        winning_moves = Board::WINNING_MOVES
+        expect(winning_moves).to eq([
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ])
+    end 
+  end
+
   # Helper methods
   def verify_top_left(player, _index)
     @new_board.place_player(player, 0)
