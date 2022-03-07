@@ -113,21 +113,15 @@ describe Board do
       expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
     end
 
-    it 'should keep count of number of turns played returns 1' do
-      play_turn_1 = @new_board.play_turn('X', 4)
+    it 'should keep track of available moves in an array' do
+        play_turn_1 = @new_board.play_turn('X', 4)
+        play_turn_2 = @new_board.play_turn('O', 1)
 
-      output = @new_board.turn_count
-      expect(output).to eq(1)
+        output = @new_board.available_moves
+        expect(output).to eq([' ',' ',' ',' ',' ',' ',' '])
+        expect(output.length).to eq(7)
+
     end
-
-    it 'shoud keep count of number of turns played returns 2' do
-      play_turn_1 = @new_board.play_turn('X', 4)
-      play_turn_2 = @new_board.play_turn('O', 1)
-
-      output = @new_board.turn_count
-      expect(output).to eq(2)
-    end
-
     it 'should show an empty board and updates board with player marker X on the first play' do
       board = ['', '', '', '', '', '', '', '', '', '']
       current_player_mark = @new_board.get_player_mark(board)

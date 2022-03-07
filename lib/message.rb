@@ -16,4 +16,9 @@ class Message
   def game_over
     "\n Game Over!\n\n"
   end
+
+  def won
+    "\n You Won!\n\n"
+  end
+
 end

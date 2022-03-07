@@ -30,5 +30,9 @@ describe Message do
     it 'should display game over message' do
       expect { @new_board.print_to_terminal(@message.game_over) }.to output("\n Game Over!\n\n").to_stdout
     end
+
+    it 'should display winning message' do
+      expect { @new_board.print_to_terminal(@message.won) }.to output("\n You Won!\n\n").to_stdout
+    end
   end
 end

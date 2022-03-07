@@ -51,16 +51,6 @@ class Board
     !position_taken?(index) && index.between?(0, 8) ? true : false
   end
 
-  def turn_count
-    counter = 0
-
-    board.each do |space|
-      counter += 1 if %w[X O].include?(space)
-    end
-
-    counter
-  end
-
   def print_to_terminal(msg)
     puts msg
   end
@@ -80,7 +70,7 @@ class Board
   end
 
   def turn
-    until turn_count == 9
+    until board_full?
       play_turn(get_player_mark(@board), player_input)
       print_board_with_msg
     end
@@ -97,6 +87,20 @@ class Board
     end
   end
 
+  def available_moves
+    available_moves = []
+    @board.each do |cell|
+        if cell != "X" && cell != "O"
+            available_moves.push(cell)
+        end
+    end
+    available_moves
+  end
+
+  def board_full?
+    available_moves.empty? 
+  end
+
   def win?(board, player)
     WINNING_MOVES.any? do |winning_play|
          winning_play.all? do |position| 
@@ -105,9 +109,13 @@ class Board
     end
   end
 
- 
+  def player_won(board, player)
+    if win?(board, player)
+        print_to_terminal(@message.won)
+    end
+  end
 end
 
-new_board = Board.new(Message.new)
-board = ['','','0','','','O','X','X','X']
-p new_board.win?(board, 'X')
+# new_board = Board.new(Message.new)
+# board = ['','','0','','','O','X','X','X']
+# p new_board.win?(board, 'X')
