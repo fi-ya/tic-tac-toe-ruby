@@ -73,9 +73,7 @@ class Board
   def turn
     until game_over?
       play_turn(get_player_mark(@board), player_input) 
-      # p "Board after player's turn: #{@board}"
       print_to_terminal(generate_board) 
-      # p "Is game over: #{game_over?}"
       print_to_terminal(@message.enter_num) unless game_over?
     end
     game_status(@board)
@@ -97,34 +95,32 @@ class Board
       available_moves.push(cell) if cell != 'X' && cell != 'O'
     end
     available_moves
-    # p "Available moves:#{available_moves}"
   end
 
   def board_full?
     available_moves.empty?
-    # p "Available moves:#{available_moves.empty?} in board_full"
   end
 
   def win?(board)
-    res =[]
+    winning_plays =[]
+    
     WINNING_MOVES.all? do |winning_game|
-      # p "Winning game:#{winning_game}"
-      # p "Board:#{board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false} in win?"
-    res.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
+      winning_plays.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
     end
-    res.any? {|res| res == true}
+    
+    winning_plays.any? { |game| game == true }
+    
   end
 
   def game_status(board)
     if board_full? && !win?(board)
-      print_to_terminal(@message.game_over)
+      print_to_terminal(@message.tie)
     else
       print_to_terminal(@message.won) 
     end
   end
 
   def game_over?
-    # p"Board full:#{board_full?}, Win?:#{win?(@board)}"
      board_full? || win?(@board)
   end
 

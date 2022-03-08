@@ -13,8 +13,8 @@ class Message
     "\n Invalid move. Try again\n\n"
   end
 
-  def game_over
-    "\n Nobody won. Game Over!\n\n"
+  def tie
+    "\n It's a tie. Game Over!\n\n"
   end
 
   def won

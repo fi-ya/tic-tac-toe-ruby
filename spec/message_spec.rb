@@ -28,7 +28,7 @@ describe Message do
     end
 
     it 'should display game over message' do
-      expect { @new_board.print_to_terminal(@message.game_over) }.to output("\n Nobody won. Game Over!\n\n").to_stdout
+      expect { @new_board.print_to_terminal(@message.tie) }.to output("\n It's a tie. Game Over!\n\n").to_stdout
     end
 
     it 'should display winning message' do

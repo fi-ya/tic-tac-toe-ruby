@@ -150,7 +150,7 @@ describe Board do
 
       output = @new_board.turn
 
-      expect(output).to eq(@new_board.print_to_terminal("\n Nobody won. Game Over!\n\n"))
+      expect(output).to eq(@new_board.print_to_terminal("\n It's a tie. Game Over!\n\n"))
     end
 
     it 'should return board_full? as false when new board is initilaised' do
@@ -179,7 +179,7 @@ describe Board do
     end
   end
 
-  context 'winning board' do
+  context 'game play' do
     it 'should have a list of winning moves' do
       winning_moves = Board::WINNING_MOVES
       expect(winning_moves).to eq([
@@ -199,6 +199,13 @@ describe Board do
       win = @new_board.win?(board)
       expect(win).to eq(true)
     end
+
+    it 'should correctly identify losing play and return false' do
+      board = ['X', 'X', '3', '0', 'X', '5', 'O', '7', '8']
+      win = @new_board.win?(board)
+      expect(win).to eq(false)
+    end
+
   end
 
   # Helper methods
@@ -208,14 +215,11 @@ describe Board do
     expect(output).to eq(" #{player} | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
   end
   
-
   def verify_bottom_right(player)
     @new_board.place_player(player, 8)
     output = @new_board.generate_board
     expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | #{player} \n")
   end
-
-  
 
   def dummy_full_board
     play_turn_1 = @new_board.play_turn('X', 0)
