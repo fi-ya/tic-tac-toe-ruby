@@ -10,7 +10,7 @@ describe Board do
   context 'display a board' do
     it 'should display the board' do
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display correct player marker in the top left corner' do
@@ -21,43 +21,43 @@ describe Board do
     it 'should display an X in the top middle row' do
       @new_board.place_player('X', 1)
       output = @new_board.generate_board
-      expect(output).to eq("   | X |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | X | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display an X in the top right row' do
       @new_board.place_player('X', 2)
       output = @new_board.generate_board
-      expect(output).to eq("   |   | X \n-----------\n   |   |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | X \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display an X in the middle left row' do
       @new_board.place_player('X', 3)
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n X |   |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n X | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display an X in the middle middle row' do
       @new_board.place_player('X', 4)
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | X | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display an X in the middle right row' do
       @new_board.place_player('X', 5)
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   |   | X \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | X \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should display an X in the bottom left row' do
       @new_board.place_player('X', 6)
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n X |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n X | 7 | 8 \n")
     end
 
     it 'should display an X in the bottom middle row' do
       @new_board.place_player('X', 7)
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   | X |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | X | 8 \n")
     end
 
     it 'should display correct players marker in the bottom right row' do
@@ -72,7 +72,7 @@ describe Board do
       play_turn_2 = @new_board.play_turn('O', 8)
 
       output = @new_board.generate_board
-      expect(output).to eq(" X |   |   \n-----------\n   |   |   \n-----------\n   |   | O \n")
+      expect(output).to eq(" X | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | O \n")
     end
 
     it 'should check to see if position is taken returns true' do
@@ -110,7 +110,7 @@ describe Board do
       @new_board.play_turn('X', 4)
 
       output = @new_board.generate_board
-      expect(output).to eq("   |   |   \n-----------\n   | X |   \n-----------\n   |   |   \n")
+      expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | X | 5 \n-----------\n 6 | 7 | 8 \n")
     end
 
     it 'should keep track of available moves in an array' do
@@ -118,7 +118,7 @@ describe Board do
       play_turn_2 = @new_board.play_turn('O', 1)
 
       output = @new_board.available_moves
-      expect(output).to eq([' ', ' ', ' ', ' ', ' ', ' ', ' '])
+      expect(output).to eq(["0", "2", "3", "5", "6", "7", "8"])
       expect(output.length).to eq(7)
     end
     it 'should show an empty board and updates board with player marker X on the first play' do
@@ -170,7 +170,7 @@ describe Board do
     it 'should print the board to the terminal' do
       expect do
         @new_board.print_to_terminal(@new_board.generate_board)
-      end.to output("   |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n").to_stdout
+      end.to output(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n").to_stdout
     end
 
     it 'should take the correct player input from the terminal' do
@@ -195,8 +195,8 @@ describe Board do
     end
 
     it 'should correctly identify winning play and return true' do
-      board = ['X', 'X', 'X', '0', '', '', 'O', '', '']
-      win = @new_board.win?(board, 'X')
+      board = ['X', 'X', 'X', '0', '4', '5', 'O', '7', '8']
+      win = @new_board.win?(board)
       expect(win).to eq(true)
     end
   end
@@ -205,14 +205,17 @@ describe Board do
   def verify_top_left(player, _index)
     @new_board.place_player(player, 0)
     output = @new_board.generate_board
-    expect(output).to eq(" #{player} |   |   \n-----------\n   |   |   \n-----------\n   |   |   \n")
+    expect(output).to eq(" #{player} | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
   end
+  
 
   def verify_bottom_right(player)
     @new_board.place_player(player, 8)
     output = @new_board.generate_board
-    expect(output).to eq("   |   |   \n-----------\n   |   |   \n-----------\n   |   | #{player} \n")
+    expect(output).to eq(" 0 | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | #{player} \n")
   end
+
+  
 
   def dummy_full_board
     play_turn_1 = @new_board.play_turn('X', 0)
