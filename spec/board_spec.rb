@@ -118,7 +118,7 @@ describe Board do
       play_turn_2 = @new_board.play_turn('O', 1)
 
       output = @new_board.available_moves
-      expect(output).to eq(["0", "2", "3", "5", "6", "7", "8"])
+      expect(output).to eq(%w[0 2 3 5 6 7 8])
       expect(output.length).to eq(7)
     end
     it 'should show an empty board and updates board with player marker X on the first play' do
@@ -177,6 +177,19 @@ describe Board do
       allow($stdin).to receive(:gets).and_return(0)
       expect(@new_board.player_input).to eq(0)
     end
+
+    it 'should print game won message ' do
+      expect do
+        @new_board.game_status(%w[X X X 0 4 5 O 7 8])
+      end.to output("\n You Won!\n\n").to_stdout
+    end
+
+    xit 'should print game tie message ' do
+      expect do
+        @new_board.game_status(%w[X X O O O X X O X])
+      end.to output("\n It's a tie. Game Over!\n\n").to_stdout
+    end
+
   end
 
   context 'game play' do
@@ -195,17 +208,16 @@ describe Board do
     end
 
     it 'should correctly identify winning play and return true' do
-      board = ['X', 'X', 'X', '0', '4', '5', 'O', '7', '8']
+      board = %w[X X X 0 4 5 O 7 8]
       win = @new_board.win?(board)
       expect(win).to eq(true)
     end
 
     it 'should correctly identify losing play and return false' do
-      board = ['X', 'X', '3', '0', 'X', '5', 'O', '7', '8']
+      board = %w[X X 3 0 X 5 O 7 8]
       win = @new_board.win?(board)
       expect(win).to eq(false)
     end
-
   end
 
   # Helper methods
@@ -214,7 +226,7 @@ describe Board do
     output = @new_board.generate_board
     expect(output).to eq(" #{player} | 1 | 2 \n-----------\n 3 | 4 | 5 \n-----------\n 6 | 7 | 8 \n")
   end
-  
+
   def verify_bottom_right(player)
     @new_board.place_player(player, 8)
     output = @new_board.generate_board

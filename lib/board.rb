@@ -17,11 +17,10 @@ class Board
   ].freeze
 
   def initialize(message)
-    @board = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+    @board = %w[0 1 2 3 4 5 6 7 8]
     @message = message
   end
 
-  
   def generate_board
     " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" \
       "-----------\n" \
@@ -69,11 +68,11 @@ class Board
   def player_input
     gets.chomp.to_i
   end
-  
+
   def turn
     until game_over?
-      play_turn(get_player_mark(@board), player_input) 
-      print_to_terminal(generate_board) 
+      play_turn(get_player_mark(@board), player_input)
+      print_to_terminal(generate_board)
       print_to_terminal(@message.enter_num) unless game_over?
     end
     game_status(@board)
@@ -102,26 +101,25 @@ class Board
   end
 
   def win?(board)
-    winning_plays =[]
-    
+    winning_plays = []
+
     WINNING_MOVES.all? do |winning_game|
       winning_plays.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
     end
-    
+
     winning_plays.any? { |game| game == true }
-    
+
   end
 
   def game_status(board)
     if board_full? && !win?(board)
       print_to_terminal(@message.tie)
     else
-      print_to_terminal(@message.won) 
+      print_to_terminal(@message.won)
     end
   end
 
   def game_over?
-     board_full? || win?(@board)
+    board_full? || win?(@board)
   end
-
 end
