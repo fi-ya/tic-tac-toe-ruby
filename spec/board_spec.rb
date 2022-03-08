@@ -181,7 +181,7 @@ describe Board do
     it 'should print game won message ' do
       expect do
         @new_board.game_status(%w[X X X 0 4 5 O 7 8])
-      end.to output("\n You Won!\n\n").to_stdout
+      end.to output("\n Player X wins!\n\n").to_stdout
     end
 
     xit 'should print game tie message ' do

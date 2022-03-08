@@ -115,7 +115,7 @@ class Board
     if board_full? && !win?(board)
       print_to_terminal(@message.tie)
     else
-      print_to_terminal(@message.won)
+      print_to_terminal(@message.won(get_player_mark(@board)))
     end
   end
 

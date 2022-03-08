@@ -32,7 +32,7 @@ describe Message do
     end
 
     it 'should display winning message' do
-      expect { @new_board.print_to_terminal(@message.won) }.to output("\n You Won!\n\n").to_stdout
+      expect { @new_board.print_to_terminal(@message.won('X')) }.to output("\n Player X wins!\n\n").to_stdout
     end
   end
 end

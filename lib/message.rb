@@ -17,7 +17,7 @@ class Message
     "\n It's a tie. Game Over!\n\n"
   end
 
-  def won
-    "\n You Won!\n\n"
+  def won(player)
+    "\n Player #{player} wins!\n\n"
   end
 end
