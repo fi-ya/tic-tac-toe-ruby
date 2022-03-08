@@ -17,7 +17,7 @@ class Board
   ].freeze
 
   def initialize(message)
-    @board = %w[0 1 2 3 4 5 6 7 8]
+    @board = %w[1 2 3 4 5 6 7 8 9]
     @message = message
   end
 
@@ -30,7 +30,7 @@ class Board
   end
 
   def place_player(player, index)
-    @board[index] = player
+    @board[index-1] = player
   end
 
   def play_turn(player, index)
@@ -44,11 +44,11 @@ class Board
   end
 
   def position_taken?(index)
-    board[index] == 'X' || board[index] == 'O'
+    board[index-1] == 'X' || board[index-1] == 'O'
   end
 
   def valid_move?(index)
-    !position_taken?(index) && index.between?(0, 8) ? true : false
+    !position_taken?(index) && index.between?(1, 9) ? true : false
   end
 
   def print_to_terminal(msg)
