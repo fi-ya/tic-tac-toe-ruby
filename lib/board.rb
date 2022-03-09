@@ -80,7 +80,7 @@ class Board
   end
 
   def print_to_terminal(msg)
-    puts msg
+    print msg
   end
 
   def print_board_with_msg
