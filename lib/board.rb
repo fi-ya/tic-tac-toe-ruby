@@ -19,7 +19,6 @@ class Board
   def initialize(message)
     @board = %w[1 2 3 4 5 6 7 8 9]
     @message = message
-    
   end
 
   def generate_board
@@ -119,7 +118,6 @@ class Board
     end
 
     winning_plays.any? { |game| game == true }
-
   end
 
   def game_status(board)

@@ -68,23 +68,23 @@ describe Board do
 
   context 'players take turns and marks the board' do
     it 'should display player X marker in top left and player O marker bottom right' do
-      play_turn_1 = @new_board.play_turn('X', 1)
-      play_turn_2 = @new_board.play_turn('O', 9)
+      @new_board.play_turn('X', 1)
+      @new_board.play_turn('O', 9)
 
       output = @new_board.generate_board
       expect(output).to eq(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")
     end
 
     it 'should check to see if position is taken returns true' do
-      play_turn_1 = @new_board.play_turn('X', 1)
+      @new_board.play_turn('X', 1)
 
       output = @new_board.position_taken?(1)
       expect(output).to eq(true)
     end
 
     it 'should check to see if position is taken returns false' do
-      play_turn_1 = @new_board.play_turn('X', 0)
-      play_turn_2 = @new_board.play_turn('O', 8)
+      @new_board.play_turn('X', 0)
+      @new_board.play_turn('O', 8)
 
       output = @new_board.position_taken?(1)
       expect(output).to eq(false)
@@ -114,8 +114,8 @@ describe Board do
     end
 
     it 'should keep track of available moves in an array' do
-      play_turn_1 = @new_board.play_turn('X', 4)
-      play_turn_2 = @new_board.play_turn('O', 1)
+      @new_board.play_turn('X', 4)
+      @new_board.play_turn('O', 1)
 
       output = @new_board.available_moves
       expect(output).to eq(%w[2 3 5 6 7 8 9])
@@ -189,7 +189,6 @@ describe Board do
         @new_board.game_status(%w[X X O O O X X O X])
       end.to output("\nIt's a tie. Game Over!\n\n").to_stdout
     end
-
   end
 
   context 'game play' do
@@ -246,14 +245,14 @@ describe Board do
   end
 
   def dummy_full_board
-    play_turn_1 = @new_board.play_turn('X', 1)
-    play_turn_2 = @new_board.play_turn('O', 2)
-    play_turn_3 = @new_board.play_turn('X', 3)
-    play_turn_4 = @new_board.play_turn('O', 4)
-    play_turn_5 = @new_board.play_turn('X', 5)
-    play_turn_6 = @new_board.play_turn('O', 6)
-    play_turn_7 = @new_board.play_turn('X', 7)
-    play_turn_8 = @new_board.play_turn('O', 8)
-    play_turn_9 = @new_board.play_turn('X', 9)
+    @new_board.play_turn('X', 1)
+    @new_board.play_turn('O', 2)
+    @new_board.play_turn('X', 3)
+    @new_board.play_turn('O', 4)
+    @new_board.play_turn('X', 5)
+    @new_board.play_turn('O', 6)
+    @new_board.play_turn('X', 7)
+    @new_board.play_turn('O', 8)
+    @new_board.play_turn('X', 9)
   end
 end
