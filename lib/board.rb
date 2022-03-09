@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'message'
 
 class Board
@@ -30,7 +31,6 @@ class Board
     end
   end
 
-
   def available_moves
     available_moves = []
     @board.each do |cell|
@@ -59,18 +59,18 @@ class Board
     winning_plays = []
 
     WINNING_MOVES.all? do |winning_game|
-      winning_plays.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
+      pos1_eq_pos2 = board[winning_game[0]] == board[winning_game[1]]
+      pos2_eq_po3 = board[winning_game[1]] == board[winning_game[2]]
+      winning_plays.push(pos1_eq_pos2 && pos2_eq_po3 ? true : false)
     end
 
     winning_plays.any? { |game| game == true }
-
   end
 
   def winning_player(board)
     board.count('X') > board.count('O') ? 'X' : 'O'
   end
 
-  # display
   def generate_board
     " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" \
       "-----------\n" \
@@ -102,9 +102,7 @@ class Board
   def print_players_move
     print_to_terminal(@message.players_move(get_player_mark(@board), @players_move))
   end
-  
-  # game
- 
+
   def play_turn(player, index)
     if player == 'X' && valid_move?(index)
       place_player('X', index)

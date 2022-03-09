@@ -183,14 +183,7 @@ describe Board do
         @new_board.game_status(%w[X X X O 5 6 O 8 9])
       end.to output("\nPlayer X wins!\n\n").to_stdout
     end
-
-    xit 'should print game tie message ' do
-      expect do
-        @new_board.game_status(%w[X X O O O X X O X])
-      end.to output("\nIt's a tie. Game Over!\n\n").to_stdout
-    end
   end
-
   context 'game play' do
     it 'should have a list of winning moves' do
       winning_moves = Board::WINNING_MOVES
