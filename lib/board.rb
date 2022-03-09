@@ -1,76 +1,125 @@
+# frozen_string_literal: true
+
+require_relative 'message'
+
 class Board
+  attr_accessor :board
 
-    attr_accessor :board
+  WINNING_MOVES = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ].freeze
 
-    def initialize
-        @board = [" "," "," "," "," "," "," "," "," "]
-    end 
+  def initialize(message)
+    @board = %w[0 1 2 3 4 5 6 7 8]
+    @message = message
+  end
 
-    def generate_board
-        " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" + 
-        "-----------\n" +
-        " #{@board[3]} | #{@board[4]} | #{@board[5]} \n" +
-        "-----------\n" +
-        " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+  def generate_board
+    " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" \
+      "-----------\n" \
+      " #{@board[3]} | #{@board[4]} | #{@board[5]} \n" \
+      "-----------\n" \
+      " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+  end
+
+  def place_player(player, index)
+    @board[index] = player
+  end
+
+  def play_turn(player, index)
+    if player == 'X' && valid_move?(index)
+      place_player('X', index)
+    elsif player == 'O' && valid_move?(index)
+      place_player('O', index)
+    else
+      print_to_terminal(@message.invalid_move)
+    end
+  end
+
+  def position_taken?(index)
+    board[index] == 'X' || board[index] == 'O'
+  end
+
+  def valid_move?(index)
+    !position_taken?(index) && index.between?(0, 8) ? true : false
+  end
+
+  def print_to_terminal(msg)
+    puts msg
+  end
+
+  def print_board_with_msg
+    print_to_terminal(generate_board)
+    print_to_terminal(@message.enter_num)
+  end
+
+  def game_setup
+    print_to_terminal(@message.welcome)
+    print_board_with_msg
+  end
+
+  def player_input
+    gets.chomp.to_i
+  end
+
+  def turn
+    until game_over?
+      play_turn(get_player_mark(@board), player_input)
+      print_to_terminal(generate_board)
+      print_to_terminal(@message.enter_num) unless game_over?
+    end
+    game_status(@board)
+  end
+
+  def get_player_mark(board)
+    if board.count('X') == board.count('O')
+      'X'
+    elsif board.count('X') > board.count('O')
+      'O'
+    else
+      'X'
+    end
+  end
+
+  def available_moves
+    available_moves = []
+    @board.each do |cell|
+      available_moves.push(cell) if cell != 'X' && cell != 'O'
+    end
+    available_moves
+  end
+
+  def board_full?
+    available_moves.empty?
+  end
+
+  def win?(board)
+    winning_plays = []
+
+    WINNING_MOVES.all? do |winning_game|
+      winning_plays.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
     end
 
-    def place_player(player, index)
-        @board[index] = player
+    winning_plays.any? { |game| game == true }
+
+  end
+
+  def game_status(board)
+    if board_full? && !win?(board)
+      print_to_terminal(@message.tie)
+    else
+      print_to_terminal(@message.won)
     end
+  end
 
-    def play_turn(player, index)
-        
-        if player == "X" && valid_move?(index)
-            place_player("X", index)
-        elsif player == "0" && valid_move?(index)
-            place_player("0", index)
-        else
-            "move not valid"
-        end
-    end
-
-    def position_taken?(index)
-        board[index] == "X" || board[index] == "0" 
-    end
-
-    def valid_move?(index)
-        !position_taken?(index) && index.between?(0,8) ? true : false
-    end
-
-    def turn_count()
-        p board, "board in turn count"
-        counter = 0
-        p counter, "counter in turn count"
-
-        board.each do |space|
-            if space == "X" || space == "0"
-                counter +=1
-            end 
-        end
-
-        counter
-    end
-
-
+  def game_over?
+    board_full? || win?(@board)
+  end
 end
-
-new_board = Board.new 
-puts new_board.generate_board
-
-puts "Enter a number between 0-8"
-
-player_x = gets.chomp().to_i
-p player_x
-
-turn_1 = new_board.play_turn("X", player_x)
-puts new_board.generate_board
-
-puts "Enter a number between 0-8"
-player_o = gets.chomp().to_i
-p player_o
-turn_2 = new_board.play_turn("O", player_o)
-p turn_2
-
-puts new_board.generate_board
-
-
