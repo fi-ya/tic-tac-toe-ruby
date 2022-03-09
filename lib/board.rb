@@ -3,7 +3,7 @@
 require_relative 'message'
 
 class Board
-  attr_accessor :board
+  attr_accessor :board, :players_move
 
   WINNING_MOVES = [
     [0, 1, 2],
@@ -19,6 +19,7 @@ class Board
   def initialize(message)
     @board = %w[1 2 3 4 5 6 7 8 9]
     @message = message
+    
   end
 
   def generate_board
@@ -30,7 +31,7 @@ class Board
   end
 
   def place_player(player, index)
-    @board[index-1] = player
+    @board[index - 1] = player
   end
 
   def play_turn(player, index)
@@ -44,7 +45,7 @@ class Board
   end
 
   def position_taken?(index)
-    board[index-1] == 'X' || board[index-1] == 'O'
+    board[index - 1] == 'X' || board[index - 1] == 'O'
   end
 
   def valid_move?(index)
@@ -65,8 +66,14 @@ class Board
     print_board_with_msg
   end
 
+  def print_players_move
+    print_to_terminal(@message.players_move(get_player_mark(@board), @players_move))
+  end
+
   def player_input
-    gets.chomp.to_i
+    @players_move = gets.chomp.to_i
+    print_players_move
+    @players_move
   end
 
   def turn
@@ -86,6 +93,10 @@ class Board
     else
       'X'
     end
+  end
+
+  def winning_player(board)
+    board.count('X') > board.count('O') ? 'X' : 'O'
   end
 
   def available_moves
@@ -115,7 +126,7 @@ class Board
     if board_full? && !win?(board)
       print_to_terminal(@message.tie)
     else
-      print_to_terminal(@message.won(get_player_mark(@board)))
+      print_to_terminal(@message.won(winning_player(board)))
     end
   end
 

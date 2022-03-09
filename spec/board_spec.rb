@@ -150,7 +150,7 @@ describe Board do
 
       output = @new_board.turn
 
-      expect(output).to eq(@new_board.print_to_terminal("\n It's a tie. Game Over!\n\n"))
+      expect(output).to eq(@new_board.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
     end
 
     it 'should return board_full? as false when new board is initilaised' do
@@ -180,14 +180,14 @@ describe Board do
 
     it 'should print game won message ' do
       expect do
-        @new_board.game_status(%w[X X X 0 4 5 O 7 8])
-      end.to output("\n Player X wins!\n\n").to_stdout
+        @new_board.game_status(%w[X X X O 5 6 O 8 9])
+      end.to output("\nPlayer X wins!\n\n").to_stdout
     end
 
     xit 'should print game tie message ' do
       expect do
         @new_board.game_status(%w[X X O O O X X O X])
-      end.to output("\n It's a tie. Game Over!\n\n").to_stdout
+      end.to output("\nIt's a tie. Game Over!\n\n").to_stdout
     end
 
   end
@@ -207,6 +207,18 @@ describe Board do
                                   ])
     end
 
+    it 'should correctly identify winning player and return its marker' do
+      board = %w[X X X O 4 5 O 7 8]
+      winning_player = @new_board.winning_player(board)
+      expect(winning_player).to eq('X')
+    end
+
+    it 'should correctly identify winning player and return its marker' do
+      board = %w[O O O X 4 5 X 7 8]
+      winning_player = @new_board.winning_player(board)
+      expect(winning_player).to eq('O')
+    end
+
     it 'should correctly identify winning play and return true' do
       board = %w[X X X 0 4 5 O 7 8]
       win = @new_board.win?(board)
@@ -214,7 +226,7 @@ describe Board do
     end
 
     it 'should correctly identify losing play and return false' do
-      board = %w[X X 3 0 X 5 O 7 8]
+      board = %w[X X O O O X X O X]
       win = @new_board.win?(board)
       expect(win).to eq(false)
     end
