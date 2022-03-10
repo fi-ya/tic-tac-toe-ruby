@@ -18,7 +18,7 @@ describe Message do
     it 'should display correct enter number instruction' do
       expect do
         @new_board.print_to_terminal(@message.enter_num)
-      end.to output("\nEnter a number between 0-8:\n\n").to_stdout
+      end.to output("\nEnter a number between 1-9: ").to_stdout
     end
 
     it 'should display the player and the move they have made' do

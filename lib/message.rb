@@ -6,7 +6,7 @@ class Message
   end
 
   def enter_num
-    "\nEnter a number between 0-8:\n\n"
+    "\nEnter a number between 1-9: "
   end
 
   def players_move(player, move)
