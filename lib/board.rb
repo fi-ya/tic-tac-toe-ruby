@@ -3,7 +3,7 @@
 require_relative 'message'
 
 class Board
-  attr_accessor :board
+  attr_accessor :board, :players_move
 
   WINNING_MOVES = [
     [0, 1, 2],
@@ -16,9 +16,61 @@ class Board
     [2, 4, 6]
   ].freeze
 
+  PLAYER_MARKS = ["X", "O"]
+
   def initialize(message)
-    @board = %w[0 1 2 3 4 5 6 7 8]
+    @board = %w[1 2 3 4 5 6 7 8 9]
     @message = message
+  end
+
+  def get_player_mark(board)
+    if board.count(PLAYER_MARKS[0]) == board.count(PLAYER_MARKS[1])
+      PLAYER_MARKS[0]
+    elsif board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1])
+      PLAYER_MARKS[1]
+    else
+      PLAYER_MARKS[0]
+    end
+  end
+
+  def available_moves
+    available_moves = []
+    @board.each do |cell|
+      available_moves.push(cell) if cell != PLAYER_MARKS[0] && cell != PLAYER_MARKS[1]
+    end
+    available_moves
+  end
+
+  def place_player(player, index)
+    @board[index - 1] = player
+  end
+
+  def position_taken?(index)
+    board[index - 1] == PLAYER_MARKS[0] || board[index - 1] == PLAYER_MARKS[1]
+  end
+
+  def valid_move?(index)
+    !position_taken?(index) && index.between?(1, 9)
+  end
+
+  def board_full?
+    available_moves.empty?
+  end
+
+  def win?(board)
+    winning_plays = []
+
+    WINNING_MOVES.all? do |winning_game|
+      pos1_eq_pos2 = board[winning_game[0]] == board[winning_game[1]]
+      pos2_eq_po3 = board[winning_game[1]] == board[winning_game[2]]
+      winning_plays.push(pos1_eq_pos2 && pos2_eq_po3 ? true : false)
+    end
+
+    winning_plays.any? { |game| game == true }
+  end
+
+  def winning_player(board)
+    board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1]) ? PLAYER_MARKS[0] : PLAYER_MARKS[1]
   end
 
   def generate_board
@@ -29,30 +81,8 @@ class Board
       " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
   end
 
-  def place_player(player, index)
-    @board[index] = player
-  end
-
-  def play_turn(player, index)
-    if player == 'X' && valid_move?(index)
-      place_player('X', index)
-    elsif player == 'O' && valid_move?(index)
-      place_player('O', index)
-    else
-      print_to_terminal(@message.invalid_move)
-    end
-  end
-
-  def position_taken?(index)
-    board[index] == 'X' || board[index] == 'O'
-  end
-
-  def valid_move?(index)
-    !position_taken?(index) && index.between?(0, 8) ? true : false
-  end
-
   def print_to_terminal(msg)
-    puts msg
+    print msg
   end
 
   def print_board_with_msg
@@ -66,7 +96,23 @@ class Board
   end
 
   def player_input
-    gets.chomp.to_i
+    @players_move = gets.chomp.to_i
+    print_players_move
+    @players_move
+  end
+
+  def print_players_move
+    print_to_terminal(@message.players_move(get_player_mark(@board), @players_move))
+  end
+
+  def play_turn(player, index)
+    if player == PLAYER_MARKS[0] && valid_move?(index)
+      place_player(PLAYER_MARKS[0], index)
+    elsif player == PLAYER_MARKS[1] && valid_move?(index)
+      place_player(PLAYER_MARKS[1], index)
+    else
+      print_to_terminal(@message.invalid_move)
+    end
   end
 
   def turn
@@ -78,44 +124,11 @@ class Board
     game_status(@board)
   end
 
-  def get_player_mark(board)
-    if board.count('X') == board.count('O')
-      'X'
-    elsif board.count('X') > board.count('O')
-      'O'
-    else
-      'X'
-    end
-  end
-
-  def available_moves
-    available_moves = []
-    @board.each do |cell|
-      available_moves.push(cell) if cell != 'X' && cell != 'O'
-    end
-    available_moves
-  end
-
-  def board_full?
-    available_moves.empty?
-  end
-
-  def win?(board)
-    winning_plays = []
-
-    WINNING_MOVES.all? do |winning_game|
-      winning_plays.push(board[winning_game[0]] == board[winning_game[1]] && board[winning_game[1]] == board[winning_game[2]] ? true : false)
-    end
-
-    winning_plays.any? { |game| game == true }
-
-  end
-
   def game_status(board)
     if board_full? && !win?(board)
       print_to_terminal(@message.tie)
     else
-      print_to_terminal(@message.won)
+      print_to_terminal(@message.won(winning_player(board)))
     end
   end
 
