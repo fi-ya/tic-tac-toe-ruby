@@ -16,25 +16,27 @@ class Board
     [2, 4, 6]
   ].freeze
 
+  PLAYER_MARKS = ["X", "O"]
+
   def initialize(message)
     @board = %w[1 2 3 4 5 6 7 8 9]
     @message = message
   end
 
   def get_player_mark(board)
-    if board.count('X') == board.count('O')
-      'X'
-    elsif board.count('X') > board.count('O')
-      'O'
+    if board.count(PLAYER_MARKS[0]) == board.count(PLAYER_MARKS[1])
+      PLAYER_MARKS[0]
+    elsif board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1])
+      PLAYER_MARKS[1]
     else
-      'X'
+      PLAYER_MARKS[0]
     end
   end
 
   def available_moves
     available_moves = []
     @board.each do |cell|
-      available_moves.push(cell) if cell != 'X' && cell != 'O'
+      available_moves.push(cell) if cell != PLAYER_MARKS[0] && cell != PLAYER_MARKS[1]
     end
     available_moves
   end
@@ -44,11 +46,11 @@ class Board
   end
 
   def position_taken?(index)
-    board[index - 1] == 'X' || board[index - 1] == 'O'
+    board[index - 1] == PLAYER_MARKS[0] || board[index - 1] == PLAYER_MARKS[1]
   end
 
   def valid_move?(index)
-    !position_taken?(index) && index.between?(1, 9) ? true : false
+    !position_taken?(index) && index.between?(1, 9)
   end
 
   def board_full?
@@ -68,7 +70,7 @@ class Board
   end
 
   def winning_player(board)
-    board.count('X') > board.count('O') ? 'X' : 'O'
+    board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1]) ? PLAYER_MARKS[0] : PLAYER_MARKS[1]
   end
 
   def generate_board
@@ -104,10 +106,10 @@ class Board
   end
 
   def play_turn(player, index)
-    if player == 'X' && valid_move?(index)
-      place_player('X', index)
-    elsif player == 'O' && valid_move?(index)
-      place_player('O', index)
+    if player == PLAYER_MARKS[0] && valid_move?(index)
+      place_player(PLAYER_MARKS[0], index)
+    elsif player == PLAYER_MARKS[1] && valid_move?(index)
+      place_player(PLAYER_MARKS[1], index)
     else
       print_to_terminal(@message.invalid_move)
     end
