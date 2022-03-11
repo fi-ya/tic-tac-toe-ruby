@@ -22,7 +22,7 @@ class Game
   end
 
   def game_over?
-    board.board_full? || board.win?(board)
+    board.board_full? || board.win?
   end
 
   def play_turn(player, index)
@@ -44,10 +44,10 @@ class Game
   end
 
   def game_status(board)
-    if board.board_full? && !board.win?(board)
+    if board.board_full? && !board.win?
       display.print_to_terminal(message.tie)
     else
-      display.print_to_terminal(message.won(board.winning_player(board)))
+      display.print_to_terminal(message.won(board.winning_player))
     end
   end
 end

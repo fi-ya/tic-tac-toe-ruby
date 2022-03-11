@@ -55,7 +55,7 @@ class Board
     available_moves.empty?
   end
 
-  def win?(_board)
+  def win?
     winning_plays = []
 
     WINNING_MOVES.all? do |winning_game|
@@ -67,7 +67,7 @@ class Board
     winning_plays.any? { |game| game == true }
   end
 
-  def winning_player(_board)
+  def winning_player
     grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
 end

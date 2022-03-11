@@ -3,42 +3,34 @@
 require 'message'
 
 describe Message do
-  before do
-    @message = Message.new
-    @new_board = Board.new(@message)
-  end
+  subject(:message) { described_class.new }
 
-  context 'print messages in the terminal ' do
-    it 'should display correct welcome message' do
-      expect do
-        @new_board.print_to_terminal(@message.welcome)
-      end.to output("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n").to_stdout
+  context 'returns correct string ' do
+    it 'welcome message' do
+      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n")
     end
 
-    it 'should display correct enter number instruction' do
-      expect do
-        @new_board.print_to_terminal(@message.enter_num)
-      end.to output("\nEnter a number between 1-9: ").to_stdout
+    it 'enter number instruction' do
+      expect(message.enter_num).to eq("\nEnter a number between 1-9: ")
     end
 
-    it 'should display the player and the move they have made' do
-      expect do
-        @new_board.print_to_terminal(@message.players_move('X', 1))
-      end.to output("\nPlayer X chose 1 \n\n").to_stdout
+    it 'enter number instruction' do
+      player = 'X'
+      move = 1
+      expect(message.players_move(player, move)).to eq("\nPlayer X chose 1 \n\n")
     end
 
-    it 'should display invalid move message' do
-      expect do
-        @new_board.print_to_terminal(@message.invalid_move)
-      end.to output("\nInvalid move. Try again\n\n").to_stdout
+    it 'invalid move message' do
+      expect(message.invalid_move).to eq("\nInvalid move. Try again\n\n")
     end
 
-    it 'should display game over message' do
-      expect { @new_board.print_to_terminal(@message.tie) }.to output("\nIt's a tie. Game Over!\n\n").to_stdout
+    it 'tie message' do
+      expect(message.tie).to eq("\nIt's a tie. Game Over!\n\n")
     end
 
-    it 'should display winning message' do
-      expect { @new_board.print_to_terminal(@message.won('X')) }.to output("\nPlayer X wins!\n\n").to_stdout
+    it 'winning message' do
+      player = 'X'
+      expect(message.won(player)).to eq("\nPlayer X wins!\n\n")
     end
   end
 end
