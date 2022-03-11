@@ -68,26 +68,25 @@ describe Board do
 
   context '#get_player_mark' do
     it 'should show an empty board and updates board with player marker X on the first play' do
-      grid = %w[1 2 3 4 5 6 7 8 9]
+      board.grid = %w[1 2 3 4 5 6 7 8 9]
       current_player_mark = board.get_player_mark
       expect(current_player_mark).to eq('X')
     end
 
     it 'should return the correct player mark on second turn for player O' do
-      grid = %w[1 X 3 4 5 6 7 8 9]
-      # player_mark = 'X'
+      board.grid = %w[1 X 3 4 5 6 7 8 9]
       current_player_mark = board.get_player_mark
       expect(current_player_mark).to eq('O')
     end
 
     it 'should return the correct player mark on third turn for player X' do
-      grid = %w[1 X O 4 5 6 7 8 9]
+      board.grid = %w[1 X O 4 5 6 7 8 9]
       current_player_mark = board.get_player_mark
       expect(current_player_mark).to eq('X')
     end
 
     it 'should return the correct player mark on fourth turn for player O' do
-      grid = %w[1 X O X 5 6 7 8 9]
+      board.grid = %w[1 X O X 5 6 7 8 9]
       current_player_mark = board.get_player_mark
       expect(current_player_mark).to eq('O')
     end
@@ -109,25 +108,25 @@ describe Board do
     end
 
     it 'should correctly identify winning player and return its marker' do
-      grid = %w[X X X O 5 6 O 8 9]
+      board.grid = %w[X X X O 5 6 O 8 9]
       winning_player = board.winning_player
       expect(winning_player).to eq('X')
     end
 
     it 'should correctly identify winning player and return its marker' do
-      grid = %w[O O O X 5 6 X 8 9]
+      board.grid = %w[O O O X 5 6 X 8 9]
       winning_player = board.winning_player
       expect(winning_player).to eq('O')
     end
 
     it 'should correctly identify winning play and return true' do
-      grid = %w[X X X O 5 6 O 8 9]
+      board.grid = %w[X X X O 5 6 O 8 9]
       win = board.win?
       expect(win).to eq(true)
     end
 
     it 'should correctly identify losing play and return false' do
-      grid = %w[X X O O O X X O X]
+      board.grid = %w[X X O O O X X O X]
       win = board.win?
       expect(win).to eq(false)
     end
