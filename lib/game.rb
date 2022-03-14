@@ -4,12 +4,13 @@ require_relative 'board'
 require_relative 'message'
 
 class Game
-  attr_reader :board, :message, :display
+  attr_reader :board, :message, :display, :computer_player
 
-  def initialize(board, display, message)
+  def initialize(board, display, message, computer_player)
     @board = board
     @message = message
     @display = display
+    @computer_player = computer_player
   end
 
   def turn
@@ -26,12 +27,17 @@ class Game
   end
 
   def play_turn(player, index)
-    if player == board.player_mark[0] && valid_move?(index)
-      board.place_player(board.player_mark[0], index)
-    elsif player == board.player_mark[1] && valid_move?(index)
-      board.place_player(board.player_mark[1], index)
-    else
-      display.print_to_terminal(message.invalid_move)
+    if player == computer_player 
+      p "#{computer_player}, computer_player"
+      board.place_player(board.player_mark[0], board.available_moves[0].to_i)
+    else 
+      if player == board.player_mark[0] && valid_move?(index)
+        board.place_player(board.player_mark[0], index)
+      elsif player == board.player_mark[1] && valid_move?(index)
+        board.place_player(board.player_mark[1], index)
+      else
+        display.print_to_terminal(message.invalid_move)
+      end
     end
   end
 
