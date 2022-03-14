@@ -19,43 +19,43 @@ describe Board do
     end
 
     it 'should display an X in the top middle row' do
-      board.place_player('X', 2)
+      board.mark_board('X', 2)
       output = board.generate_board
       expect(output).to eq(" 1 | X | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the top right row' do
-      board.place_player('X', 3)
+      board.mark_board('X', 3)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | X \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the middle left row' do
-      board.place_player('X', 4)
+      board.mark_board('X', 4)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n X | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the middle middle row' do
-      board.place_player('X', 5)
+      board.mark_board('X', 5)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | X | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the middle right row' do
-      board.place_player('X', 6)
+      board.mark_board('X', 6)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | X \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the bottom left row' do
-      board.place_player('X', 7)
+      board.mark_board('X', 7)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n X | 8 | 9 \n")
     end
 
     it 'should display an X in the bottom middle row' do
-      board.place_player('X', 8)
+      board.mark_board('X', 8)
       output = board.generate_board
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | X | 9 \n")
     end
@@ -134,13 +134,13 @@ describe Board do
 
   # Helper methods
   def verify_top_left(player)
-    board.place_player(player, 1)
+    board.mark_board(player, 1)
     output = board.generate_board
     expect(output).to eq(" #{player} | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
   end
 
   def verify_bottom_right(player)
-    board.place_player(player, 9)
+    board.mark_board(player, 9)
     output = board.generate_board
     expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | #{player} \n")
   end

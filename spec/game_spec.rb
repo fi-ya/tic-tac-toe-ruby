@@ -4,12 +4,17 @@ require 'game'
 require 'board'
 require 'display'
 require 'message'
+require 'human_player'
+require 'computer_player'
+require 'player'
 
 describe Game do
   let(:board) { Board.new }
   let(:message) { Message.new }
   let(:display) { Display.new(message, board) }
-  subject(:game) { described_class.new(board, display, message) }
+  let(:player1) { ComputerPlayer.new('X', 'Computer', board, display) }
+  let(:player2) { HumanPlayer.new('O', 'Human', display) }
+  subject(:game) { described_class.new(board, display, message, player1, player2) }
 
   context 'players take turns and marks the board' do
     it 'should display player X marker in top left and player O marker bottom right' do
@@ -23,7 +28,7 @@ describe Game do
     it 'should check to see if position is taken returns true' do
       game.play_turn('X', 1)
 
-      output = game.position_taken?(1)
+      output = board.position_taken?(1)
       expect(output).to eq(true)
     end
 
@@ -31,7 +36,7 @@ describe Game do
       game.play_turn('X', 0)
       game.play_turn('O', 8)
 
-      output = game.position_taken?(1)
+      output = board.position_taken?(1)
       expect(output).to eq(false)
     end
 
@@ -52,10 +57,10 @@ describe Game do
     end
 
     it 'should show player mark at position 4 if space is free and move is valid' do
-      game.play_turn('X', 4)
+      game.play_turn('O', 4)
 
       output = board.generate_board
-      expect(output).to eq(" 1 | 2 | 3 \n-----------\n X | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
+      expect(output).to eq(" 1 | 2 | 3 \n-----------\n O | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should keep track of available moves in an array' do

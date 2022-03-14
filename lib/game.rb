@@ -4,56 +4,52 @@ require_relative 'board'
 require_relative 'message'
 
 class Game
-  attr_reader :board, :message, :display, :computer_player
+  attr_reader :board, :message, :display, :player1, :player2, :current_player
 
-  def initialize(board, display, message, computer_player)
+  def initialize(board, display, message, player1, player2)
     @board = board
     @message = message
     @display = display
-    @computer_player = computer_player
+    @player1 = player1
+    @player2 = player2
+    @current_player = player1
   end
 
   def turn
     until game_over?
-      play_turn(board.get_player_mark, display.get_player_input)
+      play_turn(current_player, current_player.get_move)
       display.print_to_terminal(board.generate_board)
-      display.print_to_terminal(message.enter_num) unless game_over?
+      display.print_enter_num unless game_over?
     end
-    game_status(board)
+    game_status
+  end
+
+  def play_turn(player, move)
+    if valid_move?(move)
+      player == player1 ? board.mark_board(player1.marker, move) : board.mark_board(player2.marker, move)
+      current_player == player1 ? set_current_player(player2) : set_current_player(player1)
+    else
+      display.print_invalid_move
+    end
+  end
+
+  def set_current_player(current_player)
+    @current_player = current_player
   end
 
   def game_over?
     board.board_full? || board.win?
   end
 
-  def play_turn(player, index)
-    if player == computer_player 
-      p "#{computer_player}, computer_player"
-      board.place_player(board.player_mark[0], board.available_moves[0].to_i)
-    else 
-      if player == board.player_mark[0] && valid_move?(index)
-        board.place_player(board.player_mark[0], index)
-      elsif player == board.player_mark[1] && valid_move?(index)
-        board.place_player(board.player_mark[1], index)
-      else
-        display.print_to_terminal(message.invalid_move)
-      end
-    end
-  end
-
   def valid_move?(index)
-    !position_taken?(index) && index.between?(1, 9)
+    !board.position_taken?(index) && index.between?(1, 9)
   end
 
-  def position_taken?(index)
-    board.grid[index - 1] == board.player_mark[0] || board.grid[index - 1] == board.player_mark[1]
-  end
-
-  def game_status(board)
+  def game_status
     if board.board_full? && !board.win?
-      display.print_to_terminal(message.tie)
+      display.print_tie
     else
-      display.print_to_terminal(message.won(board.winning_player))
+      display.print_won
     end
   end
 end

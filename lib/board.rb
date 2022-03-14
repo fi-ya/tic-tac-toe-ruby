@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'message'
-
 class Board
   attr_accessor :grid, :player_mark
 
@@ -39,8 +38,8 @@ class Board
     end
   end
 
-  def place_player(player, index)
-    grid[index - 1] = player
+  def mark_board(player, move)
+    grid[move - 1] = player
   end
 
   def available_moves
@@ -53,6 +52,10 @@ class Board
 
   def board_full?
     available_moves.empty?
+  end
+
+  def position_taken?(index)
+    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
   end
 
   def win?
