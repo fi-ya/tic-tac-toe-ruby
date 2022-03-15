@@ -1,15 +1,12 @@
 
 # frozen_string_literal: true
-
 require_relative 'board'
-require_relative 'message'
 
 class Game
-  attr_reader :board, :message, :display, :player1, :player2, :current_player
+  attr_reader :board, :display, :player1, :player2, :current_player
 
-  def initialize(board, display, message, player1, player2)
+  def initialize(board, display, player1, player2)
     @board = board
-    @message = message
     @display = display
     @player1 = player1
     @player2 = player2
@@ -19,7 +16,7 @@ class Game
   def turn
     until game_over?
       play_turn(current_player, current_player.get_move)
-      display.print_to_terminal(board.generate_board)
+      display.print_to_terminal(board.generate)
       display.print_enter_num unless game_over?
     end
     game_status
@@ -50,10 +47,6 @@ class Game
     board.board_full? || board.win?
   end
 
-  def valid_move?(index)
-    !board.position_taken?(index) && index.between?(1, 9)
-  end
-
   def game_status
     if board.board_full? && !board.win?
       display.print_tie
@@ -61,4 +54,11 @@ class Game
       display.print_won
     end
   end
+
+  # private
+
+  def valid_move?(index)
+    !board.position_taken?(index) && index.between?(1, 9)
+  end
+
 end

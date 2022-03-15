@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-require_relative 'message'
+require 'message'
 class Board
   attr_accessor :grid, :player_mark
 
@@ -20,7 +19,7 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  def generate_board
+  def generate
     " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
       "-----------\n" \
       " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \

@@ -10,13 +10,9 @@ class Display
     @board = board
   end
 
-  def print_to_terminal(msg)
-    print msg
-  end
-
   def game_setup
     print_to_terminal(message.welcome)
-    print_to_terminal(board.generate_board)
+    print_to_terminal(board.generate)
     print_enter_num
   end
 
@@ -44,5 +40,9 @@ class Display
 
   def print_won
     print_to_terminal(message.won(board.winning_player))
+  end
+
+  def print_to_terminal(msg)
+    print msg
   end
 end

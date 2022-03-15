@@ -7,9 +7,9 @@ describe Board do
   let(:message) { Message.new }
   subject(:board) { described_class.new }
 
-  context '#generate_board' do
+  context '#generate' do
     it 'should display the board' do
-      output = board.generate_board
+      output = board.generate
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
@@ -18,51 +18,28 @@ describe Board do
       verify_top_left('O')
     end
 
-    it 'should display an X in the top middle row' do
-      board.mark_board('X', 2)
-      output = board.generate_board
-      expect(output).to eq(" 1 | X | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
-    end
-
-    it 'should display an X in the top right row' do
-      board.mark_board('X', 3)
-      output = board.generate_board
-      expect(output).to eq(" 1 | 2 | X \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
-    end
-
-    it 'should display an X in the middle left row' do
-      board.mark_board('X', 4)
-      output = board.generate_board
-      expect(output).to eq(" 1 | 2 | 3 \n-----------\n X | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
-    end
-
     it 'should display an X in the middle middle row' do
       board.mark_board('X', 5)
-      output = board.generate_board
+      output = board.generate
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | X | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the middle right row' do
       board.mark_board('X', 6)
-      output = board.generate_board
+      output = board.generate
       expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | X \n-----------\n 7 | 8 | 9 \n")
-    end
-
-    it 'should display an X in the bottom left row' do
-      board.mark_board('X', 7)
-      output = board.generate_board
-      expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n X | 8 | 9 \n")
-    end
-
-    it 'should display an X in the bottom middle row' do
-      board.mark_board('X', 8)
-      output = board.generate_board
-      expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | X | 9 \n")
     end
 
     it 'should display correct players marker in the bottom right row' do
       verify_bottom_right('X')
       verify_bottom_right('O')
+    end
+
+    it 'should show player mark at position 4 if space is free and move is valid' do
+      board.grid = %w[X 2 3 O 5 6 7 8 9]
+
+      output = board.generate
+      expect(output).to eq(" X | 2 | 3 \n-----------\n O | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
   end
 
@@ -85,10 +62,45 @@ describe Board do
       expect(current_player_mark).to eq('X')
     end
 
-    it 'should return the correct player mark on fourth turn for player O' do
-      board.grid = %w[1 X O X 5 6 7 8 9]
-      current_player_mark = board.get_player_mark
-      expect(current_player_mark).to eq('O')
+  end
+
+  context 'position taken' do
+    it 'should check to see if position is taken returns true' do
+      board.grid = %w[X 2 3 4 5 6 7 8 9]
+
+      output = board.position_taken?(1)
+      expect(output).to eq(true)
+    end
+
+    it 'should check to see if position is taken returns false' do
+      board.grid = %w[X 2 O 4 5 6 7 8 9]
+
+      output = board.position_taken?(2)
+      expect(output).to eq(false)
+    end
+  end
+
+  context 'available moves' do
+    it 'should keep track of available moves in an array' do
+      board.grid = %w[X 2 3 O 5 6 7 8 9]
+
+      output = board.available_moves
+      expect(output).to eq(%w[2 3 5 6 7 8 9])
+      expect(output.length).to eq(7)
+    end
+  end
+
+  context 'board is correctly assessed ' do
+    it 'should return board_full? as false when new board is initilaised' do
+      expect(board.board_full?).to eq(false)
+    end
+
+    it 'should return board_full? as true when board is full' do
+      board.grid = %w[X O X O X O X O]
+
+      board_full = board.available_moves.empty?
+
+      expect(board_full).to eq(true)
     end
   end
 
@@ -107,13 +119,13 @@ describe Board do
                                   ])
     end
 
-    it 'should correctly identify winning player and return its marker' do
+    it 'should correctly identify winning player and return X marker' do
       board.grid = %w[X X X O 5 6 O 8 9]
       winning_player = board.winning_player
       expect(winning_player).to eq('X')
     end
 
-    it 'should correctly identify winning player and return its marker' do
+    it 'should correctly identify winning player and return O marker' do
       board.grid = %w[O O O X 5 6 X 8 9]
       winning_player = board.winning_player
       expect(winning_player).to eq('O')
@@ -135,13 +147,13 @@ describe Board do
   # Helper methods
   def verify_top_left(player)
     board.mark_board(player, 1)
-    output = board.generate_board
+    output = board.generate
     expect(output).to eq(" #{player} | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
   end
 
   def verify_bottom_right(player)
     board.mark_board(player, 9)
-    output = board.generate_board
+    output = board.generate
     expect(output).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | #{player} \n")
   end
 end

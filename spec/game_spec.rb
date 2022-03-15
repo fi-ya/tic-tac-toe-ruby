@@ -14,7 +14,7 @@ describe Game do
   let(:display) { Display.new(message, board) }
   let(:player1) { ComputerPlayer.new('X', 'Computer', board, display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
-  subject(:game) { described_class.new(board, display, message, player1, player2) }
+  subject(:game) { described_class.new(board, display, player1, player2) }
 
   context 'players take turns and marks the board' do
     xit 'should display player X marker in top left and player O marker bottom right' do
@@ -25,21 +25,6 @@ describe Game do
         game.turn
       end.to output(a_string_including(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")).to_stdout
 
-    end
-
-    it 'should check to see if position is taken returns true' do
-      game.play_turn('X', 1)
-
-      output = board.position_taken?(1)
-      expect(output).to eq(true)
-    end
-
-    it 'should check to see if position is taken returns false' do
-      game.play_turn('X', 0)
-      game.play_turn('O', 8)
-
-      output = board.position_taken?(1)
-      expect(output).to eq(false)
     end
 
     it 'should verify if move is not valid if player picks zero' do
@@ -57,22 +42,6 @@ describe Game do
       expected = display.print_to_terminal("\n Invalid move. Try again\n\n")
       expect(output).to eq(expected)
     end
-
-    it 'should show player mark at position 4 if space is free and move is valid' do
-      game.play_turn('O', 4)
-
-      output = board.generate_board
-      expect(output).to eq(" 1 | 2 | 3 \n-----------\n O | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
-    end
-
-    it 'should keep track of available moves in an array' do
-      game.play_turn('X', 4)
-      game.play_turn('O', 1)
-
-      output = board.available_moves
-      expect(output).to eq(%w[2 3 5 6 7 8 9])
-      expect(output.length).to eq(7)
-    end
   end
 
   context 'moves are verified' do
@@ -82,20 +51,6 @@ describe Game do
       output = game.turn
 
       expect(output).to eq(display.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
-    end
-  end
-
-  context 'board is correctly assessed ' do
-    it 'should return board_full? as false when new board is initilaised' do
-      expect(board.board_full?).to eq(false)
-    end
-
-    it 'should return board_full? as true when board is full' do
-      dummy_full_board
-
-      board_full = board.available_moves.empty?
-
-      expect(board_full).to eq(true)
     end
   end
 

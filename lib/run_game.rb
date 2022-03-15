@@ -14,7 +14,7 @@ def start_game
   # computer_player = ComputerPlayer.new
   player1 = ComputerPlayer.new('X', 'Computer', board, display)
   player2 = HumanPlayer.new('O', 'Human', display)
-  game = Game.new(board, display, message, player1, player2)
+  game = Game.new(board, display, player1, player2)
 
   display.game_setup
   # player chooses game

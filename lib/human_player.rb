@@ -2,7 +2,6 @@
 
 require_relative 'player'
 require_relative 'display'
-
 class HumanPlayer < Player
   attr_accessor :marker, :name, :display
 
