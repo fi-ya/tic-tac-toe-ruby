@@ -26,11 +26,19 @@ class Game
 
   def play_turn(player, move)
     if valid_move?(move)
-      player == player1 ? board.mark_board(player1.marker, move) : board.mark_board(player2.marker, move)
-      current_player == player1 ? set_current_player(player2) : set_current_player(player1)
+      update_board(player, move)
+      update_current_player
     else
       display.print_invalid_move
     end
+  end
+
+  def update_board(player, move)
+    player == player1 ? board.mark_board(player1.marker, move) : board.mark_board(player2.marker, move)
+  end
+
+  def update_current_player
+    current_player == player1 ? set_current_player(player2) : set_current_player(player1)
   end
 
   def set_current_player(current_player)
