@@ -1,75 +1,36 @@
 # frozen_string_literal: true
+
 require 'message'
-class Board
-  attr_accessor :grid, :player_mark
 
-  def initialize
-    @grid = %w[1 2 3 4 5 6 7 8 9]
-    @player_mark = %w[X O]
-  end
+describe Message do
+  subject(:message) { described_class.new }
 
-  WINNING_MOVES = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ].freeze
-
-  def generate
-    " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
-      "-----------\n" \
-      " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \
-      "-----------\n" \
-      " #{grid[6]} | #{grid[7]} | #{grid[8]} \n"
-  end
-
-  def get_player_mark
-    if grid.count(player_mark[0]) == grid.count(player_mark[1])
-      player_mark[0]
-    elsif grid.count(player_mark[0]) > grid.count(player_mark[1])
-      player_mark[1]
-    else
-      player_mark[0]
-    end
-  end
-
-  def mark_board(player, move)
-    grid[move - 1] = player
-  end
-
-  def available_moves
-    available_moves = []
-    grid.each do |cell|
-      available_moves.push(cell) if cell != player_mark[0] && cell != player_mark[1]
-    end
-    available_moves
-  end
-
-  def board_full?
-    available_moves.empty?
-  end
-
-  def position_taken?(index)
-    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
-  end
-
-  def win?
-    winning_plays = []
-
-    WINNING_MOVES.all? do |winning_game|
-      pos1_eq_pos2 = grid[winning_game[0]] == grid[winning_game[1]]
-      pos2_eq_po3 = grid[winning_game[1]] == grid[winning_game[2]]
-      winning_plays.push(pos1_eq_pos2 && pos2_eq_po3 ? true : false)
+  context 'returns correct string ' do
+    it 'welcome message' do
+      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n")
     end
 
-    winning_plays.any? { |game| game == true }
-  end
+    it 'enter number instruction' do
+      expect(message.enter_num).to eq("\nEnter a number between 1-9: ")
+    end
 
-  def winning_player
-    grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
+    it 'enter number instruction' do
+      player = 'X'
+      move = 1
+      expect(message.players_move(player, move)).to eq("\nPlayer X chose 1 \n\n")
+    end
+
+    it 'invalid move message' do
+      expect(message.invalid_move).to eq("\nInvalid move. Try again\n\n")
+    end
+
+    it 'tie message' do
+      expect(message.tie).to eq("\nIt's a tie. Game Over!\n\n")
+    end
+
+    it 'winning message' do
+      player = 'X'
+      expect(message.won(player)).to eq("\nPlayer X wins!\n\n")
+    end
   end
 end
