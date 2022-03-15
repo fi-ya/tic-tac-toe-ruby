@@ -1,44 +1,75 @@
 # frozen_string_literal: true
-
 require 'message'
+class Board
+  attr_accessor :grid, :player_mark
 
-describe Message do
-  before do
-    @message = Message.new
-    @new_board = Board.new(@message)
+  def initialize
+    @grid = %w[1 2 3 4 5 6 7 8 9]
+    @player_mark = %w[X O]
   end
 
-  context 'print messages in the terminal ' do
-    it 'should display correct welcome message' do
-      expect do
-        @new_board.print_to_terminal(@message.welcome)
-      end.to output("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n").to_stdout
+  WINNING_MOVES = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ].freeze
+
+  def generate
+    " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
+      "-----------\n" \
+      " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \
+      "-----------\n" \
+      " #{grid[6]} | #{grid[7]} | #{grid[8]} \n"
+  end
+
+  def get_player_mark
+    if grid.count(player_mark[0]) == grid.count(player_mark[1])
+      player_mark[0]
+    elsif grid.count(player_mark[0]) > grid.count(player_mark[1])
+      player_mark[1]
+    else
+      player_mark[0]
+    end
+  end
+
+  def mark_board(player, move)
+    grid[move - 1] = player
+  end
+
+  def available_moves
+    available_moves = []
+    grid.each do |cell|
+      available_moves.push(cell) if cell != player_mark[0] && cell != player_mark[1]
+    end
+    available_moves
+  end
+
+  def board_full?
+    available_moves.empty?
+  end
+
+  def position_taken?(index)
+    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
+  end
+
+  def win?
+    winning_plays = []
+
+    WINNING_MOVES.all? do |winning_game|
+      pos1_eq_pos2 = grid[winning_game[0]] == grid[winning_game[1]]
+      pos2_eq_po3 = grid[winning_game[1]] == grid[winning_game[2]]
+      winning_plays.push(pos1_eq_pos2 && pos2_eq_po3 ? true : false)
     end
 
-    it 'should display correct enter number instruction' do
-      expect do
-        @new_board.print_to_terminal(@message.enter_num)
-      end.to output("\nEnter a number between 1-9: ").to_stdout
-    end
+    winning_plays.any? { |game| game == true }
+  end
 
-    it 'should display the player and the move they have made' do
-      expect do
-        @new_board.print_to_terminal(@message.players_move('X', 1))
-      end.to output("\nPlayer X chose 1 \n\n").to_stdout
-    end
-
-    it 'should display invalid move message' do
-      expect do
-        @new_board.print_to_terminal(@message.invalid_move)
-      end.to output("\nInvalid move. Try again\n\n").to_stdout
-    end
-
-    it 'should display game over message' do
-      expect { @new_board.print_to_terminal(@message.tie) }.to output("\nIt's a tie. Game Over!\n\n").to_stdout
-    end
-
-    it 'should display winning message' do
-      expect { @new_board.print_to_terminal(@message.won('X')) }.to output("\nPlayer X wins!\n\n").to_stdout
-    end
+  def winning_player
+    grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
 end

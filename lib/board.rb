@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 require_relative 'message'
-
 class Board
-  attr_accessor :board, :players_move
+  attr_accessor :grid, :player_mark
+
+  def initialize
+    @grid = %w[1 2 3 4 5 6 7 8 9]
+    @player_mark = %w[X O]
+  end
 
   WINNING_MOVES = [
     [0, 1, 2],
@@ -16,123 +20,57 @@ class Board
     [2, 4, 6]
   ].freeze
 
-  PLAYER_MARKS = ["X", "O"]
-
-  def initialize(message)
-    @board = %w[1 2 3 4 5 6 7 8 9]
-    @message = message
+  def generate
+    " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
+      "-----------\n" \
+      " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \
+      "-----------\n" \
+      " #{grid[6]} | #{grid[7]} | #{grid[8]} \n"
   end
 
-  def get_player_mark(board)
-    if board.count(PLAYER_MARKS[0]) == board.count(PLAYER_MARKS[1])
-      PLAYER_MARKS[0]
-    elsif board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1])
-      PLAYER_MARKS[1]
+  def get_player_mark
+    if grid.count(player_mark[0]) == grid.count(player_mark[1])
+      player_mark[0]
+    elsif grid.count(player_mark[0]) > grid.count(player_mark[1])
+      player_mark[1]
     else
-      PLAYER_MARKS[0]
+      player_mark[0]
     end
+  end
+
+  def mark_board(player, move)
+    grid[move - 1] = player
   end
 
   def available_moves
     available_moves = []
-    @board.each do |cell|
-      available_moves.push(cell) if cell != PLAYER_MARKS[0] && cell != PLAYER_MARKS[1]
+    grid.each do |cell|
+      available_moves.push(cell) if cell != player_mark[0] && cell != player_mark[1]
     end
     available_moves
-  end
-
-  def place_player(player, index)
-    @board[index - 1] = player
-  end
-
-  def position_taken?(index)
-    board[index - 1] == PLAYER_MARKS[0] || board[index - 1] == PLAYER_MARKS[1]
-  end
-
-  def valid_move?(index)
-    !position_taken?(index) && index.between?(1, 9)
   end
 
   def board_full?
     available_moves.empty?
   end
 
-  def win?(board)
+  def position_taken?(index)
+    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
+  end
+
+  def win?
     winning_plays = []
 
     WINNING_MOVES.all? do |winning_game|
-      pos1_eq_pos2 = board[winning_game[0]] == board[winning_game[1]]
-      pos2_eq_po3 = board[winning_game[1]] == board[winning_game[2]]
+      pos1_eq_pos2 = grid[winning_game[0]] == grid[winning_game[1]]
+      pos2_eq_po3 = grid[winning_game[1]] == grid[winning_game[2]]
       winning_plays.push(pos1_eq_pos2 && pos2_eq_po3 ? true : false)
     end
 
     winning_plays.any? { |game| game == true }
   end
 
-  def winning_player(board)
-    board.count(PLAYER_MARKS[0]) > board.count(PLAYER_MARKS[1]) ? PLAYER_MARKS[0] : PLAYER_MARKS[1]
-  end
-
-  def generate_board
-    " #{@board[0]} | #{@board[1]} | #{@board[2]} \n" \
-      "-----------\n" \
-      " #{@board[3]} | #{@board[4]} | #{@board[5]} \n" \
-      "-----------\n" \
-      " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-  end
-
-  def print_to_terminal(msg)
-    print msg
-  end
-
-  def print_board_with_msg
-    print_to_terminal(generate_board)
-    print_to_terminal(@message.enter_num)
-  end
-
-  def game_setup
-    print_to_terminal(@message.welcome)
-    print_board_with_msg
-  end
-
-  def player_input
-    @players_move = gets.chomp.to_i
-    print_players_move
-    @players_move
-  end
-
-  def print_players_move
-    print_to_terminal(@message.players_move(get_player_mark(@board), @players_move))
-  end
-
-  def play_turn(player, index)
-    if player == PLAYER_MARKS[0] && valid_move?(index)
-      place_player(PLAYER_MARKS[0], index)
-    elsif player == PLAYER_MARKS[1] && valid_move?(index)
-      place_player(PLAYER_MARKS[1], index)
-    else
-      print_to_terminal(@message.invalid_move)
-    end
-  end
-
-  def turn
-    until game_over?
-      play_turn(get_player_mark(@board), player_input)
-      print_to_terminal(generate_board)
-      print_to_terminal(@message.enter_num) unless game_over?
-    end
-    game_status(@board)
-  end
-
-  def game_status(board)
-    if board_full? && !win?(board)
-      print_to_terminal(@message.tie)
-    else
-      print_to_terminal(@message.won(winning_player(board)))
-    end
-  end
-
-  def game_over?
-    board_full? || win?(@board)
+  def winning_player
+    grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
 end
