@@ -17,12 +17,14 @@ describe Game do
   subject(:game) { described_class.new(board, display, message, player1, player2) }
 
   context 'players take turns and marks the board' do
-    it 'should display player X marker in top left and player O marker bottom right' do
-      game.play_turn("X", 1)
-      game.play_turn("O", 9)
+    xit 'should display player X marker in top left and player O marker bottom right' do
+      # game.play_turn('X', 1)
+      # game.play_turn('O', 9)
+      allow(display).to receive(:gets).and_return('1', '9')
+      expect do
+        game.turn
+      end.to output(a_string_including(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")).to_stdout
 
-      output = board.generate_board
-      expect(output).to eq(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")
     end
 
     it 'should check to see if position is taken returns true' do
@@ -84,7 +86,6 @@ describe Game do
   end
 
   context 'board is correctly assessed ' do
-
     it 'should return board_full? as false when new board is initilaised' do
       expect(board.board_full?).to eq(false)
     end
@@ -115,19 +116,17 @@ describe Game do
   end
 
   context 'set and update current player correctly' do
-
     it 'should update current player marker correctly to O' do
-      
-        board.grid = %w[X 2 3 4 5 6 7 8 9]
-        game.update_current_player
-        output = game.current_player
-        expect(output.marker).to eq("O")
+      board.grid = %w[X 2 3 4 5 6 7 8 9]
+      game.update_current_player
+      output = game.current_player
+      expect(output.marker).to eq('O')
     end
 
     it 'should update current player marker correctly to X' do
       board.grid = %w[X O 3 4 5 6 7 8 9]
       output = game.current_player.marker
-      expect(output).to eq("X")
+      expect(output).to eq('X')
     end
   end
 

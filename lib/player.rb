@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Player
-  attr_reader :marker, :name
+  attr_accessor :marker, :name
 
-  def initalize(marker, name)
+  def initialize(marker, name)
     @marker = marker
     @name = name
   end
