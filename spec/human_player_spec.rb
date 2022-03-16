@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 require 'human_player'
+require 'validate_response'
+require 'board'
+require 'message'
 
 describe HumanPlayer do
   let(:board) { Board.new }
   let(:message) { Message.new }
-  let(:display) { Display.new(message, board) }
+  let(:validate_response) { ValidateResponse.new }
+  let(:display) { Display.new(message, board, validate_response) }
   subject(:human_player) { described_class.new('O', 'Human', display) }
 
   context 'human marker and name' do

@@ -7,7 +7,7 @@ describe Message do
 
   context 'returns correct string ' do
     it 'welcome message' do
-      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n")
+      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n")
     end
 
     it 'enter number instruction' do
@@ -38,7 +38,7 @@ describe Message do
     end
 
     it 'error_game_mode' do
-      expect(message.error_game_mode).to eq("\n Invalid option selected. Please try again:\n\n------------------------\n 1. Human vs Human\n2. Computer vs Human\n\n")
+      expect(message.error_game_mode).to eq("\nInvalid option selected. Please try again:\n1. Human vs Human\n2. Computer vs Human\n\n")
     end
   end
 end
