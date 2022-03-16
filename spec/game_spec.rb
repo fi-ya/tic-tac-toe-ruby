@@ -3,6 +3,7 @@
 require 'game'
 require 'board'
 require 'display'
+require 'validate_response'
 require 'message'
 require 'human_player'
 require 'computer_player'
@@ -11,7 +12,8 @@ require 'player'
 describe Game do
   let(:board) { Board.new }
   let(:message) { Message.new }
-  let(:display) { Display.new(message, board) }
+  let(:validate_response) { ValidateResponse.new }
+  let(:display) { Display.new(message, board, validate_response) }
   let(:player1) { ComputerPlayer.new('X', 'Computer', board, display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
   subject(:game) { described_class.new(board, display, player1, player2) }
@@ -24,7 +26,6 @@ describe Game do
       expect do
         game.turn
       end.to output(a_string_including(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")).to_stdout
-
     end
 
     it 'should verify if move is not valid if player picks zero' do

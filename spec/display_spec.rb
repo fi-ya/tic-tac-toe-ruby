@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 require 'display'
+require 'board'
+require 'message'
+require 'validate_response'
 
 describe Display do
   let(:message) { Message.new }
   let(:board) { Board.new }
-  subject(:display) { described_class.new(message, board) }
+  let(:validate_response) { ValidateResponse.new }
+  subject(:display) { described_class.new(message, board, validate_response) }
 
   context 'correct input output' do
     it 'should print the board to the terminal' do
@@ -27,10 +31,18 @@ describe Display do
   end
 
   context 'at start of new game prints the correct messages' do
-    it 'should display a welcome message, new board and enter number message' do
+    it 'should display a welcome message' do
       expect do
-        display.game_setup
-      end.to output("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n\nEnter a number between 1-9: ").to_stdout
+        display.print_welcome
+      end.to output("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n").to_stdout
+    end
+  end
+
+  context 'validate game mode choice' do
+    xit 'should validate the users input and return error if input out of limits' do
+      allow($stdin).to receive(:gets).and_return(1)
+      output = display.validate_game_mode_choice
+      expect(output).to eq(1)
     end
   end
 end

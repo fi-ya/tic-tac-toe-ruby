@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 class ValidateResponse
+  VALID_GAME_MODES = [1, 2].freeze
 
-    VALID_GAME_MODES = [1,2]
-
-    def game_mode?(choice)
-        VALID_GAME_MODES.include?(choice)
-    end
-
+  def game_mode?(choice)
+    VALID_GAME_MODES.include?(choice)
+  end
 end

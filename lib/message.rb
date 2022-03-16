@@ -32,4 +32,8 @@ class Message
   def error_game_mode
     "\nInvalid option selected. Please try again:\n1. Human vs Human\n2. Computer vs Human\n\n"
   end
+
+  def game_starting
+    "\nGame starting... \n"
+  end
 end

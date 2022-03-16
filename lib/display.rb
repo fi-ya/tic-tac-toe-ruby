@@ -54,6 +54,10 @@ class Display
     print_to_terminal(message.error_game_mode)
   end
 
+  def print_game_starting
+    print_to_terminal(message.game_starting)
+  end
+
   def print_to_terminal(msg)
     print msg
   end
@@ -66,7 +70,7 @@ class Display
   def validate_game_mode_choice
     until validate_response.game_mode?(mode_choice)
       print_error_choose_game_mode
-      choice = game_mode_choice
+      game_mode_choice
     end
     mode_choice
   end

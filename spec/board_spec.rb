@@ -61,7 +61,6 @@ describe Board do
       current_player_mark = board.get_player_mark
       expect(current_player_mark).to eq('X')
     end
-
   end
 
   context 'position taken' do
