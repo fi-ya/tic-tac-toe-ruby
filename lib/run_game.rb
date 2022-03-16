@@ -8,6 +8,7 @@ require_relative 'computer_player'
 require_relative 'human_player'
 require_relative 'game_mode'
 
+
 def start_game
   board = Board.new
   message = Message.new
@@ -23,11 +24,22 @@ def start_game
   display.print_game_starting
   display.print_enter_num
   game.start_game
+  display.print_play_again_exit
+  display.play_exit_choice
+  replay_or_exit(display.validate_play_again_choice)
+  
+end
 
-  # display option to restart
-  # take input/validate
-  # create new board
-
+def replay_or_exit(play_again_choice)
+  if play_again_choice == 1 
+    start_game 
+  else
+     print "\nThanks for playing Tic Tac Toe!\n\n"
+  end
 end
 
 start_game
+
+
+
+

@@ -36,4 +36,16 @@ class Message
   def game_starting
     "\nGame starting... \n"
   end
+
+  def play_again_exit
+    "Game Over!\n\n1.Play again\n2.Exit\n\n"
+  end
+
+  def error_play_again_exit
+    "\nInvalid option selected. Please try again:\n1.Play again\n2.Exit\n\n"
+  end
+
+  def exit_msg
+    "\nThanks for playing Tic Tac Toe!\n\n"
+  end
 end

@@ -4,7 +4,7 @@ require_relative 'board'
 require_relative 'message'
 require_relative 'validate_response'
 class Display
-  attr_accessor :message, :board, :validate_response, :mode_choice
+  attr_accessor :message, :board, :validate_response, :mode_choice, :play_exit
 
   def initialize(message, board, validate_response)
     @message = message
@@ -57,6 +57,18 @@ class Display
   def print_game_starting
     print_to_terminal(message.game_starting)
   end
+  
+  def print_play_again_exit
+    print_to_terminal(message.play_again_exit)
+  end
+
+  def print_error_play_again_exit
+    print_to_terminal(message.error_play_again_exit)
+  end
+
+  def print_exit_msg
+    print_to_terminal(message.exit_msg)
+  end
 
   def print_to_terminal(msg)
     print msg
@@ -73,6 +85,20 @@ class Display
       game_mode_choice
     end
     mode_choice
+  end
+
+  def play_exit_choice
+    @play_exit = gets.chomp.to_i
+    play_exit
+  end
+
+  def validate_play_again_choice
+    until validate_response.play_again?(play_exit)
+      p "play exit is: #{play_exit}"
+      print_error_play_again_exit
+      play_exit_choice
+    end
+    play_exit
   end
 
 end

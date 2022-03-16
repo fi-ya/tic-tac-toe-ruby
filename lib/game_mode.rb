@@ -21,9 +21,10 @@ class GameMode
   def get_player1(game_mode_chosen)
     if game_mode_chosen == 1
       HumanPlayer.new('X', 'Human', display)
-    else
-      game_mode_chosen == 2
+    elsif game_mode_chosen == 2
       ComputerPlayer.new('X', 'Computer', board, display)
+    else
+        return
     end
   end
 
