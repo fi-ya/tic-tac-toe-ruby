@@ -57,7 +57,7 @@ class Display
   def print_game_starting
     print_to_terminal(message.game_starting)
   end
-  
+
   def print_play_again_exit
     print_to_terminal(message.play_again_exit)
   end
@@ -94,11 +94,9 @@ class Display
 
   def validate_play_again_choice
     until validate_response.play_again?(play_exit)
-      p "play exit is: #{play_exit}"
       print_error_play_again_exit
       play_exit_choice
     end
     play_exit
   end
-
 end

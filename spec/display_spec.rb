@@ -9,7 +9,7 @@ describe Display do
   let(:message) { Message.new }
   let(:board) { Board.new }
   let(:validate_response) { ValidateResponse.new }
-  
+
   subject(:display) { described_class.new(message, board, validate_response) }
 
   context 'correct input output' do

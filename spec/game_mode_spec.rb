@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'game_mode'
 require 'board'
 require 'display'
