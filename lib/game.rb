@@ -19,7 +19,7 @@ class Game
 
   def turn
     until game_over?
-      p "CurrentPlayer= #{current_player}"
+      # p "CurrentPlayer= #{current_player}"
       play_turn(current_player, current_player.get_move)
       display.print_to_terminal(board.generate)
       display.print_enter_num unless game_over?

@@ -8,10 +8,9 @@ require_relative 'computer_player'
 class GameMode
   attr_reader :display, :board, :game, :human_player, :computer_player
 
-  def initialize(display, board, game)
+  def initialize(display, board)
     @display = display
     @board = board
-    @game = game
   end
 
   def choose_game_mode
@@ -28,6 +27,7 @@ class GameMode
       create_player(ComputerPlayer.new('X', 'Computer', board, display))
     end
     display.print_game_starting
+    display.print_enter_num
     game.start_game
   end
 
