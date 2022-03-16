@@ -2,25 +2,29 @@
 
 require_relative 'board'
 require_relative 'message'
+require_relative 'validate_response'
 class Display
-  attr_accessor :message, :board
+  attr_accessor :message, :board, :validate_response, :mode_choice
 
-  def initialize(message, board)
+  def initialize(message, board, validate_response)
     @message = message
     @board = board
+    @validate_response = validate_response
   end
 
-  def game_setup
+  def print_welcome
     print_to_terminal(message.welcome)
+  end
+
+  def print_board
     print_to_terminal(board.generate)
-    print_enter_num
   end
 
   def print_enter_num
     print_to_terminal(message.enter_num)
   end
 
-  def get_player_input
+  def players_move
     player_move = gets.chomp.to_i
     print_players_move(player_move)
     player_move
@@ -42,7 +46,29 @@ class Display
     print_to_terminal(message.won(board.winning_player))
   end
 
+  def print_choose_game_mode
+    print_to_terminal(message.choose_game_mode)
+  end
+
+  def print_error_choose_game_mode
+    print_to_terminal(message.error_game_mode)
+  end
+
   def print_to_terminal(msg)
     print msg
   end
+
+  def game_mode_choice
+    @mode_choice = gets.chomp.to_i
+    mode_choice
+  end
+
+  def validate_game_mode_choice
+    until validate_response.game_mode?(mode_choice)
+      print_error_choose_game_mode
+      choice = game_mode_choice
+    end
+    mode_choice
+  end
+
 end

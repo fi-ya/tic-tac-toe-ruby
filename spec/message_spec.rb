@@ -14,7 +14,7 @@ describe Message do
       expect(message.enter_num).to eq("\nEnter a number between 1-9: ")
     end
 
-    it 'enter number instruction' do
+    it 'players move' do
       player = 'X'
       move = 1
       expect(message.players_move(player, move)).to eq("\nPlayer X chose 1 \n\n")
@@ -31,6 +31,14 @@ describe Message do
     it 'winning message' do
       player = 'X'
       expect(message.won(player)).to eq("\nPlayer X wins!\n\n")
+    end
+
+    it 'choose_game_mode' do
+      expect(message.choose_game_mode).to eq("\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n")
+    end
+
+    it 'error_game_mode' do
+      expect(message.error_game_mode).to eq("\n Invalid option selected. Please try again:\n\n------------------------\n 1. Human vs Human\n2. Computer vs Human\n\n")
     end
   end
 end

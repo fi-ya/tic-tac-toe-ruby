@@ -2,7 +2,7 @@
 
 class Message
   def welcome
-    "\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n\n"
+    "\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n"
   end
 
   def enter_num
@@ -23,5 +23,13 @@ class Message
 
   def won(player)
     "\nPlayer #{player} wins!\n\n"
+  end
+
+  def choose_game_mode
+    "\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n"
+  end
+
+  def error_game_mode
+    "\nInvalid option selected. Please try again:\n1. Human vs Human\n2. Computer vs Human\n\n"
   end
 end

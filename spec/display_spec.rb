@@ -16,7 +16,7 @@ describe Display do
 
     xit 'should take the correct player input from the terminal' do
       allow($stdin).to receive(:gets).and_return(0)
-      expect(display.get_player_input).to eq(0)
+      expect(display.players_move).to eq(0)
     end
 
     it 'should display the player and the move they have made' do
