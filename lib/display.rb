@@ -6,10 +6,10 @@ require_relative 'validate_response'
 class Display
   attr_accessor :message, :board, :validate_response, :mode_choice, :replay_exit_choice
 
-  def initialize(message, board, validate_response)
+  def initialize(message, validate_response, board)
     @message = message
-    @board = board
     @validate_response = validate_response
+    @board = board
   end
 
   def print_welcome
@@ -28,6 +28,12 @@ class Display
     player_move = gets.chomp.to_i
     print_players_move(player_move)
     player_move
+  end
+
+  def computers_move
+    computers_move = board.available_moves[0].to_i
+    print_players_move(computers_move)
+    computers_move
   end
 
   def print_invalid_move
@@ -95,7 +101,7 @@ class Display
   def validate_play_again_choice
     until validate_response.play_again?(replay_exit_choice)
       print_error_play_again_exit
-      play_exit_choice
+      get_play_exit_choice
     end
     replay_exit_choice
   end

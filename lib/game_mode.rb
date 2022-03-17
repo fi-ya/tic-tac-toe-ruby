@@ -5,11 +5,10 @@ require_relative 'board'
 require_relative 'human_player'
 require_relative 'computer_player'
 class GameMode
-  attr_reader :display, :board
+  attr_reader :display
 
-  def initialize(display, board)
+  def initialize(display)
     @display = display
-    @board = board
   end
 
   def choose_game_mode
@@ -23,7 +22,7 @@ class GameMode
     when 1
       HumanPlayer.new('X', 'Human', display)
     when 2
-      ComputerPlayer.new('X', 'Computer', board, display)
+      ComputerPlayer.new('X', 'Computer', display)
     end
   end
 end

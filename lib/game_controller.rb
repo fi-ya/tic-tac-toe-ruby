@@ -6,12 +6,12 @@ require_relative 'board'
 require_relative 'message'
 
 class GameController
-  attr_accessor :display, :game_mode, :player1, :player2, :game, :board, :message
+  attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board
   
-  def initialize(display, game_mode, board)
-    @board = board
+  def initialize(display, game_mode, message)
     @display = display
     @game_mode = game_mode
+    @message = message
   end
 
   def start
@@ -21,7 +21,6 @@ class GameController
   end
   
   def create_game
-    message = Message.new
     display.print_to_terminal(message.welcome)
     board = Board.new
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
@@ -42,7 +41,6 @@ class GameController
 
   def replay_or_exit(play_again_choice)
     if play_again_choice == 1 
-    #   @board = Board.new
       create_game
       start_game
       replay_exit_option
