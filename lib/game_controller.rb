@@ -2,9 +2,11 @@ require_relative 'display'
 require_relative 'game'
 require_relative 'game_mode'
 require_relative 'human_player'
+require_relative 'board'
+require_relative 'message'
 
-class GameFactory
-  attr_accessor :display, :game_mode, :player1, :player2, :game, :board
+class GameController
+  attr_accessor :display, :game_mode, :player1, :player2, :game, :board, :message
   
   def initialize(display, game_mode, board)
     @board = board
@@ -12,31 +14,40 @@ class GameFactory
     @game_mode = game_mode
   end
 
+  def start
+    create_game
+    start_game
+    replay_exit_option
+  end
+  
   def create_game
-    # board = Board.new
-    display.print_welcome
+    message = Message.new
+    display.print_to_terminal(message.welcome)
+    board = Board.new
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
     @game = Game.new(board, display, player1, player2)
   end
 
   def start_game
-    display.print_game_starting
-    display.print_enter_num
+    display.print_to_terminal(message.game_starting)
     game.start_game
   end
 
   def replay_exit_option
-    display.print_replay_or_exit
-    display.play_exit_choice
+    display.print_to_terminal(message.replay_or_exit)
+    display.get_play_exit_choice
     replay_or_exit(display.validate_play_again_choice)
   end
 
   def replay_or_exit(play_again_choice)
     if play_again_choice == 1 
+    #   @board = Board.new
       create_game
+      start_game
+      replay_exit_option
     else
-      display.print_exit_msg
+      display.print_to_terminal(message.exit_msg)
     end
   end
 

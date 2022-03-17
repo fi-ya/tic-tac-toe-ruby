@@ -7,7 +7,7 @@ require_relative 'message'
 require_relative 'computer_player'
 require_relative 'human_player'
 require_relative 'game_mode'
-require_relative 'game_factory'
+require_relative 'game_controller'
 
 def start_game
   board = Board.new
@@ -16,10 +16,10 @@ def start_game
   display = Display.new(message, board, validate_response)
   game_mode = GameMode.new(display, board)
 
-  game_factory = GameFactory.new(display, game_mode, board)
-  game_factory.create_game
-  game_factory.start_game
-  game_factory.replay_exit_option
+  game_controller = GameController.new(display, game_mode, board)
+  game_controller.start
+
+
 end
 
 start_game

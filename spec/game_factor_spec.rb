@@ -1,1 +1,1 @@
-require 'game_factory'
+require 'game_controller'

@@ -14,7 +14,7 @@ class ComputerPlayer < Player
   end
 
   def get_move
-    @computers_move = board.available_moves[0].to_i
+    @computers_move = board.available_moves.sample.to_i
     display.print_players_move(computers_move)
     computers_move
   end
