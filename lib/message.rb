@@ -37,7 +37,7 @@ class Message
     "\nGame starting... \n"
   end
 
-  def play_again_exit
+  def replay_or_exit
     "Game Over!\n\n1.Play again\n2.Exit\n\n"
   end
 

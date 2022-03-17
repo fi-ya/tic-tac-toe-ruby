@@ -58,8 +58,8 @@ class Display
     print_to_terminal(message.game_starting)
   end
 
-  def print_play_again_exit
-    print_to_terminal(message.play_again_exit)
+  def print_replay_or_exit
+    print_to_terminal(message.replay_or_exit)
   end
 
   def print_error_play_again_exit

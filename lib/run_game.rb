@@ -16,22 +16,10 @@ def start_game
   display = Display.new(message, board, validate_response)
   game_mode = GameMode.new(display, board)
 
-  game_factory = GameFactory.new(display, game_mode)
+  game_factory = GameFactory.new(display, game_mode, board)
   game_factory.create_game
-  # display.print_welcome
-  # player1 = game_mode.get_player1(game_mode.choose_game_mode)
-  # player2 = HumanPlayer.new('O', 'Human', display)
-  # game = Game.new(board, display, player1, player2)
-
-  # display.print_game_starting
-  # display.print_enter_num
-
-  # game.start_game
-
-  # display.print_play_again_exit
-  # display.play_exit_choice
-
-  # replay_or_exit(display.validate_play_again_choice)
+  game_factory.start_game
+  game_factory.replay_exit_option
 end
 
 start_game

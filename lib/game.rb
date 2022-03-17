@@ -59,10 +59,6 @@ class Game
     end
   end
 
-  # def replay_or_exit(play_again_choice)
-  #   play_again_choice == 1 ? start_game : display.print_exit_msg
-  # end
-
   # private
 
   def valid_move?(index)

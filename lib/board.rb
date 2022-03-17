@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require_relative 'message'
 class Board
   attr_accessor :grid, :player_mark
