@@ -24,6 +24,7 @@ class GameController
   end
 
   def create_game
+    display.clear_terminal
     display.print_to_terminal(message.welcome)
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
@@ -31,6 +32,7 @@ class GameController
   end
 
   def start_game
+    display.clear_terminal
     display.print_to_terminal(message.game_starting)
     game.start_game
   end

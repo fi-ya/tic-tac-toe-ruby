@@ -15,6 +15,7 @@ class Game
 
   def start_game
     board.reset_grid
+    display.print_to_terminal(board.generate)
     turn
   end
 
@@ -23,8 +24,9 @@ class Game
       display.print_show_current_player(current_player.marker, current_player.name)
       display.print_enter_num unless game_over?
       play_turn(current_player, current_player.get_move)
+      display.clear_terminal
       display.print_to_terminal(board.generate)
-      
+
     end
     game_status
   end
@@ -33,7 +35,7 @@ class Game
     if valid_move?(move)
       update_board(player, move)
       update_current_player
-      
+
     else
       display.print_invalid_move
     end

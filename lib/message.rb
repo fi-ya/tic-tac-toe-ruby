@@ -7,7 +7,7 @@ class Message
 
   def show_current_player(marker, name)
     "\nPlayer #{marker} (#{name}) your turn to make a move...\n"
-  end 
+  end
 
   def enter_num
     "\nEnter a number between 1-9: "

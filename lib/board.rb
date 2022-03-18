@@ -21,7 +21,7 @@ class Board
   ].freeze
 
   def generate
-    " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
+    "\n #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
       "-----------\n" \
       " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \
       "-----------\n" \

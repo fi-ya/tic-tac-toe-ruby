@@ -10,7 +10,7 @@ describe Message do
       expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n")
     end
 
-    it 'show current player' do 
+    it 'show current player' do
       expect(message.show_current_player('X', 'Human')).to eq("\nPlayer X (Human) your turn to make a move...\n")
     end
 

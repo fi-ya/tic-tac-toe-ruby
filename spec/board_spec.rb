@@ -9,7 +9,7 @@ describe Board do
 
   context '.generate' do
     it 'should display the board' do
-      expect(board.generate).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
+      expect(board.generate).to eq("\n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display correct player marker in the top left corner' do
@@ -19,12 +19,12 @@ describe Board do
 
     it 'should display an X in the middle middle row' do
       board.mark_board('X', 5)
-      expect(board.generate).to eq(" 1 | 2 | 3 \n-----------\n 4 | X | 6 \n-----------\n 7 | 8 | 9 \n")
+      expect(board.generate).to eq("\n 1 | 2 | 3 \n-----------\n 4 | X | 6 \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display an X in the middle right row' do
       board.mark_board('X', 6)
-      expect(board.generate).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | X \n-----------\n 7 | 8 | 9 \n")
+      expect(board.generate).to eq("\n 1 | 2 | 3 \n-----------\n 4 | 5 | X \n-----------\n 7 | 8 | 9 \n")
     end
 
     it 'should display correct players marker in the bottom right row' do
@@ -35,7 +35,7 @@ describe Board do
     it 'should show player mark at position 4 if space is free and move is valid' do
       board.grid = %w[X 2 3 O 5 6 7 8 9]
 
-      expect(board.generate).to eq(" X | 2 | 3 \n-----------\n O | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
+      expect(board.generate).to eq("\n X | 2 | 3 \n-----------\n O | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
     end
   end
 
@@ -135,12 +135,12 @@ describe Board do
   def verify_top_left(player)
     board.mark_board(player, 1)
 
-    expect(board.generate).to eq(" #{player} | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
+    expect(board.generate).to eq("\n #{player} | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n")
   end
 
   def verify_bottom_right(player)
     board.mark_board(player, 9)
 
-    expect(board.generate).to eq(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | #{player} \n")
+    expect(board.generate).to eq("\n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | #{player} \n")
   end
 end

@@ -12,6 +12,10 @@ class Display
     @board = board
   end
 
+  def clear_terminal
+    system 'clear'
+  end
+
   def print_welcome
     print_to_terminal(message.welcome)
   end
