@@ -14,6 +14,7 @@ class Game
   end
 
   def start_game
+    board.grid = %w[1 2 3 4 5 6 7 8 9]
     turn
   end
 
