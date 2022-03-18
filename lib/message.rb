@@ -5,6 +5,10 @@ class Message
     "\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n"
   end
 
+  def show_current_player(marker, name)
+    "\nPlayer #{marker} (#{name}) your turn to make a move...\n"
+  end 
+
   def enter_num
     "\nEnter a number between 1-9: "
   end

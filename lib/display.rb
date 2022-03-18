@@ -20,6 +20,10 @@ class Display
     print_to_terminal(board.generate)
   end
 
+  def print_show_current_player(marker, name)
+    print_to_terminal(message.show_current_player(marker, name))
+  end
+
   def print_enter_num
     print_to_terminal(message.enter_num)
   end
