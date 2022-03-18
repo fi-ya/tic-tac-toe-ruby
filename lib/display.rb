@@ -24,6 +24,10 @@ class Display
     print_to_terminal(message.enter_num)
   end
 
+  def print_invalid_move
+    print_to_terminal(message.invalid_move)
+  end
+
   def players_move
     player_move = gets.chomp.to_i
     print_players_move(player_move)
@@ -34,10 +38,6 @@ class Display
     computers_move = board.available_moves[0].to_i
     print_players_move(computers_move)
     computers_move
-  end
-
-  def print_invalid_move
-    print_to_terminal(message.invalid_move)
   end
 
   def print_players_move(players_move)

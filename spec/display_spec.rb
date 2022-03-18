@@ -9,7 +9,7 @@ describe Display do
   let(:message) { Message.new }
   let(:board) { Board.new }
   let(:validate_response) { ValidateResponse.new }
-
+  
   subject(:display) { described_class.new(message, board, validate_response) }
 
   context 'correct terminal output' do
@@ -33,25 +33,35 @@ describe Display do
     end
   end
 
-  context 'validate user input' do
-
-    xit 'should validate the players input when choosing game mode' do
-      allow($stdin).to receive(:gets).and_return(1)
-      output = display.validate_game_mode_choice
-      expect(output).to eq(1)
+  context 'get players input' do
+    
+    it 'should return an interger when choosing a game mode' do
+      allow(display).to receive(:gets).and_return('1')
+      expect(display.game_mode_choice).to eq(1)
     end
 
-    xit 'should validate player input when playing a move' do
-      allow($stdin).to receive(:gets).and_return(0)
-      expect(display.players_move).to eq(0)
+    it 'should return an interger when playing a move' do
+      allow(display).to receive(:gets).and_return('1')
+      expect(display.players_move).to eq(1)
     end 
     
-   xit 'should validate the players input when choosing to replay or quit' do
-      allow($stdin).to receive(:gets).and_return(1)
-      output = display.validate_game_mode_choice
-      expect(output).to eq(1)
+   it 'should return an interger when choosing to replay or quit' do
+      allow(display).to receive(:gets).and_return('1')
+      expect(display.get_play_exit_choice).to eq(1)
     end
 
-
   end
+
+  context 'validate input' do 
+    it 'should correctly validate input for game mode choice' do
+      allow(display).to receive(:gets).and_return('2')
+      expect(display.validate_game_mode_choice).to eq(2)
+    end
+
+    it 'should correctly validate input for play again option' do
+      allow(display).to receive(:gets).and_return('1')
+      expect(display.validate_play_again_choice).to eq(1) 
+    end
+  end
+
 end
