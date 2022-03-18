@@ -18,6 +18,10 @@ describe Message do
       expect(message.enter_num).to eq("\nEnter a number between 1-9: ")
     end
 
+    it 'computer_thinking' do
+      expect(message.computer_thinking).to eq("\nComputer thinking... ")
+    end
+
     it 'players move' do
       player = 'X'
       move = 1

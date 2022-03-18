@@ -13,6 +13,10 @@ class Message
     "\nEnter a number between 1-9: "
   end
 
+  def computer_thinking
+    "\nComputer thinking... "
+  end
+
   def players_move(player, move)
     "\nPlayer #{player} chose #{move} \n\n"
   end

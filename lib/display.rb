@@ -28,6 +28,10 @@ class Display
     print_to_terminal(message.show_current_player(marker, name))
   end
 
+  def print_computer_thinking
+    print_to_terminal(message.computer_thinking)
+  end
+
   def print_enter_num
     print_to_terminal(message.enter_num)
   end
@@ -39,12 +43,14 @@ class Display
   def human_players_move
     player_move = gets.chomp.to_i
     print_players_move(player_move)
+    sleep 1.5
     player_move
   end
 
   def computers_move
     computers_move = board.available_moves[0].to_i
     print_players_move(computers_move)
+    sleep 1.5
     computers_move
   end
 

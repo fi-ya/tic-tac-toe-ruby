@@ -22,13 +22,22 @@ class Game
   def turn
     until game_over?
       display.print_show_current_player(current_player.marker, current_player.name)
-      display.print_enter_num unless game_over?
+      prompt_player
       play_turn(current_player, current_player.get_move)
       display.clear_terminal
       display.print_to_terminal(board.generate)
 
     end
     game_status
+  end
+
+  def prompt_player
+    if current_player.name == 'Computer'
+      display.print_computer_thinking
+      sleep 3
+    else
+      display.print_enter_num unless game_over?
+    end
   end
 
   def play_turn(player, move)
@@ -38,6 +47,7 @@ class Game
 
     else
       display.print_invalid_move
+      sleep 2
     end
   end
 
