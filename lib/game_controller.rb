@@ -8,10 +8,11 @@ require_relative 'message'
 class GameController
   attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board
   
-  def initialize(display, game_mode, message)
+  def initialize(display, game_mode, message, board)
     @display = display
     @game_mode = game_mode
     @message = message
+    @board = board
   end
 
   def start
@@ -22,7 +23,6 @@ class GameController
   
   def create_game
     display.print_to_terminal(message.welcome)
-    board = Board.new
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
     @game = Game.new(board, display, player1, player2)

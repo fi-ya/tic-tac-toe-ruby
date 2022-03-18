@@ -16,7 +16,7 @@ def start_game
   display = Display.new(message,validate_response, board)
   game_mode = GameMode.new(display)
 
-  game_controller = GameController.new(display, game_mode, message)
+  game_controller = GameController.new(display, game_mode, message, board)
   game_controller.start
 
 
