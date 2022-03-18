@@ -9,11 +9,10 @@ describe Display do
   let(:message) { Message.new }
   let(:board) { Board.new }
   let(:validate_response) { ValidateResponse.new }
-  
+
   subject(:display) { described_class.new(message, board, validate_response) }
 
   context 'correct terminal output' do
-
     it 'should display a welcome message' do
       expect do
         display.print_welcome
@@ -34,7 +33,6 @@ describe Display do
   end
 
   context 'get players input' do
-    
     it 'should return an interger when choosing a game mode' do
       allow(display).to receive(:gets).and_return('1')
       expect(display.game_mode_choice).to eq(1)
@@ -42,17 +40,16 @@ describe Display do
 
     it 'should return an interger when playing a move' do
       allow(display).to receive(:gets).and_return('1')
-      expect(display.players_move).to eq(1)
-    end 
-    
-   it 'should return an interger when choosing to replay or quit' do
+      expect(display.human_players_move).to eq(1)
+    end
+
+    it 'should return an interger when choosing to replay or quit' do
       allow(display).to receive(:gets).and_return('1')
       expect(display.get_play_exit_choice).to eq(1)
     end
-
   end
 
-  context 'validate input' do 
+  context 'validate input' do
     it 'should correctly validate input for game mode choice' do
       allow(display).to receive(:gets).and_return('2')
       expect(display.validate_game_mode_choice).to eq(2)
@@ -60,8 +57,7 @@ describe Display do
 
     it 'should correctly validate input for play again option' do
       allow(display).to receive(:gets).and_return('1')
-      expect(display.validate_play_again_choice).to eq(1) 
+      expect(display.validate_play_again_choice).to eq(1)
     end
   end
-
 end

@@ -18,40 +18,23 @@ describe Game do
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
   subject(:game) { described_class.new(board, display, player1, player2) }
 
-  context 'players take turns and marks the board' do
-    xit 'should display player X marker in top left and player O marker bottom right' do
-      # game.play_turn('X', 1)
-      # game.play_turn('O', 9)
-      allow(display).to receive(:gets).and_return('1', '9')
-      expect do
-        game.turn
-      end.to output(a_string_including(" X | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | O \n")).to_stdout
-    end
-
+  context 'moves are verified' do
     it 'should verify if move is not valid if player picks zero' do
-      output = game.valid_move?(0)
-      expect(output).to eq(false)
+      expect(game.valid_move?(0)).to eq(false)
     end
 
     it 'should verify if move valid if player picks 6' do
-      output = game.valid_move?(6)
-      expect(output).to eq(true)
+      expect(game.valid_move?(6)).to eq(true)
     end
 
-    it 'should show an error message when invalid move' do
-      output = game.play_turn('X', 0)
-      expected = display.print_to_terminal("\n Invalid move. Try again\n\n")
-      expect(output).to eq(expected)
-    end
-  end
-
-  context 'moves are verified' do
     it 'should verify no more moves allowed after 9 turns' do
       dummy_full_board
 
-      output = game.turn
+      expect(game.turn).to eq(display.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
+    end
 
-      expect(output).to eq(display.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
+    it 'should show an error message when invalid move' do
+      expect { game.play_turn('X', 0) }.to output("\nInvalid move. Try again\n\n").to_stdout
     end
   end
 
@@ -75,14 +58,14 @@ describe Game do
     it 'should update current player marker correctly to O' do
       board.grid = %w[X 2 3 4 5 6 7 8 9]
       game.update_current_player
-      output = game.current_player
-      expect(output.marker).to eq('O')
+
+      expect(game.current_player.marker).to eq('O')
     end
 
     it 'should update current player marker correctly to X' do
       board.grid = %w[X O 3 4 5 6 7 8 9]
-      output = game.current_player.marker
-      expect(output).to eq('X')
+
+      expect(game.current_player.marker).to eq('X')
     end
   end
 

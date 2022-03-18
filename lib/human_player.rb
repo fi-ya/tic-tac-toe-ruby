@@ -12,6 +12,6 @@ class HumanPlayer < Player
   end
 
   def get_move
-    display.players_move
+    display.human_players_move
   end
 end

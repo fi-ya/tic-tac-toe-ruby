@@ -23,7 +23,6 @@ class Game
       display.print_enter_num unless game_over?
       play_turn(current_player, current_player.get_move)
       display.print_to_terminal(board.generate)
-
     end
     game_status
   end

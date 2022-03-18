@@ -13,12 +13,11 @@ def start_game
   board = Board.new
   message = Message.new
   validate_response = ValidateResponse.new
-  display = Display.new(message,board, validate_response)
+  display = Display.new(message, board, validate_response)
   game_mode = GameMode.new(display)
   game_controller = GameController.new(display, game_mode, message, board)
+
   game_controller.start
 end
 
 start_game
-
-

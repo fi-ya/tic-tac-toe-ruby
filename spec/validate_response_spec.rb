@@ -21,7 +21,7 @@ describe ValidateResponse do
     expect(validate_response.play_again?(2)).to eq(true)
   end
 
-  it 'should return false if input is incorrect for replay game' do 
+  it 'should return false if input is incorrect for replay game' do
     expect(validate_response.play_again?('-1')).to eq(false)
     expect(validate_response.play_again?('W')).to eq(false)
     expect(validate_response.play_again?('£')).to eq(false)

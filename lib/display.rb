@@ -28,7 +28,7 @@ class Display
     print_to_terminal(message.invalid_move)
   end
 
-  def players_move
+  def human_players_move
     player_move = gets.chomp.to_i
     print_players_move(player_move)
     player_move
