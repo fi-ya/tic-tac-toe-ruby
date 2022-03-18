@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'display'
 require_relative 'game'
 require_relative 'game_mode'
@@ -7,7 +9,7 @@ require_relative 'message'
 
 class GameController
   attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board
-  
+
   def initialize(display, game_mode, message, board)
     @display = display
     @game_mode = game_mode
@@ -20,7 +22,7 @@ class GameController
     start_game
     replay_exit_option
   end
-  
+
   def create_game
     display.print_to_terminal(message.welcome)
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
@@ -40,7 +42,7 @@ class GameController
   end
 
   def replay_or_exit(play_again_choice)
-    if play_again_choice == 1 
+    if play_again_choice == 1
       create_game
       start_game
       replay_exit_option
@@ -48,5 +50,4 @@ class GameController
       display.print_to_terminal(message.exit_msg)
     end
   end
-
 end

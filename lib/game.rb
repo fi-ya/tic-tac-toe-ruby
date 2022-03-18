@@ -14,7 +14,7 @@ class Game
   end
 
   def start_game
-    board.grid = %w[1 2 3 4 5 6 7 8 9]
+    board.reset_grid
     turn
   end
 
@@ -23,7 +23,7 @@ class Game
       display.print_enter_num unless game_over?
       play_turn(current_player, current_player.get_move)
       display.print_to_terminal(board.generate)
-      
+
     end
     game_status
   end
