@@ -6,7 +6,7 @@ require_relative 'validate_response'
 class Display
   attr_accessor :message, :board, :validate_response, :mode_choice, :replay_exit_choice
 
-  def initialize(message, validate_response, board)
+  def initialize(message, board, validate_response)
     @message = message
     @validate_response = validate_response
     @board = board

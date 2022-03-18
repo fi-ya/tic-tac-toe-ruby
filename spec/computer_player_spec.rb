@@ -12,7 +12,7 @@ describe ComputerPlayer do
   let(:message) { Message.new }
   let(:validate_response) { ValidateResponse.new }
   let(:display) { Display.new(message, board, validate_response) }
-  subject(:computer_player) { described_class.new('X', 'Computer', board, display) }
+  subject(:computer_player) { described_class.new('X', 'Computer', display) }
 
   context 'computer marker and name' do
     it 'should have X marker for computer' do
