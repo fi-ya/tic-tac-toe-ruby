@@ -15,7 +15,7 @@ describe 'GameMode' do
   # let(:player2) { HumanPlayer.new('O', 'Human', display) }
   # let(:game) { Game.new(board, display, player1, player2) }
 
-  subject(:game_mode) { described_class.new(display, board) }
+  subject(:game_mode) { described_class.new(display) }
 
   it 'should create new HumanPlayer with choice 1 ' do
     game_mode_chosen = 1

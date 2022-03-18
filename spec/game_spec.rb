@@ -14,7 +14,7 @@ describe Game do
   let(:message) { Message.new }
   let(:validate_response) { ValidateResponse.new }
   let(:display) { Display.new(message, board, validate_response) }
-  let(:player1) { ComputerPlayer.new('X', 'Computer', board, display) }
+  let(:player1) { ComputerPlayer.new('X', 'Computer', display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
   subject(:game) { described_class.new(board, display, player1, player2) }
 
