@@ -15,7 +15,8 @@ def start_game
   validate_response = ValidateResponse.new
   display = Display.new(message, board, validate_response)
   game_mode = GameMode.new(display)
-  game_controller = GameController.new(display, game_mode, message, board)
+  custom_marker = CustomMarker.new(display)
+  game_controller = GameController.new(display, game_mode, message, board, custom_marker)
 
   game_controller.start
 end

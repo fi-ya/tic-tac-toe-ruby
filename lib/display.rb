@@ -24,6 +24,10 @@ class Display
     print_to_terminal(board.generate)
   end
 
+  def print_ask_custom_marker
+    print_to_terminal(message.ask_custom_marker)
+  end
+
   def print_show_current_player(marker, name)
     print_to_terminal(message.show_current_player(marker, name))
   end

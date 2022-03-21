@@ -5,6 +5,10 @@ class Message
     "\nLet's play Tic Tac Toe\n------------------------\n"
   end
 
+  def ask_custom_marker
+    "\nEnter one letter sign to identify you on the board eg. X, O, A ...\n"
+  end
+
   def show_current_player(marker, name)
     "\nPlayer #{marker} (#{name}) your turn to make a move...\n"
   end

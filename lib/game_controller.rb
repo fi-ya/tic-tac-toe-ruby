@@ -6,15 +6,17 @@ require_relative 'game_mode'
 require_relative 'human_player'
 require_relative 'board'
 require_relative 'message'
+require_relative 'custom_marker'
 
 class GameController
-  attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board
+  attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board, :custom_marker
 
-  def initialize(display, game_mode, message, board)
+  def initialize(display, game_mode, message, board, custom_marker)
     @display = display
     @game_mode = game_mode
     @message = message
     @board = board
+    @custom_marker = custom_marker
   end
 
   def start
@@ -26,6 +28,7 @@ class GameController
   def create_game
     display.clear_terminal
     display.print_to_terminal(message.welcome)
+    custom_marker.choose_custom_maker
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
     @game = Game.new(board, display, player1, player2)
