@@ -11,12 +11,11 @@ require_relative 'custom_marker'
 class GameController
   attr_accessor :display, :game_mode, :player1, :player2, :game, :message, :board, :custom_marker
 
-  def initialize(display, game_mode, message, board, custom_marker)
+  def initialize(display, game_mode, message, board)
     @display = display
     @game_mode = game_mode
     @message = message
     @board = board
-    @custom_marker = custom_marker
   end
 
   def start
@@ -28,14 +27,16 @@ class GameController
   def create_game
     display.clear_terminal
     display.print_to_terminal(message.welcome)
-    custom_marker.choose_custom_maker
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
     @game = Game.new(board, display, player1, player2)
+    @custom_marker = CustomMarker.new(display, player1, player2)
+    
+    custom_marker.choose_custom_marker
   end
 
   def start_game
-    display.clear_terminal
+    # display.clear_terminal
     display.print_to_terminal(message.game_starting)
     game.start_game
   end
