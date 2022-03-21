@@ -5,8 +5,8 @@ require 'custom_marker'
 describe CustomMarker do
   let(:message) { Message.new }
   let(:board) { Board.new }
-  let(:validate_response) { ValidateResponse.new }
-  let(:display) { Display.new(message, board, validate_response) }
+  let(:input_validation) { InputValidation.new }
+  let(:display) { Display.new(message, board, input_validation) }
   let(:player1) { ComputerPlayer.new('X', 'Computer', display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
 

@@ -2,14 +2,14 @@
 
 require_relative 'board'
 require_relative 'message'
-require_relative 'validate_response'
+require_relative 'input_validation'
 class Display
-  attr_accessor :message, :board, :validate_response, :mode_choice, :replay_exit_choice, :custom_marker1,
+  attr_accessor :message, :board, :input_validation, :mode_choice, :replay_exit_choice, :custom_marker1,
                 :custom_marker2
 
-  def initialize(message, board, validate_response)
+  def initialize(message, board, input_validation)
     @message = message
-    @validate_response = validate_response
+    @input_validation = input_validation
     @board = board
   end
 
@@ -17,23 +17,23 @@ class Display
     system 'clear'
   end
 
-  def print_welcome
+  def welcome
     print_to_terminal(message.welcome)
   end
 
-  def print_board
+  def generate_board
     print_to_terminal(board.generate)
   end
 
-  def print_ask_custom_marker
+  def ask_custom_marker
     print_to_terminal(message.ask_custom_marker)
   end
 
-  def print_computer_mark(name,marker)
+  def computer_mark(name, marker)
     print_to_terminal(message.computer_mark(name,marker))
   end
 
-  def print_player1_custom_marker(player1_name)
+  def player1_custom_marker(player1_name)
     print_to_terminal(message.player1_custom_marker(player1_name))
   end
 
@@ -43,7 +43,7 @@ class Display
   end
 
   def validate_custom_marker1_choice
-    until validate_response.valid_custom_marker?(custom_marker1)
+    until input_validation.valid_custom_marker?(custom_marker1)
       print_error_custom_marker
       get_custom_marker1_choice
     end
@@ -68,7 +68,7 @@ class Display
   end
 
   def validate_custom_marker2_choice
-    until validate_response.valid_custom_marker2?(custom_marker2, custom_marker1)
+    until input_validation.valid_custom_marker2?(custom_marker2, custom_marker1)
       print_error_custom_marker
       get_custom_marker2_choice
     end
@@ -95,18 +95,18 @@ class Display
     print_to_terminal(message.invalid_move)
   end
 
-  def human_players_move(marker, name)
+  def human_player_move(marker, name)
     player_move = gets.chomp.to_i
     print_players_move(marker, name, player_move)
     sleep 1.5
     player_move
   end
 
-  def computers_move(marker, name)
-    computers_move = board.available_moves[0].to_i
-    print_players_move(marker, name, computers_move)
+  def computer_move(marker, name)
+    computer_move = board.available_moves[0].to_i
+    print_players_move(marker, name, computer_move)
     sleep 1.5
-    computers_move
+    computer_move
   end
 
   def print_players_move(current_player_marker, current_player_name, players_move)
@@ -121,8 +121,8 @@ class Display
     print_to_terminal(message.won(board.winning_player))
   end
 
-  def print_choose_game_mode
-    print_to_terminal(message.choose_game_mode)
+  def print_game_mode_selection
+    print_to_terminal(message.game_mode_selection)
   end
 
   def print_error_choose_game_mode
@@ -155,7 +155,7 @@ class Display
   end
 
   def validate_game_mode_choice
-    until validate_response.game_mode?(mode_choice)
+    until input_validation.game_mode?(mode_choice)
       print_error_choose_game_mode
       game_mode_choice
     end
@@ -168,7 +168,7 @@ class Display
   end
 
   def validate_play_again_choice
-    until validate_response.play_again?(replay_exit_choice)
+    until input_validation.play_again?(replay_exit_choice)
       print_error_play_again_exit
       get_play_exit_choice
     end

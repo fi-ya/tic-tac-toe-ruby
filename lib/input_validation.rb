@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class ValidateResponse
+class InputValidation
   VALID_GAME_MODES = [1, 2].freeze
   VALID_PLAY_AGAIN = [1, 2].freeze
   VALID_CUSTOM_MARKER_LENGTH = 1
   COMPUTER_MARKER = 'X'
-
+  
   def game_mode?(choice)
     VALID_GAME_MODES.include?(choice)
   end

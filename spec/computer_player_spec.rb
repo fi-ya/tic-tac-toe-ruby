@@ -4,14 +4,14 @@ require 'computer_player'
 require 'player'
 require 'board'
 require 'display'
-require 'validate_response'
+require 'input_validation'
 require 'message'
 
 describe ComputerPlayer do
   let(:board) { Board.new }
   let(:message) { Message.new }
-  let(:validate_response) { ValidateResponse.new }
-  let(:display) { Display.new(message, board, validate_response) }
+  let(:input_validation) { InputValidation.new }
+  let(:display) { Display.new(message, board, input_validation) }
   subject(:computer_player) { described_class.new('X', 'Computer', display) }
 
   context 'computer marker and name' do

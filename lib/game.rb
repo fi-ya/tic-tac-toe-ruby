@@ -15,17 +15,17 @@ class Game
 
   def start_game
     board.reset_grid
-    display.print_to_terminal(board.generate)
-    turn
+    display.generate_board
+    take_turn
   end
 
-  def turn
+  def take_turn
     until game_over?
       display.print_show_current_player(current_player.marker, current_player.name)
       prompt_player
       play_turn(current_player, current_player.get_move)
       display.clear_terminal
-      display.print_to_terminal(board.generate)
+      display.generate_board
 
     end
     game_status

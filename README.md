@@ -37,7 +37,7 @@ To view code coverage report run command
 - [RuboCop](https://rubocop.org/)
 ## Features
  - Human vs Human game
- - Human vs Computer game
+ - Computer vs Human game
 
 ## Resources 
 - [GitHub CI Guide](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)

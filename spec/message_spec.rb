@@ -63,8 +63,8 @@ describe Message do
       expect(message.won(player)).to eq("\nPlayer X wins!\n\n")
     end
 
-    it 'choose_game_mode' do
-      expect(message.choose_game_mode).to eq("\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n")
+    it 'game_mode_selection' do
+      expect(message.game_mode_selection).to eq("\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n")
     end
 
     it 'error_game_mode' do

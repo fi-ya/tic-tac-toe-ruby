@@ -61,7 +61,7 @@ class Message
     "\nPlayer #{player} wins!\n\n"
   end
 
-  def choose_game_mode
+  def game_mode_selection
     "\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n"
   end
 

@@ -5,8 +5,8 @@ require 'game_controller'
 describe GameController do
   let(:board) { Board.new }
   let(:message) { Message.new }
-  let(:validate_response) { ValidateResponse.new }
-  let(:display) { Display.new(message, board, validate_response) }
+  let(:input_validation) { InputValidation.new }
+  let(:display) { Display.new(message, board, input_validation) }
   let(:game_mode) { GameMode.new(display) }
   let(:player1) { ComputerPlayer.new('X', 'Computer', display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }

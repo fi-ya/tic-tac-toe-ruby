@@ -3,19 +3,19 @@
 require 'display'
 require 'board'
 require 'message'
-require 'validate_response'
+require 'input_validation'
 
 describe Display do
   let(:message) { Message.new }
   let(:board) { Board.new }
-  let(:validate_response) { ValidateResponse.new }
+  let(:input_validation) { InputValidation.new }
 
-  subject(:display) { described_class.new(message, board, validate_response) }
+  subject(:display) { described_class.new(message, board, input_validation) }
 
   context 'correct terminal output' do
     it 'should display a welcome message' do
       expect do
-        display.print_welcome
+        display.welcome
       end.to output("\nLet's play Tic Tac Toe\n------------------------\n").to_stdout
     end
 
@@ -33,14 +33,14 @@ describe Display do
   end
 
   context 'get players input' do
-    it 'should return an interger when choosing a game mode' do
+    it 'should return an integer when choosing a game mode' do
       allow(display).to receive(:gets).and_return('1')
       expect(display.game_mode_choice).to eq(1)
     end
 
     it 'should return an interger when playing a move' do
       allow(display).to receive(:gets).and_return('1')
-      expect(display.human_players_move('X', 'Human')).to eq(1)
+      expect(display.human_player_move('X', 'Human')).to eq(1)
     end
 
     it 'should return an interger when choosing to replay or quit' do

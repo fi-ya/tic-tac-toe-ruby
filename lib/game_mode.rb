@@ -11,13 +11,13 @@ class GameMode
     @display = display
   end
 
-  def choose_game_mode
-    display.print_choose_game_mode
+  def select_game_mode
+    display.print_game_mode_selection
     display.game_mode_choice
     display.validate_game_mode_choice
   end
 
-  def get_player1(game_mode_chosen)
+  def set_player1(game_mode_chosen)
     case game_mode_chosen
     when 1
       HumanPlayer.new('X', 'Human', display)

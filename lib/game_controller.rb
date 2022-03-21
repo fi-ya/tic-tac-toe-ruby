@@ -18,7 +18,7 @@ class GameController
     @board = board
   end
 
-  def start
+  def start_session
     create_game
     start_game
     replay_exit_option
@@ -26,9 +26,10 @@ class GameController
 
   def create_game
     display.clear_terminal
-    display.print_to_terminal(message.welcome)
+    display.welcome
 
-    @player1 = game_mode.get_player1(game_mode.choose_game_mode)
+    player1_token = game_mode.select_game_mode
+    @player1 = game_mode.set_player1(player1_token)
     @player2 = HumanPlayer.new('O', 'Human', display)
 
     @custom_marker = CustomMarker.new(display, player1, player2)

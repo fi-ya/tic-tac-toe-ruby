@@ -16,7 +16,7 @@ class CustomMarker
   end
 
   def choose_custom_marker
-    display.print_ask_custom_marker
+    display.ask_custom_marker
     get_player1_custom_marker
     get_player2_custom_marker
     set_player1_custom_marker
@@ -25,10 +25,10 @@ class CustomMarker
 
   def get_player1_custom_marker
     if player1.name == 'Computer'
-        display.print_computer_mark(player1.name, player1.marker)
+        display.computer_mark(player1.name, player1.marker)
         return 
     else
-      display.print_player1_custom_marker(player1.name)
+      display.player1_custom_marker(player1.name)
       display.get_custom_marker1_choice
       @player1_marker = display.validate_custom_marker1_choice
       display.print_player1_custom_marker_choice(player1.name)
