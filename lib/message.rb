@@ -26,7 +26,7 @@ class Message
   end
 
   def error_custom_marker
-    "\nMarker not available. Please enter only one alphabetic character.\n\n"
+    "\nMarker not available. Please enter a SINGLE alphabetic character.\n\n"
   end
 
   def error_number_custom_marker

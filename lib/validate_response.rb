@@ -19,7 +19,7 @@ class ValidateResponse
   end
 
   def is_number?(marker)
-    [0,1,2,3,4,5,6,7,8,9].include?(marker)
+    marker.count("0-9") > 0
   end
 
   def is_comp_marker?(marker)

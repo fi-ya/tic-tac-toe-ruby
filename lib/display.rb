@@ -55,27 +55,11 @@ class Display
   end
 
   def validate_custom_marker1_choice
-    p "what is this:",custom_marker1
     until validate_response.valid_custom_marker?(custom_marker1)
-      p "what is this:",custom_marker1
       print_error_custom_marker
       get_custom_marker1_choice
     end
    custom_marker1
-    # while true do 
-    #   if custom_marker1.length != 1 
-    #     print_error_custom_marker
-    #     get_custom_marker1_choice
-    #   elsif is_number?(custom_marker1) 
-    #     print_error_number_custom_marker
-    #     get_custom_marker1_choice
-    #   elsif custom_marker1 == "#" 
-    #     print_error_computer_taken_marker
-    #     get_custom_marker1_choice
-    #   else
-    #     return custom_marker1
-    #   end
-    # end
   end
 
   def print_error_custom_marker
