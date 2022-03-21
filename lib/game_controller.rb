@@ -31,7 +31,7 @@ class GameController
     @player2 = HumanPlayer.new('O', 'Human', display)
     @game = Game.new(board, display, player1, player2)
     @custom_marker = CustomMarker.new(display, player1, player2)
-    
+
     custom_marker.choose_custom_marker
   end
 

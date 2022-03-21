@@ -28,36 +28,36 @@ describe ValidateResponse do
   end
 
   it 'should return true if custom marker input is not a single character' do
-    expect(validate_response.is_not_single_char?('sa')).to eq(true)
-    expect(validate_response.is_not_single_char?('AGFRE')).to eq(true)
-    expect(validate_response.is_not_single_char?('DEW6ERdfs')).to eq(true)
+    expect(validate_response.not_single_char?('sa')).to eq(true)
+    expect(validate_response.not_single_char?('AGFRE')).to eq(true)
+    expect(validate_response.not_single_char?('DEW6ERdfs')).to eq(true)
   end
 
-  it 'should return false if custom marker input is a single character'  do
-    expect(validate_response.is_not_single_char?('a')).to eq(false)
-    expect(validate_response.is_not_single_char?('A')).to eq(false)
-    expect(validate_response.is_not_single_char?('!')).to eq(false)
+  it 'should return false if custom marker input is a single character' do
+    expect(validate_response.not_single_char?('a')).to eq(false)
+    expect(validate_response.not_single_char?('A')).to eq(false)
+    expect(validate_response.not_single_char?('!')).to eq(false)
   end
 
   it 'should return true if custom marker input is a number' do
-    expect(validate_response.is_number?('1')).to eq(true)
-    expect(validate_response.is_number?('97')).to eq(true)
-    expect(validate_response.is_number?('064')).to eq(true)
+    expect(validate_response.number?('1')).to eq(true)
+    expect(validate_response.number?('97')).to eq(true)
+    expect(validate_response.number?('064')).to eq(true)
   end
 
   it 'should return false if custom marker input is a number' do
-    expect(validate_response.is_number?('a')).to eq(false)
-    expect(validate_response.is_number?('ASF')).to eq(false)
-    expect(validate_response.is_number?('asd-sa')).to eq(false)
+    expect(validate_response.number?('a')).to eq(false)
+    expect(validate_response.number?('ASF')).to eq(false)
+    expect(validate_response.number?('asd-sa')).to eq(false)
   end
 
   it 'should return true if custom marker input is same as computer #' do
-    expect(validate_response.is_comp_marker?('#')).to eq(true)
+    expect(validate_response.comp_marker?('#')).to eq(true)
   end
 
   it 'should return false if custom marker input is not #' do
-    expect(validate_response.is_comp_marker?('!')).to eq(false)
-    expect(validate_response.is_comp_marker?('--')).to eq(false)
+    expect(validate_response.comp_marker?('!')).to eq(false)
+    expect(validate_response.comp_marker?('--')).to eq(false)
   end
 
   it 'should return true if custom marker input is a valid input' do
@@ -65,7 +65,7 @@ describe ValidateResponse do
     expect(validate_response.valid_custom_marker?('!')).to eq(true)
     expect(validate_response.valid_custom_marker?('v')).to eq(true)
   end
-  
+
   it 'should return false if custom marker input is not a valid input' do
     expect(validate_response.valid_custom_marker?('aw')).to eq(false)
     expect(validate_response.valid_custom_marker?('!7')).to eq(false)
@@ -76,24 +76,24 @@ describe ValidateResponse do
   it 'should return true if custom marker has already been taken' do
     expect(validate_response.marker_taken?('a', 'a')).to eq(true)
     expect(validate_response.marker_taken?('!', '!')).to eq(true)
-    expect(validate_response.marker_taken?('1','1')).to eq(true)
+    expect(validate_response.marker_taken?('1', '1')).to eq(true)
   end
 
   it 'should return false if custom marker has not been taken' do
     expect(validate_response.marker_taken?('a', 'b')).to eq(false)
     expect(validate_response.marker_taken?('!', '-')).to eq(false)
-    expect(validate_response.marker_taken?('1','2')).to eq(false)
+    expect(validate_response.marker_taken?('1', '2')).to eq(false)
   end
 
   it 'should return true if custom marker 2 meets validation critera' do
     expect(validate_response.valid_custom_marker2?('a', 'b')).to eq(true)
     expect(validate_response.valid_custom_marker2?('!', '-')).to eq(true)
-    expect(validate_response.valid_custom_marker2?('O','X')).to eq(true)
+    expect(validate_response.valid_custom_marker2?('O', 'X')).to eq(true)
   end
 
   it 'should return true if custom marker 2 meets validation critera' do
     expect(validate_response.valid_custom_marker2?('a', 'a')).to eq(false)
-    expect(validate_response.valid_custom_marker2?('A', '#')).to eq(false)
-    expect(validate_response.valid_custom_marker2?('A','12')).to eq(false)
+    expect(validate_response.valid_custom_marker2?('#', 'A')).to eq(false)
+    expect(validate_response.valid_custom_marker2?('12', 'A')).to eq(false)
   end
 end

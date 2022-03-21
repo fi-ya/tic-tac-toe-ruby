@@ -11,7 +11,7 @@ class Message
 
   def player1_custom_marker(player1_name)
     "\nPlayer 1 (#{player1_name}) choose your custom marker: "
-  end 
+  end
 
   def player1_custom_marker_choice(player1_name, marker)
     "\nPlayer 1 (#{player1_name}) your marker is #{marker} \n"
@@ -19,7 +19,7 @@ class Message
 
   def player2_custom_marker(player2_name)
     "\nPlayer 2 (#{player2_name}) choose your custom marker: "
-  end 
+  end
 
   def player2_custom_marker_choice(player2_name, marker)
     "\nPlayer 2 (#{player2_name}) your marker is #{marker} \n"
@@ -27,18 +27,6 @@ class Message
 
   def error_custom_marker
     "\nMarker not available. Please enter a SINGLE alphabetic character.\n\n"
-  end
-
-  def error_number_custom_marker
-    "\nNumber marker not available. Please enter only one alphabetic character.\n\n"
-  end
-
-  def error_computer_taken_marker
-    "\nSorry, this sign will be used by the computer. Please choose again.\n\n"
-  end
-
-  def error_custom_marker_taken
-    "\nSorry, this marker is already taken. Please choose again.\n\n"
   end
 
   def show_current_player(marker, name)

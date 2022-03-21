@@ -4,7 +4,8 @@ require_relative 'board'
 require_relative 'message'
 require_relative 'validate_response'
 class Display
-  attr_accessor :message, :board, :validate_response, :mode_choice, :replay_exit_choice, :custom_marker1, :custom_marker2
+  attr_accessor :message, :board, :validate_response, :mode_choice, :replay_exit_choice, :custom_marker1,
+                :custom_marker2
 
   def initialize(message, board, validate_response)
     @message = message
@@ -30,7 +31,7 @@ class Display
 
   def print_player1_custom_marker(player1_name)
     print_to_terminal(message.player1_custom_marker(player1_name))
-  end 
+  end
 
   def get_custom_marker1_choice
     @custom_marker1 = gets.chomp
@@ -42,7 +43,7 @@ class Display
       print_error_custom_marker
       get_custom_marker1_choice
     end
-   custom_marker1
+    custom_marker1
   end
 
   def print_error_custom_marker
@@ -55,7 +56,7 @@ class Display
 
   def print_player2_custom_marker(player2_name)
     print_to_terminal(message.player2_custom_marker(player2_name))
-  end 
+  end
 
   def get_custom_marker2_choice
     @custom_marker2 = gets.chomp

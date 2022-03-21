@@ -10,6 +10,30 @@ describe Message do
       expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n")
     end
 
+    it 'custom marker' do
+      expect(message.ask_custom_marker).to eq("\nEnter one letter sign to identify you on the board eg. X, O, A \n")
+    end
+
+    it 'Player 1 choose marker' do
+      expect(message.player1_custom_marker('Human')).to eq("\nPlayer 1 (Human) choose your custom marker: ")
+    end
+
+    it 'Player 1 custom marker' do
+      expect(message.player1_custom_marker_choice('Human', 'S')).to eq("\nPlayer 1 (Human) your marker is S \n")
+    end
+
+    it 'Player 2 choose marker' do
+      expect(message.player2_custom_marker('Human')).to eq("\nPlayer 2 (Human) choose your custom marker: ")
+    end
+
+    it 'Player 2 custom marker' do
+      expect(message.player2_custom_marker_choice('Human', 'B')).to eq("\nPlayer 2 (Human) your marker is B \n")
+    end
+
+    it 'custom marker error' do
+      expect(message.error_custom_marker).to eq("\nMarker not available. Please enter a SINGLE alphabetic character.\n\n")
+    end
+
     it 'show current player' do
       expect(message.show_current_player('X', 'Human')).to eq("\nPlayer X (Human) your turn to make a move...\n")
     end
