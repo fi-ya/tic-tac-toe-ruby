@@ -7,7 +7,7 @@ describe Message do
 
   context 'returns correct string ' do
     it 'welcome message' do
-      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n")
+      expect(message.welcome).to eq("\nLet's play Tic Tac Toe\n------------------------\n")
     end
 
     it 'show current player' do

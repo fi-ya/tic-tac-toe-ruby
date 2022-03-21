@@ -2,7 +2,7 @@
 
 class Message
   def welcome
-    "\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n"
+    "\nLet's play Tic Tac Toe\n------------------------\n"
   end
 
   def show_current_player(marker, name)

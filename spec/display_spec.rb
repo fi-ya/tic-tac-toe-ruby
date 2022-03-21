@@ -16,7 +16,7 @@ describe Display do
     it 'should display a welcome message' do
       expect do
         display.print_welcome
-      end.to output("\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n").to_stdout
+      end.to output("\nLet's play Tic Tac Toe\n------------------------\n").to_stdout
     end
 
     it 'should print the board to the terminal' do
