@@ -32,20 +32,20 @@ class Display
     print_to_terminal(message.player1_custom_marker(player1_name))
   end 
 
-  def custom_marker1_choice
+  def get_custom_marker1_choice
     @custom_marker1 = gets.chomp
     custom_marker1.upcase!
   end
 
   def print_player1_custom_marker_choice(player1_name)
-    print_to_terminal(message.player1_custom_marker_choice(player1_name, custom_marker1 = "#"))
+    print_to_terminal(message.player1_custom_marker_choice(player1_name, custom_marker1))
   end
 
   def print_player2_custom_marker(player2_name)
     print_to_terminal(message.player2_custom_marker(player2_name))
   end 
 
-  def custom_marker2_choice
+  def get_custom_marker2_choice
     @custom_marker2 = gets.chomp
     custom_marker2.upcase!
   end
@@ -55,25 +55,26 @@ class Display
   end
 
   def validate_custom_marker1_choice
-    p custom_marker1
-    # while validate_response.single_char?(custom_marker1) || validate_response.is_number?(custom_marker1.to_i) || validate_response.is_comp_marker?(custom_marker1)
-    #   print_error_custom_marker
-    #   custom_marker1_choice
-    # end
+    p "what is this:",custom_marker1
+    until validate_response.valid_custom_marker?(custom_marker1)
+      p "what is this:",custom_marker1
+      print_error_custom_marker
+      get_custom_marker1_choice
+    end
    custom_marker1
     # while true do 
-      # if custom_marker1.length != 1 
-      #   print_error_custom_marker
-      #   custom_marker1_choice
-      # elsif is_number?(custom_marker1) 
-      #   print_error_number_custom_marker
-      #   custom_marker1_choice
-      # elsif custom_marker1 == "#" 
-      #   print_error_computer_taken_marker
-      #   custom_marker1_choice
-      # else
-      #   return custom_marker1
-      # end
+    #   if custom_marker1.length != 1 
+    #     print_error_custom_marker
+    #     get_custom_marker1_choice
+    #   elsif is_number?(custom_marker1) 
+    #     print_error_number_custom_marker
+    #     get_custom_marker1_choice
+    #   elsif custom_marker1 == "#" 
+    #     print_error_computer_taken_marker
+    #     get_custom_marker1_choice
+    #   else
+    #     return custom_marker1
+    #   end
     # end
   end
 
@@ -102,16 +103,16 @@ class Display
     # while true do
       # if custom_marker2.length != 1 
       #   print_error_custom_marker
-      #   custom_marker2_choice
+      #   get_custom_marker2_choice
       # elsif is_number?(custom_marker2) 
       #   print_error_number_custom_marker
-      #   custom_marker2_choice
+      #   get_custom_marker2_choice
       # elsif custom_marker2 == "#"
-      #   custom_marker2_choice
       #   print_error_computer_taken_marker
+        # get_custom_marker2_choice
       # elsif custom_marker2 == custom_marker1
       #   print_error_custom_marker_taken
-      #   custom_marker2_choice
+      #   get_custom_marker2_choice
       # else
       #   return custom_marker2
       # end

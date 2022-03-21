@@ -3,6 +3,8 @@
 class ValidateResponse
   VALID_GAME_MODES = [1, 2].freeze
   VALID_PLAY_AGAIN = [1, 2].freeze
+  VALID_CUSTOM_MARKER_LENGTH = 1
+  COMPUTER_MARKER = "#"
 
   def game_mode?(choice)
     VALID_GAME_MODES.include?(choice)
@@ -12,8 +14,8 @@ class ValidateResponse
     VALID_PLAY_AGAIN.include?(choice)
   end
 
-  def single_char?(marker)
-    marker.length != 1 
+  def is_not_single_char?(marker)
+    marker.length != VALID_CUSTOM_MARKER_LENGTH
   end
 
   def is_number?(marker)
@@ -21,7 +23,11 @@ class ValidateResponse
   end
 
   def is_comp_marker?(marker)
-    marker == "#"
+    marker == COMPUTER_MARKER 
+  end
+
+  def valid_custom_marker?(marker)
+    !is_not_single_char?(marker) && !is_number?(marker) && !is_comp_marker?(marker)
   end
 
   # if custom_marker1.length != 1 

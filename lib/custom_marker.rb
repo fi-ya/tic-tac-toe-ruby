@@ -22,19 +22,20 @@ class CustomMarker
 
     def get_player1_custom_marker
         if player1.name == 'Computer'
+            p "player1name #{player1.name}"
             @player1_marker = "#"
             display.print_player1_custom_marker_choice(player1.name)
         else
           display.print_player1_custom_marker(player1.name)
-          display.custom_marker1_choice
-          @player1_marker = display.validate_custom_marker1_choice
+          display.get_custom_marker1_choice
+          player1_marker = display.validate_custom_marker1_choice
           display.print_player1_custom_marker_choice(player1.name)
         end 
     end
 
     def get_player2_custom_marker
         display.print_player2_custom_marker(player2.name)
-        display.custom_marker2_choice
+        display.get_custom_marker2_choice
         @player2_marker = display.validate_custom_marker2_choice
         display.print_player2_custom_marker_choice(player2.name)
     end
@@ -43,5 +44,4 @@ class CustomMarker
         player1.marker = player1_marker
         player2.marker = player2_marker
     end
-
 end
