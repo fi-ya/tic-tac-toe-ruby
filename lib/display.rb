@@ -37,6 +37,18 @@ class Display
     custom_marker1.upcase!
   end
 
+  def validate_custom_marker1_choice
+    until validate_response.valid_custom_marker?(custom_marker1)
+      print_error_custom_marker
+      get_custom_marker1_choice
+    end
+   custom_marker1
+  end
+
+  def print_error_custom_marker
+    print_to_terminal(message.error_custom_marker)
+  end
+
   def print_player1_custom_marker_choice(player1_name)
     print_to_terminal(message.player1_custom_marker_choice(player1_name, custom_marker1))
   end
@@ -50,57 +62,16 @@ class Display
     custom_marker2.upcase!
   end
 
+  def validate_custom_marker2_choice
+    until validate_response.valid_custom_marker2?(custom_marker2, custom_marker1)
+      print_error_custom_marker
+      get_custom_marker2_choice
+    end
+    custom_marker2
+  end
+
   def print_player2_custom_marker_choice(player2_name)
     print_to_terminal(message.player2_custom_marker_choice(player2_name, custom_marker2))
-  end
-
-  def validate_custom_marker1_choice
-    until validate_response.valid_custom_marker?(custom_marker1)
-      print_error_custom_marker
-      get_custom_marker1_choice
-    end
-   custom_marker1
-  end
-
-  def print_error_custom_marker
-    print_to_terminal(message.error_custom_marker)
-  end
-
-  def is_number?(marker)
-    [0,1,2,3,4,5,6,7,8,9].include?(marker.to_i)
-  end
-
-  def print_error_number_custom_marker
-    print_to_terminal(message.error_number_custom_marker)
-  end 
-
-  def print_error_computer_taken_marker
-    print_to_terminal(message.error_computer_taken_marker)
-  end
-
-  def print_error_custom_marker_taken
-    print_to_terminal(message.error_custom_marker_taken)
-  end
-
-  def validate_custom_marker2_choice
-    custom_marker2
-    # while true do
-      # if custom_marker2.length != 1 
-      #   print_error_custom_marker
-      #   get_custom_marker2_choice
-      # elsif is_number?(custom_marker2) 
-      #   print_error_number_custom_marker
-      #   get_custom_marker2_choice
-      # elsif custom_marker2 == "#"
-      #   print_error_computer_taken_marker
-        # get_custom_marker2_choice
-      # elsif custom_marker2 == custom_marker1
-      #   print_error_custom_marker_taken
-      #   get_custom_marker2_choice
-      # else
-      #   return custom_marker2
-      # end
-    # end
   end
 
   def print_show_current_player(marker, name)

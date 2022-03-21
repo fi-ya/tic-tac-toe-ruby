@@ -30,14 +30,12 @@ class ValidateResponse
     !is_not_single_char?(marker) && !is_number?(marker) && !is_comp_marker?(marker)
   end
 
-  # if custom_marker1.length != 1 
-  #   print_error_custom_marker
-  #   custom_marker1_choice
-  # elsif is_number?(custom_marker1) 
-  #   print_error_number_custom_marker
-  #   custom_marker1_choice
-  # elsif custom_marker1 == "#" 
-  #   print_error_computer_taken_marker
-  #   custom_marker1_choice
+  def valid_custom_marker2?(custom_marker2, custom_marker1)
+    valid_custom_marker?(custom_marker2) && !marker_taken?(custom_marker2, custom_marker1)
+  end
+
+  def marker_taken?(custom_marker2, custom_marker1)
+    custom_marker2 == custom_marker1
+  end
 
 end

@@ -72,4 +72,28 @@ describe ValidateResponse do
     expect(validate_response.valid_custom_marker?('1')).to eq(false)
     expect(validate_response.valid_custom_marker?('#')).to eq(false)
   end
+
+  it 'should return true if custom marker has already been taken' do
+    expect(validate_response.marker_taken?('a', 'a')).to eq(true)
+    expect(validate_response.marker_taken?('!', '!')).to eq(true)
+    expect(validate_response.marker_taken?('1','1')).to eq(true)
+  end
+
+  it 'should return false if custom marker has not been taken' do
+    expect(validate_response.marker_taken?('a', 'b')).to eq(false)
+    expect(validate_response.marker_taken?('!', '-')).to eq(false)
+    expect(validate_response.marker_taken?('1','2')).to eq(false)
+  end
+
+  it 'should return true if custom marker 2 meets validation critera' do
+    expect(validate_response.valid_custom_marker2?('a', 'b')).to eq(true)
+    expect(validate_response.valid_custom_marker2?('!', '-')).to eq(true)
+    expect(validate_response.valid_custom_marker2?('O','X')).to eq(true)
+  end
+
+  it 'should return true if custom marker 2 meets validation critera' do
+    expect(validate_response.valid_custom_marker2?('a', 'a')).to eq(false)
+    expect(validate_response.valid_custom_marker2?('A', '#')).to eq(false)
+    expect(validate_response.valid_custom_marker2?('A','12')).to eq(false)
+  end
 end
