@@ -47,9 +47,7 @@ describe Message do
     end
 
     it 'players move' do
-      player = 'X'
-      move = 1
-      expect(message.players_move(player, move)).to eq("\nPlayer X chose 1 \n\n")
+      expect(message.players_move('X', 'Human', 1)).to eq("\nPlayer X (Human) chose 1 \n\n")
     end
 
     it 'invalid move message' do

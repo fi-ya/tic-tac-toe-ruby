@@ -13,6 +13,6 @@ class ComputerPlayer < Player
   end
 
   def get_move
-    display.computers_move
+    display.computers_move(marker, name)
   end
 end

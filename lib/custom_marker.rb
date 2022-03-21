@@ -19,19 +19,20 @@ class CustomMarker
     display.print_ask_custom_marker
     get_player1_custom_marker
     get_player2_custom_marker
-    set_custom_marker
+    set_player1_custom_marker
+    set_player2_custom_marker
   end
 
   def get_player1_custom_marker
     if player1.name == 'Computer'
-      p "player1name #{player1.name}"
-      @player1_marker = '#'
+        display.print_computer_mark(player1.name, player1.marker)
+        return 
     else
       display.print_player1_custom_marker(player1.name)
       display.get_custom_marker1_choice
-      player1_marker = display.validate_custom_marker1_choice
+      @player1_marker = display.validate_custom_marker1_choice
+      display.print_player1_custom_marker_choice(player1.name)
     end
-    display.print_player1_custom_marker_choice(player1.name)
   end
 
   def get_player2_custom_marker
@@ -41,8 +42,15 @@ class CustomMarker
     display.print_player2_custom_marker_choice(player2.name)
   end
 
-  def set_custom_marker
-    player1.marker = player1_marker
+  def set_player1_custom_marker
+    if player1.name == 'Computer'
+        return 
+    else
+      player1.marker = player1_marker
+    end
+  end
+
+  def set_player2_custom_marker
     player2.marker = player2_marker
   end
 end

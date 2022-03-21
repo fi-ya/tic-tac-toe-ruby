@@ -27,8 +27,8 @@ describe Display do
 
     it 'should display the player and the move they have made' do
       expect do
-        display.print_to_terminal(message.players_move('X', 1))
-      end.to output("\nPlayer X chose 1 \n\n").to_stdout
+        display.print_to_terminal(message.players_move('X', 'Human', 1))
+      end.to output("\nPlayer X (Human) chose 1 \n\n").to_stdout
     end
   end
 
@@ -40,12 +40,22 @@ describe Display do
 
     it 'should return an interger when playing a move' do
       allow(display).to receive(:gets).and_return('1')
-      expect(display.human_players_move).to eq(1)
+      expect(display.human_players_move('X', 'Human')).to eq(1)
     end
 
     it 'should return an interger when choosing to replay or quit' do
       allow(display).to receive(:gets).and_return('1')
       expect(display.get_play_exit_choice).to eq(1)
+    end
+
+    it 'should return an string when player 1 is choosing a custom marker' do
+      allow(display).to receive(:gets).and_return('s')
+      expect(display.get_custom_marker1_choice).to eq('S')
+    end
+
+    it 'should return an string when player 2 is choosing a custom marker' do
+      allow(display).to receive(:gets).and_return('w')
+      expect(display.get_custom_marker2_choice).to eq('W')
     end
   end
 

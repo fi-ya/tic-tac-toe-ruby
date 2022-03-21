@@ -27,12 +27,14 @@ class GameController
   def create_game
     display.clear_terminal
     display.print_to_terminal(message.welcome)
+
     @player1 = game_mode.get_player1(game_mode.choose_game_mode)
     @player2 = HumanPlayer.new('O', 'Human', display)
-    @game = Game.new(board, display, player1, player2)
-    @custom_marker = CustomMarker.new(display, player1, player2)
 
+    @custom_marker = CustomMarker.new(display, player1, player2)
     custom_marker.choose_custom_marker
+
+    @game = Game.new(board, display, player1, player2)
   end
 
   def start_game

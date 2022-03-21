@@ -9,6 +9,10 @@ class Message
     "\nEnter one letter sign to identify you on the board eg. X, O, A \n"
   end
 
+  def computer_mark(name, marker)
+    "\nPlayer 1 (#{name}) chose #{marker} marker \n"
+  end 
+
   def player1_custom_marker(player1_name)
     "\nPlayer 1 (#{player1_name}) choose your custom marker: "
   end
@@ -41,8 +45,8 @@ class Message
     "\nComputer thinking... "
   end
 
-  def players_move(player, move)
-    "\nPlayer #{player} chose #{move} \n\n"
+  def players_move(marker, name, move)
+    "\nPlayer #{marker} (#{name}) chose #{move} \n\n"
   end
 
   def invalid_move

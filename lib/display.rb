@@ -29,6 +29,10 @@ class Display
     print_to_terminal(message.ask_custom_marker)
   end
 
+  def print_computer_mark(name,marker)
+    print_to_terminal(message.computer_mark(name,marker))
+  end
+
   def print_player1_custom_marker(player1_name)
     print_to_terminal(message.player1_custom_marker(player1_name))
   end
@@ -91,22 +95,22 @@ class Display
     print_to_terminal(message.invalid_move)
   end
 
-  def human_players_move
+  def human_players_move(marker, name)
     player_move = gets.chomp.to_i
-    print_players_move(player_move)
+    print_players_move(marker, name, player_move)
     sleep 1.5
     player_move
   end
 
-  def computers_move
+  def computers_move(marker, name)
     computers_move = board.available_moves[0].to_i
-    print_players_move(computers_move)
+    print_players_move(marker, name, computers_move)
     sleep 1.5
     computers_move
   end
 
-  def print_players_move(players_move)
-    print_to_terminal(message.players_move(board.get_player_mark, players_move))
+  def print_players_move(current_player_marker, current_player_name, players_move)
+    print_to_terminal(message.players_move(current_player_marker, current_player_name, players_move))
   end
 
   def print_tie

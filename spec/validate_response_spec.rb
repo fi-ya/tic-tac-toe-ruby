@@ -51,11 +51,11 @@ describe ValidateResponse do
     expect(validate_response.number?('asd-sa')).to eq(false)
   end
 
-  it 'should return true if custom marker input is same as computer #' do
-    expect(validate_response.comp_marker?('#')).to eq(true)
+  it 'should return true if custom marker input is same as computer X' do
+    expect(validate_response.comp_marker?('X')).to eq(true)
   end
 
-  it 'should return false if custom marker input is not #' do
+  it 'should return false if custom marker input is not X' do
     expect(validate_response.comp_marker?('!')).to eq(false)
     expect(validate_response.comp_marker?('--')).to eq(false)
   end
@@ -64,13 +64,13 @@ describe ValidateResponse do
     expect(validate_response.valid_custom_marker?('a')).to eq(true)
     expect(validate_response.valid_custom_marker?('!')).to eq(true)
     expect(validate_response.valid_custom_marker?('v')).to eq(true)
+    expect(validate_response.valid_custom_marker?('X')).to eq(true)
   end
 
   it 'should return false if custom marker input is not a valid input' do
     expect(validate_response.valid_custom_marker?('aw')).to eq(false)
     expect(validate_response.valid_custom_marker?('!7')).to eq(false)
     expect(validate_response.valid_custom_marker?('1')).to eq(false)
-    expect(validate_response.valid_custom_marker?('#')).to eq(false)
   end
 
   it 'should return true if custom marker has already been taken' do
@@ -93,7 +93,7 @@ describe ValidateResponse do
 
   it 'should return true if custom marker 2 meets validation critera' do
     expect(validate_response.valid_custom_marker2?('a', 'a')).to eq(false)
-    expect(validate_response.valid_custom_marker2?('#', 'A')).to eq(false)
+    expect(validate_response.valid_custom_marker2?('X', 'A')).to eq(false)
     expect(validate_response.valid_custom_marker2?('12', 'A')).to eq(false)
   end
 end
