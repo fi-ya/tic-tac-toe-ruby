@@ -35,7 +35,7 @@ class Board
   def available_moves
     available_moves = []
     grid.each do |cell|
-      available_moves.push(cell) if cell != player_mark[0] && cell != player_mark[1]
+      available_moves.push(cell) if cell.count('1-9').positive?
     end
     available_moves
   end
@@ -44,8 +44,8 @@ class Board
     available_moves.empty?
   end
 
-  def position_taken?(index)
-    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
+  def position_taken?(position)
+    !grid.include?(position.to_s) 
   end
 
   def win?

@@ -48,7 +48,6 @@ describe Board do
 
     it 'should check to see if position is taken returns false' do
       board.grid = %w[X 2 O 4 5 6 7 8 9]
-
       expect(board.position_taken?(2)).to eq(false)
     end
   end
