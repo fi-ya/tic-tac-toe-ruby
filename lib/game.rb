@@ -1,5 +1,5 @@
-
 # frozen_string_literal: true
+
 require_relative 'board'
 
 class Game
@@ -13,11 +13,16 @@ class Game
     @current_player = player1
   end
 
+  def start_game
+    board.reset_grid
+    turn
+  end
+
   def turn
     until game_over?
+      display.print_enter_num unless game_over?
       play_turn(current_player, current_player.get_move)
       display.print_to_terminal(board.generate)
-      display.print_enter_num unless game_over?
     end
     game_status
   end
@@ -60,5 +65,4 @@ class Game
   def valid_move?(index)
     !board.position_taken?(index) && index.between?(1, 9)
   end
-
 end

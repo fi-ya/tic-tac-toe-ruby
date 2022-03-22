@@ -6,19 +6,18 @@ require_relative 'game'
 require_relative 'message'
 require_relative 'computer_player'
 require_relative 'human_player'
+require_relative 'game_mode'
+require_relative 'game_controller'
 
 def start_game
   board = Board.new
   message = Message.new
-  display = Display.new(message, board)
-  # computer_player = ComputerPlayer.new
-  player1 = ComputerPlayer.new('X', 'Computer', board, display)
-  player2 = HumanPlayer.new('O', 'Human', display)
-  game = Game.new(board, display, player1, player2)
+  validate_response = ValidateResponse.new
+  display = Display.new(message, board, validate_response)
+  game_mode = GameMode.new(display)
+  game_controller = GameController.new(display, game_mode, message, board)
 
-  display.game_setup
-  # player chooses game
-  game.turn
+  game_controller.start
 end
 
 start_game

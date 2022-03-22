@@ -19,7 +19,7 @@ The following steps will allow you to run the game in your terminal.
 2. Check to see if you have the correct version of Ruby (3.1.0) installed `ruby --version`
    - If not, you can use a software version manager like [chruby](https://github.com/postmodern/chruby), [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv). For more information on which one is best for you check [this blog](https://mac.install.guide/ruby/index.html) or follow [this guide](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install)
 3. Install dependencies requirements with `bundle install`
-4. Run application with `ruby lib/board.rb`
+4. Run application with `ruby ./lib/run_game.rb`
 5. Have fun playing!
 ## Run tests
 Run the following command in the terminal to run the Rspec test suite:
@@ -37,6 +37,7 @@ To view code coverage report run command
 - [RuboCop](https://rubocop.org/)
 ## Features
  - Human vs Human game
+ - Human vs Computer game
 
 ## Resources 
 - [GitHub CI Guide](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)

@@ -73,4 +73,8 @@ class Board
   def winning_player
     grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
+
+  def reset_grid
+    @grid = %w[1 2 3 4 5 6 7 8 9]
+  end
 end
