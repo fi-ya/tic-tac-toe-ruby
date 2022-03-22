@@ -54,6 +54,7 @@ class GameController
       start_game
       replay_exit_option
     else
+      display.clear_terminal
       display.print_message(message.exit_msg)
     end
   end

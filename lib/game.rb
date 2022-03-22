@@ -32,7 +32,7 @@ class Game
   def prompt_player
     if current_player.name == 'Computer'
       display.print_computer_thinking
-      sleep 3
+      sleep 2
     else
       display.print_enter_num unless game_over?
     end
