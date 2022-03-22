@@ -28,16 +28,6 @@ class Board
       " #{grid[6]} | #{grid[7]} | #{grid[8]} \n"
   end
 
-  def get_player_mark
-    if grid.count(player_mark[0]) == grid.count(player_mark[1])
-      player_mark[0]
-    elsif grid.count(player_mark[0]) > grid.count(player_mark[1])
-      player_mark[1]
-    else
-      player_mark[0]
-    end
-  end
-
   def mark_board(player, move)
     grid[move - 1] = player
   end
@@ -68,10 +58,6 @@ class Board
     end
 
     winning_plays.any? { |game| game == true }
-  end
-
-  def winning_player
-    grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
 
   def reset_grid

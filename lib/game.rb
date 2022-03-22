@@ -71,8 +71,12 @@ class Game
     if board.board_full? && !board.win?
       display.print_tie
     else
-      display.print_won
+      display.print_won(winning_player)
     end
+  end
+
+  def winning_player
+    board.grid.count(player1.marker) > board.grid.count(player2.marker) ? player1.marker : player2.marker
   end
 
   # private

@@ -21,13 +21,13 @@ describe Display do
 
     it 'should print the board to the terminal' do
       expect do
-        display.print_to_terminal(board.generate)
+        display.print_message(board.generate)
       end.to output("\n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n").to_stdout
     end
 
     it 'should display the player and the move they have made' do
       expect do
-        display.print_to_terminal(message.players_move('X', 'Human', 1))
+        display.print_message(message.players_move('X', 'Human', 1))
       end.to output("\nPlayer X (Human) chose 1 \n\n").to_stdout
     end
   end

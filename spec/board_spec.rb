@@ -39,23 +39,6 @@ describe Board do
     end
   end
 
-  context '#get_player_mark' do
-    it 'should show an empty board and updates board with player marker X on the first play' do
-      board.grid = %w[1 2 3 4 5 6 7 8 9]
-      expect(board.get_player_mark).to eq('X')
-    end
-
-    it 'should return the correct player mark on second turn for player O' do
-      board.grid = %w[1 X 3 4 5 6 7 8 9]
-      expect(board.get_player_mark).to eq('O')
-    end
-
-    it 'should return the correct player mark on third turn for player X' do
-      board.grid = %w[1 X O 4 5 6 7 8 9]
-      expect(board.get_player_mark).to eq('X')
-    end
-  end
-
   context 'position taken' do
     it 'should check to see if position is taken returns true' do
       board.grid = %w[X 2 3 4 5 6 7 8 9]
@@ -104,18 +87,6 @@ describe Board do
                                     [0, 4, 8],
                                     [2, 4, 6]
                                   ])
-    end
-
-    it 'should correctly identify winning player and return X marker' do
-      board.grid = %w[X X X O 5 6 O 8 9]
-
-      expect(board.winning_player).to eq('X')
-    end
-
-    it 'should correctly identify winning player and return O marker' do
-      board.grid = %w[O O O X 5 6 X 8 9]
-
-      expect(board.winning_player).to eq('O')
     end
 
     it 'should correctly identify winning play and return true' do

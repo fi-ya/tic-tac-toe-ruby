@@ -18,23 +18,23 @@ class Display
   end
 
   def welcome
-    print_to_terminal(message.welcome)
+    print_message(message.welcome)
   end
 
   def generate_board
-    print_to_terminal(board.generate)
+    print_message(board.generate)
   end
 
   def ask_custom_marker
-    print_to_terminal(message.ask_custom_marker)
+    print_message(message.ask_custom_marker)
   end
 
   def computer_mark(name, marker)
-    print_to_terminal(message.computer_mark(name,marker))
+    print_message(message.computer_mark(name,marker))
   end
 
   def player1_custom_marker(player1_name)
-    print_to_terminal(message.player1_custom_marker(player1_name))
+    print_message(message.player1_custom_marker(player1_name))
   end
 
   def get_custom_marker1_choice
@@ -51,15 +51,15 @@ class Display
   end
 
   def print_error_custom_marker
-    print_to_terminal(message.error_custom_marker)
+    print_message(message.error_custom_marker)
   end
 
   def print_player1_custom_marker_choice(player1_name)
-    print_to_terminal(message.player1_custom_marker_choice(player1_name, custom_marker1))
+    print_message(message.player1_custom_marker_choice(player1_name, custom_marker1))
   end
 
   def print_player2_custom_marker(player2_name)
-    print_to_terminal(message.player2_custom_marker(player2_name))
+    print_message(message.player2_custom_marker(player2_name))
   end
 
   def get_custom_marker2_choice
@@ -76,23 +76,23 @@ class Display
   end
 
   def print_player2_custom_marker_choice(player2_name)
-    print_to_terminal(message.player2_custom_marker_choice(player2_name, custom_marker2))
+    print_message(message.player2_custom_marker_choice(player2_name, custom_marker2))
   end
 
   def print_show_current_player(marker, name)
-    print_to_terminal(message.show_current_player(marker, name))
+    print_message(message.show_current_player(marker, name))
   end
 
   def print_computer_thinking
-    print_to_terminal(message.computer_thinking)
+    print_message(message.computer_thinking)
   end
 
   def print_enter_num
-    print_to_terminal(message.enter_num)
+    print_message(message.enter_num)
   end
 
   def print_invalid_move
-    print_to_terminal(message.invalid_move)
+    print_message(message.invalid_move)
   end
 
   def human_player_move(marker, name)
@@ -110,42 +110,30 @@ class Display
   end
 
   def print_players_move(current_player_marker, current_player_name, players_move)
-    print_to_terminal(message.players_move(current_player_marker, current_player_name, players_move))
+    print_message(message.players_move(current_player_marker, current_player_name, players_move))
   end
 
   def print_tie
-    print_to_terminal(message.tie)
+    print_message(message.tie)
   end
 
-  def print_won
-    print_to_terminal(message.won(board.winning_player))
+  def print_won(winning_player)
+    print_message(message.won(winning_player))
   end
 
   def print_game_mode_selection
-    print_to_terminal(message.game_mode_selection)
+    print_message(message.game_mode_selection)
   end
 
   def print_error_choose_game_mode
-    print_to_terminal(message.error_game_mode)
-  end
-
-  def print_game_starting
-    print_to_terminal(message.game_starting)
-  end
-
-  def print_replay_or_exit
-    print_to_terminal(message.replay_or_exit)
+    print_message(message.error_game_mode)
   end
 
   def print_error_play_again_exit
-    print_to_terminal(message.error_play_again_exit)
+    print_message(message.error_play_again_exit)
   end
 
-  def print_exit_msg
-    print_to_terminal(message.exit_msg)
-  end
-
-  def print_to_terminal(msg)
+  def print_message(msg)
     print msg
   end
 

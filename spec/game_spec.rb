@@ -30,7 +30,7 @@ describe Game do
     it 'should verify no more moves allowed after 9 turns' do
       dummy_full_board
 
-      expect(game.take_turn).to eq(display.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
+      expect(game.take_turn).to eq(display.print_message("\nIt's a tie. Game Over!\n\n"))
     end
 
     it 'should show an error message when invalid move' do
@@ -67,6 +67,18 @@ describe Game do
 
       expect(game.current_player.marker).to eq('X')
     end
+  end
+
+  it 'should correctly identify winning player and return X marker' do
+    board.grid = %w[X X X O 5 6 O 8 9]
+
+    expect(game.winning_player).to eq('X')
+  end
+
+  it 'should correctly identify winning player and return O marker' do
+    board.grid = %w[O O O X 5 6 X 8 9]
+
+    expect(game.winning_player).to eq('O')
   end
 
   def dummy_full_board

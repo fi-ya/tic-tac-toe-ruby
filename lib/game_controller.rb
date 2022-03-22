@@ -39,13 +39,13 @@ class GameController
   end
 
   def start_game
-    # display.clear_terminal
-    display.print_to_terminal(message.game_starting)
+    display.clear_terminal
+    display.print_message(message.game_starting)
     game.start_game
   end
 
   def replay_exit_option
-    display.print_to_terminal(message.replay_or_exit)
+    display.print_message(message.replay_or_exit)
     display.get_play_exit_choice
     replay_or_exit(display.validate_play_again_choice)
   end
@@ -56,7 +56,7 @@ class GameController
       start_game
       replay_exit_option
     else
-      display.print_to_terminal(message.exit_msg)
+      display.print_message(message.exit_msg)
     end
   end
 end
