@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Message
   def welcome
     "\nLet's play Tic Tac Toe\n------------------------\n"
@@ -11,7 +9,7 @@ class Message
 
   def computer_mark(name, marker)
     "\nPlayer 1 (#{name}) chose #{marker} marker \n"
-  end 
+  end
 
   def player1_custom_marker(player1_name)
     "\nPlayer 1 (#{player1_name}) choose your custom marker: "

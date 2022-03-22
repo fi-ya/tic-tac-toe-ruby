@@ -38,6 +38,7 @@ To view code coverage report run command
 ## Features
  - Human vs Human game
  - Computer vs Human game
+ - Players can create custom markers
 
 ## Resources 
 - [GitHub CI Guide](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration)

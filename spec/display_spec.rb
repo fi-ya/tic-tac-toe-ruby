@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'display'
 require 'board'
 require 'message'

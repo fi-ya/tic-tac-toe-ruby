@@ -1,12 +1,9 @@
-# frozen_string_literal: true
-
 require_relative 'message'
 class Board
-  attr_accessor :grid, :player_mark
+  attr_accessor :grid
 
   def initialize
     @grid = %w[1 2 3 4 5 6 7 8 9]
-    @player_mark = %w[X O]
   end
 
   WINNING_MOVES = [
@@ -45,7 +42,7 @@ class Board
   end
 
   def position_taken?(position)
-    !grid.include?(position.to_s) 
+    !grid.include?(position.to_s)
   end
 
   def win?

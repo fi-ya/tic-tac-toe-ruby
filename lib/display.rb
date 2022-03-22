@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'board'
 require_relative 'message'
 require_relative 'input_validation'
@@ -30,7 +28,7 @@ class Display
   end
 
   def computer_mark(name, marker)
-    print_message(message.computer_mark(name,marker))
+    print_message(message.computer_mark(name, marker))
   end
 
   def player1_custom_marker(player1_name)

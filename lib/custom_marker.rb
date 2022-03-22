@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'display'
 require_relative 'board'
 require_relative 'human_player'
@@ -25,8 +23,8 @@ class CustomMarker
 
   def get_player1_custom_marker
     if player1.name == 'Computer'
-        display.computer_mark(player1.name, player1.marker)
-        return 
+      display.computer_mark(player1.name, player1.marker)
+      nil
     else
       display.player1_custom_marker(player1.name)
       display.get_custom_marker1_choice
@@ -44,7 +42,7 @@ class CustomMarker
 
   def set_player1_custom_marker
     if player1.name == 'Computer'
-        return 
+      nil
     else
       player1.marker = player1_marker
     end

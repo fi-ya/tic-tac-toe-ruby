@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'player'
 require_relative 'display'
 class HumanPlayer < Player
