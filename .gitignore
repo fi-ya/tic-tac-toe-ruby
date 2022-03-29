@@ -59,4 +59,6 @@ build-iPhoneSimulator/
 # To ensure that SimpleCov coverage results are not tracked by Git (optional):
 echo coverage >> .gitignore
 
+.vscode
+
 

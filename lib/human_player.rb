@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'player'
 require_relative 'display'
 class HumanPlayer < Player
@@ -12,6 +10,6 @@ class HumanPlayer < Player
   end
 
   def get_move
-    display.human_players_move
+    display.human_player_move(marker, name)
   end
 end

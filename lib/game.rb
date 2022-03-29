@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'board'
 
 class Game
@@ -15,24 +13,39 @@ class Game
 
   def start_game
     board.reset_grid
-    turn
+    display.generate_board
+    take_turn
   end
 
-  def turn
+  def take_turn
     until game_over?
-      display.print_enter_num unless game_over?
+      display.print_show_current_player(current_player.marker, current_player.name)
+      prompt_player
       play_turn(current_player, current_player.get_move)
-      display.print_to_terminal(board.generate)
+      display.clear_terminal
+      display.generate_board
+
     end
     game_status
+  end
+
+  def prompt_player
+    if current_player.name == 'Computer'
+      display.print_computer_thinking
+      sleep 2
+    else
+      display.print_enter_num unless game_over?
+    end
   end
 
   def play_turn(player, move)
     if valid_move?(move)
       update_board(player, move)
       update_current_player
+
     else
       display.print_invalid_move
+      sleep 2
     end
   end
 
@@ -56,8 +69,12 @@ class Game
     if board.board_full? && !board.win?
       display.print_tie
     else
-      display.print_won
+      display.print_won(winning_player)
     end
+  end
+
+  def winning_player
+    board.grid.count(player1.marker) > board.grid.count(player2.marker) ? player1.marker : player2.marker
   end
 
   # private

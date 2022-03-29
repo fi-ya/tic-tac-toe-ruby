@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'board'
 require_relative 'display'
 require_relative 'game'
@@ -12,12 +10,12 @@ require_relative 'game_controller'
 def start_game
   board = Board.new
   message = Message.new
-  validate_response = ValidateResponse.new
-  display = Display.new(message, board, validate_response)
+  input_validation = InputValidation.new
+  display = Display.new(message, board, input_validation)
   game_mode = GameMode.new(display)
   game_controller = GameController.new(display, game_mode, message, board)
 
-  game_controller.start
+  game_controller.start_session
 end
 
 start_game

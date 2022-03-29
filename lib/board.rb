@@ -1,12 +1,9 @@
-# frozen_string_literal: true
-
 require_relative 'message'
 class Board
-  attr_accessor :grid, :player_mark
+  attr_accessor :grid
 
   def initialize
     @grid = %w[1 2 3 4 5 6 7 8 9]
-    @player_mark = %w[X O]
   end
 
   WINNING_MOVES = [
@@ -21,21 +18,11 @@ class Board
   ].freeze
 
   def generate
-    " #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
+    "\n #{grid[0]} | #{grid[1]} | #{grid[2]} \n" \
       "-----------\n" \
       " #{grid[3]} | #{grid[4]} | #{grid[5]} \n" \
       "-----------\n" \
       " #{grid[6]} | #{grid[7]} | #{grid[8]} \n"
-  end
-
-  def get_player_mark
-    if grid.count(player_mark[0]) == grid.count(player_mark[1])
-      player_mark[0]
-    elsif grid.count(player_mark[0]) > grid.count(player_mark[1])
-      player_mark[1]
-    else
-      player_mark[0]
-    end
   end
 
   def mark_board(player, move)
@@ -45,7 +32,7 @@ class Board
   def available_moves
     available_moves = []
     grid.each do |cell|
-      available_moves.push(cell) if cell != player_mark[0] && cell != player_mark[1]
+      available_moves.push(cell) if cell.count('1-9').positive?
     end
     available_moves
   end
@@ -54,8 +41,8 @@ class Board
     available_moves.empty?
   end
 
-  def position_taken?(index)
-    grid[index - 1] == player_mark[0] || grid[index - 1] == player_mark[1]
+  def position_taken?(position)
+    !grid.include?(position.to_s)
   end
 
   def win?
@@ -68,10 +55,6 @@ class Board
     end
 
     winning_plays.any? { |game| game == true }
-  end
-
-  def winning_player
-    grid.count(player_mark[0]) > grid.count(player_mark[1]) ? player_mark[0] : player_mark[1]
   end
 
   def reset_grid

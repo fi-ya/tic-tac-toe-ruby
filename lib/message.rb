@@ -1,16 +1,50 @@
-# frozen_string_literal: true
-
 class Message
   def welcome
-    "\nLet's play Tic Tac Toe\n------------------------\n Player one = X\n Player two = O\n"
+    "\nLet's play Tic Tac Toe\n------------------------\n"
+  end
+
+  def ask_custom_marker
+    "\nEnter one letter sign to identify you on the board eg. X, O, A \n"
+  end
+
+  def computer_mark(name, marker)
+    "\nPlayer 1 (#{name}) chose #{marker} marker \n"
+  end
+
+  def player1_custom_marker(player1_name)
+    "\nPlayer 1 (#{player1_name}) choose your custom marker: "
+  end
+
+  def player1_custom_marker_choice(player1_name, marker)
+    "\nPlayer 1 (#{player1_name}) your marker is #{marker} \n"
+  end
+
+  def player2_custom_marker(player2_name)
+    "\nPlayer 2 (#{player2_name}) choose your custom marker: "
+  end
+
+  def player2_custom_marker_choice(player2_name, marker)
+    "\nPlayer 2 (#{player2_name}) your marker is #{marker} \n"
+  end
+
+  def error_custom_marker
+    "\nMarker not available. Please enter a SINGLE alphabetic character.\n\n"
+  end
+
+  def show_current_player(marker, name)
+    "\nPlayer #{marker} (#{name}) your turn to make a move...\n"
   end
 
   def enter_num
     "\nEnter a number between 1-9: "
   end
 
-  def players_move(player, move)
-    "\nPlayer #{player} chose #{move} \n\n"
+  def computer_thinking
+    "\nComputer thinking... "
+  end
+
+  def players_move(marker, name, move)
+    "\nPlayer #{marker} (#{name}) chose #{move} \n\n"
   end
 
   def invalid_move
@@ -25,7 +59,7 @@ class Message
     "\nPlayer #{player} wins!\n\n"
   end
 
-  def choose_game_mode
+  def game_mode_selection
     "\nSelect a game:\n 1. Human vs Human\n 2. Computer vs Human\n\n"
   end
 

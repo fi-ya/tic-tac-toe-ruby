@@ -1,9 +1,7 @@
-# frozen_string_literal: true
-
 require 'game'
 require 'board'
 require 'display'
-require 'validate_response'
+require 'input_validation'
 require 'message'
 require 'human_player'
 require 'computer_player'
@@ -12,8 +10,8 @@ require 'player'
 describe Game do
   let(:board) { Board.new }
   let(:message) { Message.new }
-  let(:validate_response) { ValidateResponse.new }
-  let(:display) { Display.new(message, board, validate_response) }
+  let(:input_validation) { InputValidation.new }
+  let(:display) { Display.new(message, board, input_validation) }
   let(:player1) { ComputerPlayer.new('X', 'Computer', display) }
   let(:player2) { HumanPlayer.new('O', 'Human', display) }
   subject(:game) { described_class.new(board, display, player1, player2) }
@@ -30,7 +28,7 @@ describe Game do
     it 'should verify no more moves allowed after 9 turns' do
       dummy_full_board
 
-      expect(game.turn).to eq(display.print_to_terminal("\nIt's a tie. Game Over!\n\n"))
+      expect(game.take_turn).to eq(display.print_message("\nIt's a tie. Game Over!\n\n"))
     end
 
     it 'should show an error message when invalid move' do
@@ -67,6 +65,18 @@ describe Game do
 
       expect(game.current_player.marker).to eq('X')
     end
+  end
+
+  it 'should correctly identify winning player and return X marker' do
+    board.grid = %w[X X X O 5 6 O 8 9]
+
+    expect(game.winning_player).to eq('X')
+  end
+
+  it 'should correctly identify winning player and return O marker' do
+    board.grid = %w[O O O X 5 6 X 8 9]
+
+    expect(game.winning_player).to eq('O')
   end
 
   def dummy_full_board
